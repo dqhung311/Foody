@@ -322,6 +322,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="rgW-6B-lDG"/>
                     <connections>
+                        <outlet property="boundButtonMenu" destination="dVr-Je-WeN" id="nSS-kg-JxS"/>
                         <outlet property="btnCategory" destination="Pud-9n-29f" id="oXc-Sk-AUB"/>
                         <outlet property="btnLabel" destination="0dD-ep-Gu1" id="aKS-qx-hZR"/>
                         <outlet property="btnLatest" destination="0Gw-Bs-cFf" id="UZy-8j-Yeu"/>

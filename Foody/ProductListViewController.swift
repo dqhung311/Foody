@@ -16,7 +16,7 @@ class ProductListViewController: UIViewController{
     @IBOutlet weak var btnProvince: UIButton!
     
     @IBOutlet weak var productListView: UITableView!
-    
+    @IBOutlet weak var boundButtonMenu: UIView!
     
     var viewCurrent: String = ""
     var query: String = ""
@@ -74,8 +74,10 @@ class ProductListViewController: UIViewController{
 
     
     @IBAction func tabToChangeView(_ sender: UIButton){
+        
         if (sender === btnLatest){
             self.viewCurrent = tabProduct
+            
         }
         if (sender === btnCategory){
             self.viewCurrent = tabCategory
@@ -84,6 +86,17 @@ class ProductListViewController: UIViewController{
         if (sender === btnProvince){
             self.viewCurrent = tabProvince
         }
+        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
+        for view in myViews {
+            let viewbutton = view.subviews.filter{$0 is UIButton}
+            for btn in viewbutton{
+                if let item = btn as? UIButton
+                {
+                    item.setTitleColor(UIColor.darkGray, for: .normal)
+                }
+            }
+        }
+        sender.setTitleColor(UIColor.red, for: .normal)
         self.productListView.reloadData()
     }
 
@@ -108,6 +121,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         if query.range(of:"?") != nil{
             str = "&"
         }
+        
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
             self.viewCurrent = tabProduct
@@ -117,6 +131,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                     self?.productListView.reloadData()
                 }
             }
+            btnCategory.setTitle(categoryList[indexPath.row].name, for: .normal)
         }
         if(viewCurrent == tabProvince){
             query += "\(str)provinceID=\(provinceList[indexPath.row].id)"
@@ -127,8 +142,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                     self?.productListView.reloadData()
                 }
             }
+            btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
         }
-        print(query)
+        //print(query)
     }
     
     
@@ -146,6 +162,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         if(viewCurrent == tabCategory){
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryListCell")
             if let cell = cell as? CategoryListCell {
+                //cell.labelCategoryName.text = "Danh muc"
                 let dataCategory = categoryList[indexPath.row]
                 cell.loadCell(data: dataCategory)
             }
@@ -160,7 +177,6 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
             if let cell = cell as? ProductListCell {
-                
                 let dataProduct = productList[indexPath.row]
                 cell.loadCell(data: dataProduct)
             }

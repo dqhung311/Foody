@@ -19,14 +19,14 @@ class ProvinceService{
     
     func fetchProvince(completion:  @escaping ([ProductProvince], NSError?) -> Void){
         guard let url = URL(string: urlJson) else {
-            let error = NSError(domain: "CategoryService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
+            let error = NSError(domain: "ProvinceService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
             return
         }
         
         let task = session.dataTask(with: url, completionHandler: {[weak self] (data, res, err) in
             guard let jsonData = data, let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
-                let error = NSError(domain: "CategoryService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
+                let error = NSError(domain: "ProvinceService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
                 completion([], error)
                 return
             }
