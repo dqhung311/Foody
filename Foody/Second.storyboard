@@ -93,7 +93,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewU-Pr-sPS">
-                                <rect key="frame" x="42.5" y="318" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="318.5" width="290" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="eZA-ae-uyO"/>
                                     <constraint firstAttribute="width" constant="290" id="qGk-y0-TZX"/>
@@ -112,7 +112,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11D-oP-Scl">
-                                <rect key="frame" x="42" y="572" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="572" width="290" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EDf-gJ-tOI"/>
                                     <constraint firstAttribute="width" constant="290" id="ikx-O9-JNn"/>
@@ -122,6 +122,17 @@
                                 </state>
                                 <connections>
                                     <action selector="signUpClick:" destination="8sJ-9y-4vS" eventType="touchUpInside" id="g0X-om-63M"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9l-qg-p8W">
+                                <rect key="frame" x="-30" y="-24" width="97" height="89"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="&lt;">
+                                    <color key="titleColor" red="0.99600285290000001" green="0.99619680639999997" blue="0.99162989850000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="clickBack:" destination="8sJ-9y-4vS" eventType="touchUpInside" id="5gf-Ir-Zyq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -260,7 +271,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LtH-H5-qfb">
-                                <rect key="frame" x="42" y="318.5" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="318.5" width="290" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="TpL-V8-Oim"/>
@@ -280,7 +291,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNA-Lp-weI">
-                                <rect key="frame" x="42" y="368.5" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="368.5" width="290" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="CiL-gR-PeA"/>
                                     <constraint firstAttribute="height" constant="30" id="vhB-ko-MgV"/>
@@ -429,7 +440,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vui Lòng nhập email vào ô bên dưới, chúng tôi sẽ gửi mật khẩu mới vào hộp thư của bạn" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3q-u3-izB">
-                                <rect key="frame" x="3" y="78.5" width="370" height="50"/>
+                                <rect key="frame" x="2.5" y="78.5" width="370" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="370" id="2hk-hD-hEI"/>
                                     <constraint firstAttribute="height" constant="50" id="nVG-kU-JA1"/>
@@ -471,7 +482,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qnx-if-NYn" userLabel="EmailView">
-                                <rect key="frame" x="42" y="87" width="290" height="33"/>
+                                <rect key="frame" x="42.5" y="87" width="290" height="33"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fbq-nq-4eX">
                                         <rect key="frame" x="0.0" y="32" width="290" height="1"/>
@@ -510,7 +521,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cq7-U4-ruD" userLabel="PasswordView">
-                                <rect key="frame" x="42" y="137" width="290" height="33"/>
+                                <rect key="frame" x="42.5" y="137" width="290" height="33"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuq-vq-s8r">
                                         <rect key="frame" x="0.0" y="32" width="290" height="1"/>
@@ -549,7 +560,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOD-FT-K01" userLabel="ConfirmPasswordView">
-                                <rect key="frame" x="42" y="187" width="290" height="33"/>
+                                <rect key="frame" x="42.5" y="187" width="290" height="33"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hhj-xk-72O">
                                         <rect key="frame" x="0.0" y="32" width="290" height="1"/>
@@ -588,7 +599,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vry-UI-XZe" userLabel="DisplayNameView">
-                                <rect key="frame" x="42" y="237" width="290" height="33"/>
+                                <rect key="frame" x="42.5" y="237" width="290" height="33"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ivg-YQ-jLi">
                                         <rect key="frame" x="0.0" y="32" width="290" height="1"/>
@@ -627,7 +638,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2h-Nr-G6S">
-                                <rect key="frame" x="42" y="318.5" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="318.5" width="290" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="DTE-bq-RK4"/>
                                     <constraint firstAttribute="height" constant="30" id="GO2-6e-MR3"/>
@@ -648,7 +659,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AvS-I3-wXu">
-                                <rect key="frame" x="42" y="368.5" width="290" height="30"/>
+                                <rect key="frame" x="42.5" y="368.5" width="290" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="otI-dP-sSb"/>
                                     <constraint firstAttribute="width" constant="290" id="pH8-Aa-iRd"/>

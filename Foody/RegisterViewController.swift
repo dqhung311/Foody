@@ -31,5 +31,9 @@ class RegisterViewController: UIViewController {
     @IBAction func signUpClick(_ sender: UIButton){
         self.performSegue(withIdentifier: "ToSignUpSegue", sender: sender)
     }
-
+    
+    @IBAction func clickBack(_ sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
