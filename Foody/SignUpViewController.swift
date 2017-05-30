@@ -63,22 +63,37 @@ class SignUpViewController: UIViewController {
             
             let responseString = String(data: data, encoding: .utf8)
             let messageshow = responseString ?? ""
-            if messageshow != "OK" {
+            if messageshow != "ok" {
                 DispatchQueue.main.async {
                     self.showAlertMessage(messageshow)
                 }
             } else {
-                self.showAlertMessage("Đăng ký thành công")
+                DispatchQueue.main.async {
+                    UserDefaults.standard.setValue(newuser.getPassword(), forKey: "password")
+                    self.showSuccessMessage("Đăng ký thành công")
+                }
             }
             
         }
         task.resume()
     }
     
+    func dissmissall(){
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    }
     
     func showAlertMessage(_ message: String){
         let alertController = UIAlertController(title: "Warning", message: "\(message)", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    func showSuccessMessage(_ message: String){
+        let alertController = UIAlertController(title: "Success", message: "\(message)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: { action in
+            self.dissmissall()
+        })
         alertController.addAction(defaultAction)
         
         present(alertController, animated: true, completion: nil)

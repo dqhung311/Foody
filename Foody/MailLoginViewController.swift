@@ -20,9 +20,6 @@ class MailLoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        UserDefaults.standard.setValue("12345", forKey: "password")
-        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.loginBtn.layer.borderColor = UIColor.white.cgColor
     }
