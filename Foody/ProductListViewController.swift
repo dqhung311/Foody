@@ -20,11 +20,12 @@ class ProductListViewController: UIViewController{
     
     var viewCurrent: String = ""
     
-    let urlString = "http://anphatkhanh.vn/foody/json.php"
+    //let urlString = "http://anphatkhanh.vn/foody/json.php"
     var provinceList = [ProductProvince]()
     var categoryList = [ProductCategory]()
     var productList  = [ProductItem]()
-    let foodyAPI = FoodyAPI()
+    
+    let productService = ProductService()
     
     let tabProduct = Config().getTabProduct()
     let tabCategory = Config().getTabCategory()
@@ -38,15 +39,20 @@ class ProductListViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
-        self.getJSON(url: urlString)
-        DispatchQueue.main.async {
-            self.productListView.reloadData()
-            
+        //self.getJSON(url: urlString)
+        
+        
+        productService.getAllProduct(urlString: "http://anphatkhanh.vn/foody/json.php"){ [weak self] (productList, error) in
+            self?.productList = productList
+            DispatchQueue.main.async {
+                print(productList.count)
+                self?.productListView.reloadData()
+            }
         }
         
+    
     }
     
     @IBAction func disMist(_ sender: UIButton){
@@ -72,106 +78,6 @@ class ProductListViewController: UIViewController{
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-        
-    func getJSON(url: String) {
-        let manager = AFHTTPSessionManager()
-        manager.get(
-            url,
-            parameters: nil,
-            success:
-            {
-                (operation, responseObject) in
-                
-                if let jsonDict = responseObject as? [String: Any] {
-                    
-                    if let product = jsonDict["product"] as? [[String:Any]] {
-                        
-                        self.productList = []
-                        for p in product{
-                            
-                            let item = ProductItem()
-                            
-                            if let id = p["id"] as? String {
-                                item.id = id
-                            }
-                            if let name = p["name"] as? String {
-                                item.name = name
-                            }
-                            if let code = p["code"] as? String {
-                                item.code = code
-                            }
-                            if let address = p["address"] as? String {
-                                item.address = address
-                            }
-                            if let urlphoto = p["preview_image"] as? String {
-                                item.urlphoto = urlphoto
-                            }
-                            if let score = p["score"] as? String {
-                                item.score = score
-                            }
-                            self.productList.append(item)
-                        }
-                    }
-                    
-                    
-                    if let province = jsonDict["province"] as? [[String:Any]] {
-                        
-                            self.provinceList = []
-                            for p in province{
-                                let item = ProductProvince()
-                                
-                                if let id = p["id"] as? String {
-                                    item.id = id
-                                }
-                                if let name = p["name"] as? String {
-                                    item.name = name
-                                }
-                                if let code = p["code"] as? String {
-                                    item.code = code
-                                }
-                                self.provinceList.append(item)
-                                
-                            }
-                        
-                    }
-                    
-                    if let category = jsonDict["category"] as? [[String:Any]] {
-                        
-                        self.categoryList = []
-                        for p in category{
-                            let item = ProductCategory()
-                            if let id = p["id"] as? String {
-                                item.id = id
-                            }
-                            if let name = p["name"] as? String {
-                                item.name = name
-                            }
-                            if let code = p["code"] as? String {
-                                item.code = code
-                            }
-                            if let urlphoto = p["urlphoto"] as? String {
-                                item.urlphoto = urlphoto
-                            }
-                            self.categoryList.append(item)
-                            
-                        }
-                        
-                    }
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.productListView.reloadData()
-                }
-                
-        },
-            failure:
-            {
-                (operation, error) in
-                print("Error: " + error.localizedDescription)
-        })
-        
     }
     
 }

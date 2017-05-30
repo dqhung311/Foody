@@ -186,6 +186,14 @@
                                     <constraint firstItem="ab9-SO-tja" firstAttribute="top" secondItem="LEP-Ag-ihr" secondAttribute="top" id="yVA-wT-N6x"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOT-uO-4eL">
+                                <rect key="frame" x="227" y="40" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="nextDemoWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VcC-xt-WDY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>

@@ -13,7 +13,7 @@
         <!--Register View Controller-->
         <scene sceneID="SBs-sC-MgN">
             <objects>
-                <viewController id="8sJ-9y-4vS" customClass="RegisterViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginStoryBoard" id="8sJ-9y-4vS" customClass="RegisterViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qMn-BM-eUN"/>
                         <viewControllerLayoutGuide type="bottom" id="dQR-FX-R0X"/>

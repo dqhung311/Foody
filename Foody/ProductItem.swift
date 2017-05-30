@@ -15,6 +15,7 @@ class ProductItem{
     var urlphoto: String = ""
     var address: String = ""
     var score: String = ""
+    
     init(){
         
     }
@@ -26,7 +27,7 @@ class ProductItem{
         self.address = address
         self.score = score
     }
-    
+  
     
     
 }

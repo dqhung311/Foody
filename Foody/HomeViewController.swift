@@ -118,6 +118,14 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "Main", sender: sender)
     }
     
+    @IBAction func nextDemo(sender:UIButton){
+        let storyboard = UIStoryboard(name: "Second", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
+        self.present(vc, animated: true, completion: nil)
+        
+        //self.performSegue(withIdentifier: "LoginStoryBoard", sender: sender)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
        
         if let barViewControllers = segue.destination as? UITabBarController{
@@ -126,6 +134,8 @@ class HomeViewController: UIViewController {
             
         }
     }
+    
+    
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue){
        
