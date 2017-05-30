@@ -28,7 +28,6 @@ class ProductListCell: UITableViewCell {
     }
     
     func loadCell(data: ProductItem){
-        
         labelProductName.text = data.name
         labelProductAddress.text = data.address
         labelScore.text = data.score
@@ -36,5 +35,7 @@ class ProductListCell: UITableViewCell {
         labelScore.clipsToBounds = true
         picturePreview.loadImage(urlString: data.urlphoto)
     }
+    
+    
 
 }

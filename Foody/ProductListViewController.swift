@@ -19,37 +19,50 @@ class ProductListViewController: UIViewController{
     
     
     var viewCurrent: String = ""
+    var query: String = ""
     
-    //let urlString = "http://anphatkhanh.vn/foody/json.php"
     var provinceList = [ProductProvince]()
     var categoryList = [ProductCategory]()
     var productList  = [ProductItem]()
     
     let productService = ProductService()
+    let categoryService = CategoryService()
+    let provinceService = ProvinceService()
     
     let tabProduct = Config().getTabProduct()
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
     
+    
+ 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
-        //self.getJSON(url: urlString)
         
-        
-        productService.getAllProduct(urlString: "http://anphatkhanh.vn/foody/json.php"){ [weak self] (productList, error) in
+        productService.fetchProduct(strUrl: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
-                print(productList.count)
                 self?.productListView.reloadData()
             }
+        }
+        categoryService.fetchCategory(){ [weak self] (categoryList, error) in
+            self?.categoryList = categoryList
+            DispatchQueue.main.async {
+                self?.productListView.reloadData()
+            }
+           
+        }
+        provinceService.fetchProvince(){ [weak self] (provinceList, error) in
+            self?.provinceList = provinceList
+            DispatchQueue.main.async {
+                self?.productListView.reloadData()
+            }
+            
         }
         
     
@@ -66,13 +79,12 @@ class ProductListViewController: UIViewController{
         }
         if (sender === btnCategory){
             self.viewCurrent = tabCategory
+            
         }
         if (sender === btnProvince){
             self.viewCurrent = tabProvince
         }
-        
         self.productListView.reloadData()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,8 +93,6 @@ class ProductListViewController: UIViewController{
     }
     
 }
-
-
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -93,6 +103,33 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         return height
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var str = "?"
+        if query.range(of:"?") != nil{
+            str = "&"
+        }
+        if(viewCurrent == tabCategory){
+            query += "\(str)catID=\(categoryList[indexPath.row].id)"
+            self.viewCurrent = tabProduct
+            productService.fetchProduct(strUrl: "http://anphatkhanh.vn/foody/product/\(query)"){ [weak self] (productList, error) in
+                self?.productList = productList
+                DispatchQueue.main.async {
+                    self?.productListView.reloadData()
+                }
+            }
+        }
+        if(viewCurrent == tabProvince){
+            query += "\(str)provinceID=\(provinceList[indexPath.row].id)"
+            self.viewCurrent = tabProduct
+            productService.fetchProduct(strUrl: "http://anphatkhanh.vn/foody/product/\(query)"){ [weak self] (productList, error) in
+                self?.productList = productList
+                DispatchQueue.main.async {
+                    self?.productListView.reloadData()
+                }
+            }
+        }
+        print(query)
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

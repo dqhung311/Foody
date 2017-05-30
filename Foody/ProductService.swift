@@ -7,36 +7,41 @@
 //
 
 import UIKit
-import AFNetworking
 
 class ProductService{
     
-    let urlJson: String = "http://anphatkhanh.vn/foody/json.php"
-    //let manager: AFHTTPSessionManager!
+    var urlJson: String = "http://anphatkhanh.vn/foody/product/"
+    private let session : URLSession!
     
-    init(){
-        //manager = AFHTTPSessionManager()
+    init() {
+        session = URLSession(configuration: .default)
     }
     
-    
-    func getAllProduct(urlString: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
-        self.parseJson(urlString: urlString,completion: completion )
-    }
-    
-    
-    func parseJson(urlString: String, completion: ([ProductItem], NSError?) -> Void){
-        let manager = AFHTTPSessionManager()
-        var productItems = [ProductItem]()
+    func fetchProduct(strUrl: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
         
-        manager.get(
-            urlString,
-            parameters: nil,
-            success:
-            {
-                (operation, responseObject) in
+        if(strUrl != ""){
+            urlJson = strUrl
+        }
+        guard let url = URL(string: urlJson) else {
+            let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
+            completion([], error)
+            return
+        }
+        let task = session.dataTask(with: url, completionHandler: {[weak self] (data, res, err) in
+            guard let jsonData = data, let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
+                let error = NSError(domain: "ProductService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
+                completion([], error)
                 
-                if let jsonDict = responseObject as? [String: Any] {
-                    if let product = jsonDict["product"] as? [[String:Any]] {
+                return
+            }
+            self?.parseJson(json: jsonObject as? [String: Any], completion: completion)
+        })
+        task.resume()
+    }
+    
+    func parseJson(json: [String: Any]?, completion: ([ProductItem], NSError?) -> Void){
+        var productItems = [ProductItem]()
+        if let product = json?["product"] as? [[String:Any]] {
                         for p in product{
                             
                             //if let item = object as? ProductItem {
@@ -62,20 +67,9 @@ class ProductService{
                             productItems.append(item)
                             
                         }
-                        print(productItems.count)
                     }
-                    
-                }
-                
-        },
-            failure:
-            {
-                (operation, error) in
-                print("Error: " + error.localizedDescription)
-        })
-        print(productItems.count)
         completion(productItems, nil)
-        
+                    
     }
     
 }

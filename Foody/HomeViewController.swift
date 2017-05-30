@@ -123,7 +123,6 @@ class HomeViewController: UIViewController {
         let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
         self.present(vc, animated: true, completion: nil)
         
-        //self.performSegue(withIdentifier: "LoginStoryBoard", sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .

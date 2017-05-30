@@ -2,127 +2,37 @@
 //  FoodyAPI.swift
 //  Foody
 //
-//  Created by Dao Quang Hung on 5/29/17.
+//  Created by Dao Quang Hung on 5/30/17.
 //  Copyright © 2017 Dao Quang Hung. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import AFNetworking
 
 class FoodyAPI{
-    
-    
-    var categoryList  = [ProductCategory]()
-    var provinceList = [ProductProvince]()
-    
-    private let manager: AFHTTPSessionManager!
-    
+    private let session : URLSession!
     init() {
-        manager = AFHTTPSessionManager()
+        session = URLSession(configuration: .default)
     }
     
-    
-    func getProducts(urlString: String){
-       self.getJSON(url: urlString)
-    }
-    
-    func getJSON(url: String) -> Any {
-        var productList  = [ProductItem]()
-        manager.get(
-            url,
-            parameters: nil,
-            success:
-            {
-                (operation, responseObject) in
-                
-                if let jsonDict = responseObject as? [String: Any] {
-                    if let product = jsonDict["product"] as? [[String:Any]] {
-                        for p in product{
-                            
-                            //if let item = object as? ProductItem {
-                            let item = ProductItem()
-                            if let id = p["id"] as? String {
-                                item.id = id
-                            }
-                            if let name = p["name"] as? String {
-                                item.name = name
-                            }
-                            if let code = p["code"] as? String {
-                                item.code = code
-                            }
-                            if let address = p["address"] as? String {
-                                item.address = address
-                            }
-                            if let urlphoto = p["preview_image"] as? String {
-                                item.urlphoto = urlphoto
-                            }
-                            if let score = p["score"] as? String {
-                                item.score = score
-                            }
-                            productList.append(item)
-                            //}
-                        }
-                    }
-                    //print(productList.count)
-                    //Category
-                    /*if let category = jsonDict["category"] as? [[String:Any]] {
-                        
-                        self.categoryList = []
-                        for p in category{
-                            let item = ProductCategory()
-                            if let id = p["id"] as? String {
-                                item.id = id
-                            }
-                            if let name = p["name"] as? String {
-                                item.name = name
-                            }
-                            if let code = p["code"] as? String {
-                                item.code = code
-                            }
-                            if let urlphoto = p["urlphoto"] as? String {
-                                item.urlphoto = urlphoto
-                            }
-                            self.categoryList.append(item)
-                            
-                        }
-                        
-                    }
-                    //Province
-                    if let province = jsonDict["province"] as? [[String:Any]] {
-                        
-                        self.provinceList = []
-                        for p in province{
-                            let item = ProductProvince()
-                            
-                            if let id = p["id"] as? String {
-                                item.id = id
-                            }
-                            if let name = p["name"] as? String {
-                                item.name = name
-                            }
-                            if let code = p["code"] as? String {
-                                item.code = code
-                            }
-                            self.provinceList.append(item)
-                            
-                        }
-                        
-                    }*/
-                    
-                }
-                
-        },
-            failure:
-            {
-                (operation, error) in
-                print("Error: " + error.localizedDescription)
+    func connectAPI(urlJson: String, object: AnyObject, completion:  @escaping ([AnyObject], NSError?) -> Void){
+        guard let url = URL(string: urlJson) else {
+            let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
+            completion([], error)
+            return
+        }
+        
+        let task = session.dataTask(with: url, completionHandler: {[weak self] (data, res, err) in
+            guard let jsonData = data, let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
+                let error = NSError(domain: "ProductService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
+                completion([], error)
+                //closure completion duoc goi tu ham callback cua dataTask, nen phai them thuoc tinh @escaping
+                return
+            }
+            
+            //object.parseJson(json: jsonObject as? [String: Any], completion: completion)
         })
         
-        return productList
+        task.resume()
     }
-    
-    
-    
-    
+
 }
