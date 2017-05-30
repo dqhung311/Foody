@@ -12,6 +12,7 @@ class CategoryListCell: UITableViewCell {
     
     @IBOutlet weak var labelCategoryName: UILabel!
     @IBOutlet weak var picturePreview: UIImageView!
+    var productCategory: ProductCategory!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +24,9 @@ class CategoryListCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func loadCell(data: ProductCategory){
+        labelCategoryName.text = data.name
+        picturePreview.loadImage(urlString: data.urlphoto)
+    }
 }

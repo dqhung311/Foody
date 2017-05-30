@@ -15,6 +15,8 @@ class ProductListCell: UITableViewCell {
     @IBOutlet weak var picturePreview: UIImageView!
     @IBOutlet weak var labelScore: UILabel!
     
+    var productItem: ProductItem!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,8 +24,17 @@ class ProductListCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
+    }
+    
+    func loadCell(data: ProductItem){
+        
+        labelProductName.text = data.name
+        labelProductAddress.text = data.address
+        labelScore.text = data.score
+        labelScore.layer.cornerRadius = labelScore.frame.width/2.0
+        labelScore.clipsToBounds = true
+        picturePreview.loadImage(urlString: data.urlphoto)
     }
 
 }

@@ -8,8 +8,10 @@
 
 import UIKit
 
-class PlaceListCell: UITableViewCell {
+class ProvinceListCell: UITableViewCell {
     @IBOutlet weak var labelProvinceName: UILabel!
+    var productProvince: ProductProvince!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +22,11 @@ class PlaceListCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
+    func loadCell(data: ProductProvince){
+        labelProvinceName.text = data.name
+    }
+    
 
 }

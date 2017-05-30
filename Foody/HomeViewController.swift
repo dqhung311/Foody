@@ -28,6 +28,9 @@ class HomeViewController: UIViewController {
     
     var selectView: String = ""
     
+    let tabProduct = Config().getTabProduct()
+    let tabCategory = Config().getTabCategory()
+    let tabProvince = Config().getTabProvince()
     
     //@IBOutlet weak var homeLogo: UIImageView!
     override func viewDidLoad() {
@@ -103,13 +106,13 @@ class HomeViewController: UIViewController {
     
     func onTabToViewProductList(sender:UITapGestureRecognizer){
         if(sender.view === khamPhaView){
-            self.selectView = "Latest"
+            self.selectView = tabProduct
         }
         if(sender.view === tinhThanhView){
-            self.selectView = "Province"
+            self.selectView = tabProvince
         }
         if(sender.view === danhMucView){
-            self.selectView = "Category"
+            self.selectView = tabCategory
         }
         
         self.performSegue(withIdentifier: "Main", sender: sender)
