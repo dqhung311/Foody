@@ -48,8 +48,6 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpClick(sender: AnyObject) {
         let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
         
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.securityPolicy.allowInvalidCertificates = YES; // not recommended for production
     }
     
     func dissmissall(){
