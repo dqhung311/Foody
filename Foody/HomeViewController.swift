@@ -25,6 +25,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var khamPhaView: UIView!
     @IBOutlet weak var tinhThanhView: UIView!
     @IBOutlet weak var danhMucView: UIView!
+    @IBOutlet weak var boSuuTapView: UIView!
+    
+    @IBOutlet weak var labelWelcome: UILabel!
     
     var selectView: String = ""
     
@@ -74,6 +77,8 @@ class HomeViewController: UIViewController {
         tinhThanhImage.layer.cornerRadius = 5
         tinhThanhImage.layer.masksToBounds = true
         
+        
+        
     
         let padding = 8
         let size = 15
@@ -88,17 +93,27 @@ class HomeViewController: UIViewController {
         
         //homeTextSearch.leftView = searchImageView
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
+        let tapKhamPha = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
         self.khamPhaView.isUserInteractionEnabled = true
-        self.khamPhaView.addGestureRecognizer(tap)
+        self.khamPhaView.addGestureRecognizer(tapKhamPha)
         
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
+        let tabTinhThanh = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
         self.tinhThanhView.isUserInteractionEnabled = true
-        self.tinhThanhView.addGestureRecognizer(tap2)
+        self.tinhThanhView.addGestureRecognizer(tabTinhThanh)
         
-        let tap3 = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
+        let tabDanhMuc = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
         self.danhMucView.isUserInteractionEnabled = true
-        self.danhMucView.addGestureRecognizer(tap3)
+        self.danhMucView.addGestureRecognizer(tabDanhMuc)
+        
+        let tabSuuTap = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewCollectionList))
+        self.boSuuTapView.isUserInteractionEnabled = true
+        self.boSuuTapView.addGestureRecognizer(tabSuuTap)
+        
+        let tabLogin = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToLogin))
+        
+        self.labelWelcome.isUserInteractionEnabled = true
+        self.labelWelcome.addGestureRecognizer(tabLogin)
+        
         
         // Do any additional setup after loading the view.
     }
@@ -118,19 +133,28 @@ class HomeViewController: UIViewController {
         self.performSegue(withIdentifier: "HomeStoryBoard", sender: sender)
     }
     
-    @IBAction func nextDemo(sender:UIButton){
+    func onTabToViewCollectionList(sender:UITapGestureRecognizer){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "MainStoryBoard") as! UITabBarController
+        tabBarController.selectedIndex = 1
+        self.present(tabBarController, animated: true, completion: nil)
+        
+    }
+    
+    func onTabToLogin(sender:UITapGestureRecognizer){
         let storyboard = UIStoryboard(name: "Second", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
         self.present(vc, animated: true, completion: nil)
         
     }
     
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
        
         if let barViewControllers = segue.destination as? UITabBarController{
             let destinationViewController = barViewControllers.viewControllers?[0] as! ProductListViewController
             destinationViewController.viewCurrent = self.selectView
-            
         }
     }
     

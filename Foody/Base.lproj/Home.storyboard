@@ -186,14 +186,6 @@
                                     <constraint firstItem="ab9-SO-tja" firstAttribute="top" secondItem="LEP-Ag-ihr" secondAttribute="top" id="yVA-wT-N6x"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOT-uO-4eL">
-                                <rect key="frame" x="227" y="40" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="nextDemoWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VcC-xt-WDY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -228,6 +220,7 @@
                     <connections>
                         <outlet property="boSuuTapIcon" destination="cRo-Vk-Aj1" id="suw-CI-Xec"/>
                         <outlet property="boSuuTapImage" destination="6WI-bY-swr" id="E7R-1i-VZV"/>
+                        <outlet property="boSuuTapView" destination="BGC-xI-QDs" id="QgL-NJ-DP6"/>
                         <outlet property="danhMucIcon" destination="bfP-Dx-kzN" id="7AG-OA-aVz"/>
                         <outlet property="danhMucImage" destination="ab9-SO-tja" id="jN3-xi-tBD"/>
                         <outlet property="danhMucView" destination="LEP-Ag-ihr" id="GwW-WA-b10"/>
@@ -236,10 +229,11 @@
                         <outlet property="khamPhaIcon" destination="D4E-lv-M8P" id="zz3-tJ-HIF"/>
                         <outlet property="khamPhaImage" destination="0rX-Gc-Kdi" id="PzU-uV-ytU"/>
                         <outlet property="khamPhaView" destination="FuN-xK-qsR" id="YuR-8S-jqS"/>
+                        <outlet property="labelWelcome" destination="AF5-sC-f7D" id="jau-2N-JmT"/>
                         <outlet property="tinhThanhIcon" destination="TtC-BT-CEX" id="3Ai-cu-P4q"/>
                         <outlet property="tinhThanhImage" destination="Fc6-mh-t2k" id="1c4-un-gde"/>
                         <outlet property="tinhThanhView" destination="08D-fK-oxC" id="O5K-jI-fhK"/>
-                        <segue destination="N3v-ev-BAR" kind="presentation" identifier="HomeStoryBoard" modalTransitionStyle="crossDissolve" id="CNb-aO-Lvy"/>
+                        <segue destination="N3v-ev-BAR" kind="presentation" identifier="HomeStoryBoard" id="CNb-aO-Lvy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
