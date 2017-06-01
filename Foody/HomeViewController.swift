@@ -115,7 +115,7 @@ class HomeViewController: UIViewController {
             self.selectView = tabCategory
         }
         
-        self.performSegue(withIdentifier: "Main", sender: sender)
+        self.performSegue(withIdentifier: "HomeStoryBoard", sender: sender)
     }
     
     @IBAction func nextDemo(sender:UIButton){

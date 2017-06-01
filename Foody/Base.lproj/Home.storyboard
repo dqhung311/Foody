@@ -239,7 +239,7 @@
                         <outlet property="tinhThanhIcon" destination="TtC-BT-CEX" id="3Ai-cu-P4q"/>
                         <outlet property="tinhThanhImage" destination="Fc6-mh-t2k" id="1c4-un-gde"/>
                         <outlet property="tinhThanhView" destination="08D-fK-oxC" id="O5K-jI-fhK"/>
-                        <segue destination="N3v-ev-BAR" kind="presentation" identifier="Main" modalTransitionStyle="crossDissolve" id="CNb-aO-Lvy"/>
+                        <segue destination="N3v-ev-BAR" kind="presentation" identifier="HomeStoryBoard" modalTransitionStyle="crossDissolve" id="CNb-aO-Lvy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,8 +7,11 @@
 //
 
 import UIKit
-
-class ProductService{
+protocol ProtocolProductService {
+    func fetchAllProduct(query: String, completion: @escaping ([ProductItem], NSError?) -> Void)
+    
+}
+class ProductService:ProtocolProductService{
     
     var urlJson: String = "http://anphatkhanh.vn/foody/product/"
     private let session : URLSession!
@@ -17,10 +20,10 @@ class ProductService{
         session = URLSession(configuration: .default)
     }
     
-    func fetchProduct(strUrl: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
+    func fetchAllProduct(query: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
         
-        if(strUrl != ""){
-            urlJson = strUrl
+        if(query != ""){
+            urlJson += query
         }
         guard let url = URL(string: urlJson) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])

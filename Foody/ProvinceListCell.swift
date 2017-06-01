@@ -25,6 +25,7 @@ class ProvinceListCell: UITableViewCell {
     
     
     func loadCell(data: ProductProvince){
+        
         labelProvinceName.text = data.name
     }
     

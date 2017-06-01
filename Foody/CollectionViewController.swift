@@ -9,11 +9,31 @@
 import UIKit
 
 class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
+    
+    @IBOutlet weak var btnLabel: UIButton!
+    var collectionList  = [CollectionItem]()
+    let collectionService = CollectionService()
+    @IBOutlet weak var productCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        btnLabel.layer.cornerRadius = 5
+        btnLabel.layer.masksToBounds = true
+        
+        collectionService.fetchCollection(strUrl: ""){ [weak self] (collectionList, error) in
+            self?.collectionList = collectionList
+            DispatchQueue.main.async {
+                self?.productCollectionView.reloadData()
+            }
+        }
+        
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func disMist(_ sender: UIButton){
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryBoard")
+        self.present(vc, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +42,15 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return collectionList.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionListCell", for: indexPath) as! CollectionListCell
-        cell.labelProductName.text = "Hung"
+        let dataCollection = collectionList[indexPath.row]
+        cell.loadCell(data: dataCollection)
         
         return cell
     }
@@ -45,7 +66,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
             widthRemainingForCellContent -= borderSize + ((cellsAcross - 1) * flowLayout.minimumInteritemSpacing)
         }
         let cellWidth = widthRemainingForCellContent / cellsAcross
-        return CGSize(width: cellWidth, height: 160)
+        return CGSize(width: cellWidth, height: cellWidth)
     }
     
 }

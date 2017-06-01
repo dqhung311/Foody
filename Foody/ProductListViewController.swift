@@ -41,16 +41,15 @@ class ProductListViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        btnLabel.layer.cornerRadius = 5
-        btnLabel.layer.masksToBounds = true
         
-        productService.fetchProduct(strUrl: ""){ [weak self] (productList, error) in
+        self.setUIView()
+        productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
                 self?.productListView.reloadData()
             }
         }
-        categoryService.fetchCategory(){ [weak self] (categoryList, error) in
+        categoryService.fetchAllCategory(){ [weak self] (categoryList, error) in
             self?.categoryList = categoryList
             DispatchQueue.main.async {
                 self?.productListView.reloadData()
@@ -68,6 +67,17 @@ class ProductListViewController: UIViewController{
     
     }
     
+    func setUIView(){
+        btnLabel.layer.cornerRadius = 5
+        btnLabel.layer.masksToBounds = true
+        btnLatest.setTitleColor(UIColor.red, for: .normal)
+        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
+        for view in myViews {
+          view.backgroundColor = UIColor.clear
+            
+        }
+    }
+    
     @IBAction func disMist(_ sender: UIButton){
         self.performSegue(withIdentifier: "Home", sender: nil)
     }
@@ -82,21 +92,14 @@ class ProductListViewController: UIViewController{
         if (sender === btnCategory){
             self.viewCurrent = tabCategory
             
+            
         }
         if (sender === btnProvince){
             self.viewCurrent = tabProvince
+            
         }
-        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
-        for view in myViews {
-            let viewbutton = view.subviews.filter{$0 is UIButton}
-            for btn in viewbutton{
-                if let item = btn as? UIButton
-                {
-                    item.setTitleColor(UIColor.darkGray, for: .normal)
-                }
-            }
-        }
-        sender.setTitleColor(UIColor.red, for: .normal)
+        self.setUIView()
+        sender.superview?.backgroundColor = UIColor.white
         self.productListView.reloadData()
     }
 
@@ -125,9 +128,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
             self.viewCurrent = tabProduct
-            productService.fetchProduct(strUrl: "http://anphatkhanh.vn/foody/product/\(query)"){ [weak self] (productList, error) in
+            productService.fetchAllProduct(query: query){ [weak self] (productList, error) in
                 self?.productList = productList
                 DispatchQueue.main.async {
+                    self?.setUIView()
                     self?.productListView.reloadData()
                 }
             }
@@ -136,9 +140,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         if(viewCurrent == tabProvince){
             query += "\(str)provinceID=\(provinceList[indexPath.row].id)"
             self.viewCurrent = tabProduct
-            productService.fetchProduct(strUrl: "http://anphatkhanh.vn/foody/product/\(query)"){ [weak self] (productList, error) in
+            productService.fetchAllProduct(query: query){ [weak self] (productList, error) in
                 self?.productList = productList
                 DispatchQueue.main.async {
+                    self?.setUIView()
                     self?.productListView.reloadData()
                 }
             }
@@ -165,6 +170,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                 //cell.labelCategoryName.text = "Danh muc"
                 let dataCategory = categoryList[indexPath.row]
                 cell.loadCell(data: dataCategory)
+                btnCategory.superview?.backgroundColor = UIColor.white
             }
             return cell!
         }else if(viewCurrent == tabProvince){
@@ -172,6 +178,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             if let cell = cell as? ProvinceListCell {
                 let dataProvince = provinceList[indexPath.row]
                 cell.loadCell(data: dataProvince)
+                btnProvince.superview?.backgroundColor = UIColor.white
             }
             return cell!
         }else{
@@ -179,6 +186,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             if let cell = cell as? ProductListCell {
                 let dataProduct = productList[indexPath.row]
                 cell.loadCell(data: dataProduct)
+                btnLatest.superview?.backgroundColor = UIColor.white
             }
             return cell!
         }

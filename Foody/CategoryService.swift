@@ -8,7 +8,12 @@
 
 import UIKit
 
-class CategoryService{
+protocol ProtocolCategoryService {
+    func fetchAllCategory(completion: @escaping ([ProductCategory], NSError?) -> Void)
+    
+}
+
+class CategoryService: ProtocolCategoryService{
     
     let urlJson: String = "http://anphatkhanh.vn/foody/category/"
     private let session : URLSession!
@@ -17,13 +22,12 @@ class CategoryService{
         session = URLSession(configuration: .default)
     }
     
-    func fetchCategory(completion:  @escaping ([ProductCategory], NSError?) -> Void){
+    func fetchAllCategory(completion: @escaping ([ProductCategory], NSError?) -> Void) {
         guard let url = URL(string: urlJson) else {
             let error = NSError(domain: "CategoryService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
             return
         }
-        
         let task = session.dataTask(with: url, completionHandler: {[weak self] (data, res, err) in
             guard let jsonData = data, let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
                 let error = NSError(domain: "CategoryService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
@@ -36,7 +40,6 @@ class CategoryService{
         
         task.resume()
     }
-    
     
     func parseJson(json: [String: Any]?, completion: ([ProductCategory], NSError?) -> Void){
         var categoryItem = [ProductCategory]()
