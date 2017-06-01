@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource{
     
     @IBOutlet weak var recentViewBtn: UIButton!
     @IBOutlet weak var recentOrderBtn: UIButton!
@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
         self.recentViewBtn.layer.borderColor = UIColor.gray.cgColor
         self.recentOrderBtn.layer.borderColor = UIColor.gray.cgColor
         self.searchedBtn.layer.borderColor = UIColor.gray.cgColor
-        productService.fetchProduct(strUrl: ""){ [weak self] (productList, error) in
+        productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
                 self?.searchResultTableView.reloadData()
@@ -41,6 +41,24 @@ class SearchViewController: UIViewController {
     
     @IBAction func clickBack(_ sender: UIButton){
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            let height: CGFloat = 44
+            return height
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return productList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell")
+        if let cell = cell as? SearchCell {
+            cell.loadCell(data: productList[indexPath.row])
+        }
+        return cell!
     }
 
 }

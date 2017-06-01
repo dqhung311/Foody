@@ -27,6 +27,7 @@ class SearchCell: UITableViewCell {
     
     func loadCell(data: ProductItem){
         labelProductName.text = data.name
+        print(labelProductName.text!)
         labelProductAddress.text = data.address
         picturePreview.loadImage(urlString: data.urlphoto)
     }
