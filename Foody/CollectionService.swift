@@ -6,8 +6,14 @@
 //  Copyright © 2017 Dao Quang Hung. All rights reserved.
 //
 
+protocol ProtocolCollectionService {
+    func fetchAllCollection(query: String, completion: @escaping ([CollectionItem], NSError?) -> Void)
+    
+}
+
+
 import Foundation
-class CollectionService{
+class CollectionService: ProtocolCollectionService{
     
     var urlJson: String = "http://anphatkhanh.vn/foody/collection/"
     private let session : URLSession!
@@ -16,10 +22,10 @@ class CollectionService{
         session = URLSession(configuration: .default)
     }
     
-    func fetchCollection(strUrl: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
+    func fetchAllCollection(query: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
         
-        if(strUrl != ""){
-            urlJson = strUrl
+        if(query != ""){
+            urlJson += query
         }
         guard let url = URL(string: urlJson) else {
             let error = NSError(domain: "CollectionService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
@@ -37,6 +43,8 @@ class CollectionService{
         })
         task.resume()
     }
+    
+    
     
     func parseJson(json: [String: Any]?, completion: ([CollectionItem], NSError?) -> Void){
         var collectionItems = [CollectionItem]()

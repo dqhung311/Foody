@@ -20,7 +20,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
         
-        collectionService.fetchCollection(strUrl: ""){ [weak self] (collectionList, error) in
+        collectionService.fetchAllCollection(query: ""){ [weak self] (collectionList, error) in
             self?.collectionList = collectionList
             DispatchQueue.main.async {
                 self?.productCollectionView.reloadData()
@@ -31,9 +31,12 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     @IBAction func disMist(_ sender: UIButton){
+        /*DispatchQueue.main.async {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryBoard")
         self.present(vc, animated: true, completion: nil)
+        }*/
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {
