@@ -41,8 +41,9 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func clickSignIn(_ sender: UIButton){
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-//        let nn = CoreDataStore.shared.getContext()
+        let storyboard = UIStoryboard(name: "Second", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func signUpClick(sender: AnyObject) {
