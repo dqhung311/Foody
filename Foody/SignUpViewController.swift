@@ -6,8 +6,10 @@
 //  Copyright © 2017 Dao Quang Hung. All rights reserved.
 //
 
+import AFNetworking
 import UIKit
 import CoreData
+
 
 class SignUpViewController: UIViewController {
 
@@ -45,37 +47,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpClick(sender: AnyObject) {
         let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
-        var request = URLRequest(url: URL(string: "http://anphatkhanh.vn/foody/edit.php")!)
-        request.httpMethod = "POST"
-        let postString = "email=\(newuser.getEmail())&password=\(newuser.getPassword())&name=\(newuser.getName())"
-        request.httpBody = postString.data(using: .utf8)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                // check for http errors
-                DispatchQueue.main.async {
-                    self.showAlertMessage("statusCode should be 200, but is \(httpStatus.statusCode)")
-                }
-            }
-            
-            let responseString = String(data: data, encoding: .utf8)
-            let messageshow = responseString ?? ""
-            if messageshow != "ok" {
-                DispatchQueue.main.async {
-                    self.showAlertMessage(messageshow)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    UserDefaults.standard.setValue(newuser.getPassword(), forKey: "password")
-                    self.showSuccessMessage("Đăng ký thành công")
-                }
-            }
-            
-        }
-        task.resume()
+        
     }
     
     func dissmissall(){
