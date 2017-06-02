@@ -44,8 +44,6 @@ class CollectionService: ProtocolCollectionService{
         task.resume()
     }
     
-    
-    
     func parseJson(json: [String: Any]?, completion: ([CollectionItem], NSError?) -> Void){
         var collectionItems = [CollectionItem]()
         if let collection = json?["collection"] as? [[String:Any]] {
@@ -75,7 +73,7 @@ class CollectionService: ProtocolCollectionService{
                 
             }
         }
-        print(collectionItems.count)
+       
         completion(collectionItems, nil)
         
     }

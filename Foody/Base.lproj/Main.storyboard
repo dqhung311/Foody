@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Mới nhất-->
+        <!--Product List View Controller-->
         <scene sceneID="SQq-NK-gTj">
             <objects>
                 <viewController id="YvF-Cl-USX" customClass="ProductListViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
@@ -317,7 +317,9 @@
                             <constraint firstAttribute="trailing" secondItem="w1l-k5-nCh" secondAttribute="trailing" id="wKS-vt-g6x"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Mới nhất" image="tab-home" id="rgW-6B-lDG"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab-home" id="rgW-6B-lDG">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="boundButtonMenu" destination="dVr-Je-WeN" id="nSS-kg-JxS"/>
                         <outlet property="btnCategory" destination="Pud-9n-29f" id="oXc-Sk-AUB"/>
@@ -333,7 +335,7 @@
             </objects>
             <point key="canvasLocation" x="2784.8000000000002" y="-5.8470764617691158"/>
         </scene>
-        <!--Người dùng-->
+        <!--View Controller-->
         <scene sceneID="9uX-vd-9Du">
             <objects>
                 <viewController id="bmH-Mf-KiJ" sceneMemberID="viewController">
@@ -346,32 +348,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Người dùng" image="tab-user" id="c1m-uB-vbQ"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab-user" id="c1m-uB-vbQ">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxN-lf-YDm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1846" y="802"/>
         </scene>
-        <!--Tìm kiếm-->
-        <scene sceneID="B6s-Y1-SUx">
-            <objects>
-                <viewController id="yF8-1L-abD" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hoa-X7-pzq"/>
-                        <viewControllerLayoutGuide type="bottom" id="pEd-wB-p49"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="S44-FC-viL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Tìm kiếm" image="tab-search" id="pcR-D2-mJK"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aeL-D8-yql" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1087" y="802"/>
-        </scene>
-        <!--Bộ sưu tập-->
+        <!--Collection View Controller-->
         <scene sceneID="d0P-OY-Rav">
             <objects>
                 <viewController storyboardIdentifier="CollectionStoryBoard" id="rZM-WD-W7A" customClass="CollectionViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
@@ -425,34 +410,34 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vwo-LD-L4Q">
-                                <rect key="frame" x="2" y="100" width="371" height="518"/>
+                                <rect key="frame" x="5" y="103" width="365" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ylJ-eN-Wqz">
-                                    <size key="itemSize" width="356" height="197"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="ylJ-eN-Wqz">
+                                    <size key="itemSize" width="356" height="161"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionListCell" id="WOK-oW-1ax" customClass="CollectionListCell" customModule="Foody" customModuleProvider="target">
-                                        <rect key="frame" x="7.5" y="0.0" width="356" height="197"/>
+                                        <rect key="frame" x="4.5" y="0.0" width="356" height="161"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="356" height="197"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="356" height="161"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JYj-4W-JvJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="356" height="131.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="356" height="107.5"/>
                                                     <color key="backgroundColor" red="1" green="0.86434732520000002" blue="0.28417798859999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpe-x1-Ntc">
-                                                    <rect key="frame" x="0.0" y="131.5" width="356" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="107.5" width="356" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4w-Fb-PNw">
-                                                    <rect key="frame" x="0.0" y="146" width="356" height="14.5"/>
+                                                    <rect key="frame" x="0.0" y="122" width="356" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -499,13 +484,15 @@
                             <constraint firstItem="m0s-I2-ulJ" firstAttribute="top" secondItem="3Td-Em-ivn" secondAttribute="bottom" id="NWo-Qr-CRb"/>
                             <constraint firstItem="3Td-Em-ivn" firstAttribute="leading" secondItem="V6c-Yu-dd7" secondAttribute="leading" id="Ntl-Wu-zlE"/>
                             <constraint firstAttribute="trailing" secondItem="m0s-I2-ulJ" secondAttribute="trailing" id="SYi-sw-ptG"/>
-                            <constraint firstItem="vwo-LD-L4Q" firstAttribute="top" secondItem="m0s-I2-ulJ" secondAttribute="bottom" constant="2" id="g1r-ci-yVV"/>
-                            <constraint firstAttribute="trailing" secondItem="vwo-LD-L4Q" secondAttribute="trailing" constant="2" id="kRf-vh-KQe"/>
-                            <constraint firstItem="vwo-LD-L4Q" firstAttribute="leading" secondItem="V6c-Yu-dd7" secondAttribute="leading" constant="2" id="nLb-cu-dWV"/>
+                            <constraint firstItem="vwo-LD-L4Q" firstAttribute="top" secondItem="m0s-I2-ulJ" secondAttribute="bottom" constant="5" id="g1r-ci-yVV"/>
+                            <constraint firstAttribute="trailing" secondItem="vwo-LD-L4Q" secondAttribute="trailing" constant="5" id="kRf-vh-KQe"/>
+                            <constraint firstItem="vwo-LD-L4Q" firstAttribute="leading" secondItem="V6c-Yu-dd7" secondAttribute="leading" constant="5" id="nLb-cu-dWV"/>
                             <constraint firstItem="npY-UZ-LhE" firstAttribute="top" secondItem="vwo-LD-L4Q" secondAttribute="bottom" id="yma-t2-ocy"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Bộ sưu tập" image="tab-collection" id="jHm-la-kET"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab-collection" id="jHm-la-kET">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="btnLabel" destination="VCm-FS-3mU" id="qvD-9p-P6M"/>
                         <outlet property="productCollectionView" destination="vwo-LD-L4Q" id="TLA-Zx-Pad"/>
@@ -528,7 +515,6 @@
                     <connections>
                         <segue destination="YvF-Cl-USX" kind="relationship" relationship="viewControllers" id="enG-Le-Oxk"/>
                         <segue destination="rZM-WD-W7A" kind="relationship" relationship="viewControllers" id="uW2-aa-xU9"/>
-                        <segue destination="yF8-1L-abD" kind="relationship" relationship="viewControllers" id="WlX-dc-1PW"/>
                         <segue destination="bmH-Mf-KiJ" kind="relationship" relationship="viewControllers" id="7RY-Dy-WkL"/>
                     </connections>
                 </tabBarController>
@@ -539,9 +525,9 @@
     </scenes>
     <resources>
         <image name="icon-map" width="512" height="512"/>
-        <image name="tab-collection" width="27" height="26"/>
-        <image name="tab-home" width="30" height="30"/>
-        <image name="tab-search" width="24" height="24"/>
-        <image name="tab-user" width="25" height="25"/>
+        <image name="tab-collection" width="28" height="27"/>
+        <image name="tab-home" width="28" height="27"/>
+        <image name="tab-user" width="28" height="27"/>
     </resources>
+    <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
 </document>

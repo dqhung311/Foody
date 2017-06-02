@@ -27,6 +27,15 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
             }
         }
         
+        
+        
+        
+        if let password = UserDefaults.standard.value(forKey: "password") as? String{
+            if (password == "ok"){
+                print("Da dang nhap")
+            }
+        }
+        
         // Do any additional setup after loading the view.
     }
     

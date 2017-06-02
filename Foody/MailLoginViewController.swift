@@ -34,10 +34,12 @@ class MailLoginViewController: UIViewController {
     
     @IBAction func clickSignUp(_ sender: UIButton){
         self.performSegue(withIdentifier: "ToRegisterSegue", sender: sender)
+        UserDefaults.standard.setValue("ok", forKey: "password")
     }
     
     @IBAction func clickForgetPass(_ sender: UIButton){
         self.performSegue(withIdentifier: "ToForgetSegue", sender: sender)
+        UserDefaults.standard.setValue("no", forKey: "password")
     }
     
 }

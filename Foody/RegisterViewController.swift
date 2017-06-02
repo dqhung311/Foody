@@ -26,6 +26,7 @@ class RegisterViewController: UIViewController {
     
     @IBAction func emailLoginClick(_ sender: UIButton){
         self.performSegue(withIdentifier: "MailLoginSegue", sender: sender)
+        
     }
     
     @IBAction func signUpClick(_ sender: UIButton){
