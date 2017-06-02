@@ -9,27 +9,43 @@
 import UIKit
 
 class ProductDetailController: UIViewController {
-
+    
+    @IBOutlet weak var btnComment: UIButton!
+    @IBOutlet weak var btnLike: UIButton!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var labelProductName: UILabel!
+    
+    var productID: String = ""
+    
+    var productList  = [ProductItem]()
+    let productService = ProductService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        productService.fetchByID(id: productID){ [weak self] (productList, error) in
+            self?.productList = productList
+            DispatchQueue.main.async {
+                let data = productList[0]
+                self?.setUIView(data: data)
+            }
+            
+        }
+        
+        //print(productList.count)
+        //labelProductName.text = productList[0].name
         // Do any additional setup after loading the view.
+    }
+    
+    func setUIView(data: ProductItem){
+        labelProductName.text = data.name
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func disMist(_ sender: UIButton){
+        self.dismiss(animated: true, completion: nil)
     }
-    */
 
 }

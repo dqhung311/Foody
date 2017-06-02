@@ -11,24 +11,34 @@ import UIKit
 class CollectionViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var btnLabel: UIButton!
+    @IBOutlet weak var btnLatestCollection: UIButton!
+    @IBOutlet weak var btnMyCollection: UIButton!
+    @IBOutlet weak var boundButtonMenu: UIView!
+    
     var collectionList  = [CollectionItem]()
     let collectionService = CollectionService()
+    
     @IBOutlet weak var productCollectionView: UICollectionView!
+    
+    var viewCurrent: String = ""
+    var query: String = ""
+    
+    let tabMyCollection = Config().getTabMyCollection()
+    let tabLatestCollection = Config().getTabLatestCollection()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
+        self.setUIView()
         
-        collectionService.fetchAllCollection(query: ""){ [weak self] (collectionList, error) in
+        collectionService.fetchAllCollection(""){ [weak self] (collectionList, error) in
             self?.collectionList = collectionList
             DispatchQueue.main.async {
                 self?.productCollectionView.reloadData()
             }
         }
-        
-        
-        
         
         if let password = UserDefaults.standard.value(forKey: "password") as? String{
             if (password == "ok"){
@@ -39,18 +49,50 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func disMist(_ sender: UIButton){
-        /*DispatchQueue.main.async {
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryBoard")
-        self.present(vc, animated: true, completion: nil)
-        }*/
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    
+    func setUIView(){
+        
+        
+        
+        let myButtons = boundButtonMenu.subviews.filter{$0 is UIButton}
+        for button in myButtons {
+            button.backgroundColor = UIColor.clear
+        }
+        
+        if(viewCurrent == tabMyCollection ){
+            btnMyCollection.backgroundColor = UIColor.white
+        }
+        if(viewCurrent == tabLatestCollection || viewCurrent==""){
+            btnLatestCollection.backgroundColor = UIColor.white
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func tabToChangeView(_ sender: UIButton){
+        
+        if (sender === btnMyCollection){
+            self.viewCurrent = tabMyCollection
+            query += "?userID=2"
+        }else if (sender === btnLatestCollection){
+            query = ""
+            self.viewCurrent = tabLatestCollection
+            
+        }
+        collectionService.fetchAllCollection(query){ [weak self] (collectionList, error) in
+            self?.collectionList = collectionList
+            DispatchQueue.main.async {
+                self?.productCollectionView.reloadData()
+            }
+        }
+        self.setUIView()
+    }
+    
+    @IBAction func disMist(_ sender: UIButton){
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -62,7 +104,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionListCell", for: indexPath) as! CollectionListCell
         let dataCollection = collectionList[indexPath.row]
-        cell.loadCell(data: dataCollection)
+        cell.loadCell(data: dataCollection, currentTab: viewCurrent)
         
         return cell
     }

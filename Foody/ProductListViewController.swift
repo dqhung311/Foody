@@ -33,7 +33,7 @@ class ProductListViewController: UIViewController{
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
     
-    
+    var productIdSelected: String = ""
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -43,6 +43,7 @@ class ProductListViewController: UIViewController{
         super.viewDidLoad()
         
         self.setUIView()
+        
         productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
@@ -70,36 +71,51 @@ class ProductListViewController: UIViewController{
     func setUIView(){
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
-        btnLatest.setTitleColor(UIColor.red, for: .normal)
+        
         let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
         for view in myViews {
           view.backgroundColor = UIColor.clear
-            
         }
+        
+        if(viewCurrent == tabProduct || viewCurrent==""){
+            btnLatest.superview?.backgroundColor = UIColor.white
+           
+        }
+        if(viewCurrent == tabCategory){
+            btnCategory.superview?.backgroundColor = UIColor.white
+        }
+        if(viewCurrent == tabProvince){
+            btnProvince.superview?.backgroundColor = UIColor.white
+        }
+        
+     
     }
     
     @IBAction func disMist(_ sender: UIButton){
         self.performSegue(withIdentifier: "Home", sender: nil)
     }
-
+   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
+        //let dest = segue.destination as? UIViewController
+        let svc = segue.destination as! ProductDetailController
+        svc.productID = self.productIdSelected
+        
+        
+    }
     
     @IBAction func tabToChangeView(_ sender: UIButton){
-        
         if (sender === btnLatest){
             self.viewCurrent = tabProduct
-            
         }
+        
         if (sender === btnCategory){
             self.viewCurrent = tabCategory
-            
-            
         }
+        
         if (sender === btnProvince){
             self.viewCurrent = tabProvince
-            
         }
         self.setUIView()
-        sender.superview?.backgroundColor = UIColor.white
         self.productListView.reloadData()
     }
 
@@ -120,6 +136,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         var str = "?"
         if query.range(of:"?") != nil{
             str = "&"
@@ -136,8 +153,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                 }
             }
             btnCategory.setTitle(categoryList[indexPath.row].name, for: .normal)
-        }
-        if(viewCurrent == tabProvince){
+        }else if(viewCurrent == tabProvince){
             query += "\(str)provinceID=\(provinceList[indexPath.row].id)"
             self.viewCurrent = tabProduct
             productService.fetchAllProduct(query: query){ [weak self] (productList, error) in
@@ -148,8 +164,11 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                 }
             }
             btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
+        }else{
+           // tableView.deselectRow(at: indexPath, animated: true)
+            productIdSelected = productList[indexPath.row].id
+            self.performSegue(withIdentifier: "ProductDetail", sender: self)
         }
-        //print(query)
     }
     
     
@@ -167,10 +186,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         if(viewCurrent == tabCategory){
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryListCell")
             if let cell = cell as? CategoryListCell {
-                //cell.labelCategoryName.text = "Danh muc"
                 let dataCategory = categoryList[indexPath.row]
                 cell.loadCell(data: dataCategory)
-                btnCategory.superview?.backgroundColor = UIColor.white
+                
             }
             return cell!
         }else if(viewCurrent == tabProvince){
@@ -178,15 +196,16 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             if let cell = cell as? ProvinceListCell {
                 let dataProvince = provinceList[indexPath.row]
                 cell.loadCell(data: dataProvince)
-                btnProvince.superview?.backgroundColor = UIColor.white
+                
             }
             return cell!
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
+            
             if let cell = cell as? ProductListCell {
                 let dataProduct = productList[indexPath.row]
                 cell.loadCell(data: dataProduct)
-                btnLatest.superview?.backgroundColor = UIColor.white
+                
             }
             return cell!
         }

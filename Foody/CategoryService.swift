@@ -9,7 +9,10 @@
 import UIKit
 
 protocol ProtocolCategoryService {
+    
     func fetchAllCategory(completion: @escaping ([ProductCategory], NSError?) -> Void)
+    
+    
     
 }
 

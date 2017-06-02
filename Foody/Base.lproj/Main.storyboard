@@ -328,6 +328,7 @@
                         <outlet property="btnProvince" destination="hAd-Mf-5ei" id="jZq-96-u2f"/>
                         <outlet property="productListView" destination="Skw-TZ-VeN" id="09Q-76-8UJ"/>
                         <segue destination="G41-ak-Dww" kind="unwind" identifier="Home" unwindAction="unwindSegueWithSegue:" id="VCb-4a-GRr"/>
+                        <segue destination="1rh-Sm-55c" kind="show" identifier="ProductDetail" id="xyP-zy-5cM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uXN-L5-ehX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,9 +471,39 @@
                             </collectionView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m0s-I2-ulJ">
                                 <rect key="frame" x="0.0" y="68" width="375" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH8-7C-2SJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <state key="normal" title="Mới nhất">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tabToChangeView:" destination="rZM-WD-W7A" eventType="touchUpInside" id="Knp-34-5by"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="668-wk-I9y">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <state key="normal" title="Của tôi">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="tabToChangeView:" destination="rZM-WD-W7A" eventType="touchUpInside" id="cCV-ut-JeV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="nH8-7C-2SJ" firstAttribute="width" secondItem="668-wk-I9y" secondAttribute="width" id="1hm-oK-3S0"/>
+                                    <constraint firstAttribute="bottom" secondItem="668-wk-I9y" secondAttribute="bottom" id="6dB-CO-ZcJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="nH8-7C-2SJ" secondAttribute="bottom" id="8YG-jZ-MDG"/>
+                                    <constraint firstItem="nH8-7C-2SJ" firstAttribute="top" secondItem="m0s-I2-ulJ" secondAttribute="top" id="Amk-RU-Esf"/>
+                                    <constraint firstAttribute="trailing" secondItem="668-wk-I9y" secondAttribute="trailing" id="CHi-1v-aga"/>
                                     <constraint firstAttribute="height" constant="30" id="RDD-Fc-qJG"/>
+                                    <constraint firstItem="nH8-7C-2SJ" firstAttribute="leading" secondItem="m0s-I2-ulJ" secondAttribute="leading" id="Tri-fT-6YZ"/>
+                                    <constraint firstItem="668-wk-I9y" firstAttribute="leading" secondItem="nH8-7C-2SJ" secondAttribute="trailing" id="fdW-Lb-kCE"/>
+                                    <constraint firstItem="668-wk-I9y" firstAttribute="top" secondItem="m0s-I2-ulJ" secondAttribute="top" id="li9-7a-wDq"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -494,7 +525,10 @@
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="boundButtonMenu" destination="m0s-I2-ulJ" id="WXf-f5-l3r"/>
                         <outlet property="btnLabel" destination="VCm-FS-3mU" id="qvD-9p-P6M"/>
+                        <outlet property="btnLatestCollection" destination="nH8-7C-2SJ" id="ZAV-ie-sNg"/>
+                        <outlet property="btnMyCollection" destination="668-wk-I9y" id="OWx-n6-ZSZ"/>
                         <outlet property="productCollectionView" destination="vwo-LD-L4Q" id="TLA-Zx-Pad"/>
                     </connections>
                 </viewController>
@@ -521,6 +555,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2o9-aj-u9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1845.5999999999999" y="-5.8470764617691158"/>
+        </scene>
+        <!--ProductDetail-->
+        <scene sceneID="f7j-Cz-kDK">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ProductDetail" id="1rh-Sm-55c" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="czX-EQ-WK5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3756" y="-6"/>
         </scene>
     </scenes>
     <resources>

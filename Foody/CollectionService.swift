@@ -7,25 +7,46 @@
 //
 
 protocol ProtocolCollectionService {
-    func fetchAllCollection(query: String, completion: @escaping ([CollectionItem], NSError?) -> Void)
     
+    func fetchAllCollection(_ query: String, completion: @escaping ([CollectionItem], NSError?) -> Void)
+    
+    func fetchByID(_ id: String, completion: @escaping ([CollectionItem], NSError?) -> Void)
+    
+    func updateCollection(_ id: String) -> String
+    
+    func addNewCollection() -> String
 }
 
 
 import Foundation
 class CollectionService: ProtocolCollectionService{
     
-    var urlJson: String = "http://anphatkhanh.vn/foody/collection/"
+    func addNewCollection() -> String {
+        return ""
+    }
+
+    func updateCollection(_ id: String) -> String {
+        return ""
+    }
+
+    func fetchByID(_ id: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
+        self.fetchAllCollection("?id=" + id, completion: completion)
+    }
+
+    
+    var urlCollection: String = "http://anphatkhanh.vn/foody/collection/"
     private let session : URLSession!
     
     init() {
         session = URLSession(configuration: .default)
     }
     
-    func fetchAllCollection(query: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
-        
+    func fetchAllCollection(_ query: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
+        let urlJson: String
         if(query != ""){
-            urlJson += query
+            urlJson = urlCollection + query
+        }else{
+            urlJson = urlCollection
         }
         guard let url = URL(string: urlJson) else {
             let error = NSError(domain: "CollectionService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])

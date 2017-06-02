@@ -13,6 +13,7 @@ class CollectionListCell: UICollectionViewCell {
     @IBOutlet weak var labelTotalLike: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    let tabMyCollection = Config().getTabMyCollection()
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,9 +24,13 @@ class CollectionListCell: UICollectionViewCell {
         //update(with: nil)
     }
     
-    func loadCell(data: CollectionItem){
+    func loadCell(data: CollectionItem, currentTab: String){
         labelProductName.text = data.product_name
         imageView.loadImage(urlString: data.product_image)
-        labelTotalLike.text = (data.total_like) + " lưu"
+        if(currentTab == tabMyCollection){
+            labelTotalLike.text = ""
+        }else{
+            labelTotalLike.text = (data.total_like) + " lưu"
+        }
     }
 }

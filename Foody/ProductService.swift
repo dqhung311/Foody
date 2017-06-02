@@ -8,8 +8,15 @@
 
 import UIKit
 protocol ProtocolProductService {
+    
     func fetchAllProduct(query: String, completion: @escaping ([ProductItem], NSError?) -> Void)
     
+    func fetchByID(id: String, completion: @escaping ([ProductItem], NSError?) -> Void)
+    
+    func updateProduct(_ id: String) -> String
+    
+    func addNewProduct() -> String
+
 }
 class ProductService:ProtocolProductService{
     
@@ -20,11 +27,24 @@ class ProductService:ProtocolProductService{
         session = URLSession(configuration: .default)
     }
     
+    func addNewProduct() -> String {
+        return ""
+    }
+    
+    func updateProduct(_ id: String) -> String {
+        return ""
+    }
+    
+    func fetchByID(id: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
+        self.fetchAllProduct(query: "?id=" + id, completion: completion)
+    }
+    
     func fetchAllProduct(query: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
         
         if(query != ""){
             urlJson += query
         }
+        
         guard let url = URL(string: urlJson) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)

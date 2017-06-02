@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
     let tabProduct = Config().getTabProduct()
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
+    let tabLatestCollection = Config().getTabLatestCollection()
     
     //@IBOutlet weak var homeLogo: UIImageView!
     override func viewDidLoad() {
@@ -138,6 +139,8 @@ class HomeViewController: UIViewController {
         let tabBarController: UITabBarController = storyboard.instantiateViewController(withIdentifier: "MainStoryBoard") as! UITabBarController
         tabBarController.selectedIndex = 1
         self.present(tabBarController, animated: true, completion: nil)
+        
+        
         
     }
     

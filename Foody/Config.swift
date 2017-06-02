@@ -13,6 +13,8 @@ class Config{
     let tabProduct: String = "Product"
     let tabCategory: String = "Category"
     let tabProvince: String = "Province"
+    let tabMyCollection: String = "MyCollection"
+    let tabLatestCollection: String = "LatestCollection"
     init(){
 
     }
@@ -24,6 +26,12 @@ class Config{
     }
     func getTabProvince() -> String {
         return tabProvince
+    }
+    func getTabMyCollection() -> String {
+        return tabMyCollection
+    }
+    func getTabLatestCollection() -> String {
+        return tabLatestCollection
     }
 }
 
