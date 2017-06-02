@@ -219,7 +219,7 @@
                                             <outlet property="labelProvinceName" destination="mVw-5l-Hhb" id="IXw-2K-yKZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductListCell" rowHeight="315" id="Nkm-VV-LqG" customClass="ProductListCell" customModule="Foody" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProductListCell" rowHeight="315" id="Nkm-VV-LqG" customClass="ProductListCell" customModule="Foody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="315"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Nkm-VV-LqG" id="w4U-Ui-gVS">

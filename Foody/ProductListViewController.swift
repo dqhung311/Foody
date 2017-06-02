@@ -33,7 +33,7 @@ class ProductListViewController: UIViewController{
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
     
-    var productIdSelected: String = ""
+    var productItemInfo = ProductItem()
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,7 +98,7 @@ class ProductListViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
         //let dest = segue.destination as? UIViewController
         let svc = segue.destination as! ProductDetailController
-        svc.productID = self.productIdSelected
+        svc.productItem = self.productItemInfo
         
         
     }
@@ -165,8 +165,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             }
             btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
         }else{
-           // tableView.deselectRow(at: indexPath, animated: true)
-            productIdSelected = productList[indexPath.row].id
+            productItemInfo = productList[indexPath.row]
             self.performSegue(withIdentifier: "ProductDetail", sender: self)
         }
     }

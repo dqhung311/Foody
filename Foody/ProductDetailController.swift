@@ -14,30 +14,42 @@ class ProductDetailController: UIViewController {
     @IBOutlet weak var btnLike: UIButton!
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var labelProductName: UILabel!
+    @IBOutlet weak var pictureImage: UIImageView!
+    @IBOutlet weak var labelProductNameDetail: UILabel!
     
-    var productID: String = ""
+    @IBOutlet weak var labelTotalComment: UILabel!
+    @IBOutlet weak var labelTotalPicture: UILabel!
+    @IBOutlet weak var labelTotalCollection: UILabel!
+    @IBOutlet weak var labelScore: UILabel!
     
-    var productList  = [ProductItem]()
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    var productItem  = ProductItem()
     let productService = ProductService()
     
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        productService.fetchByID(id: productID){ [weak self] (productList, error) in
-            self?.productList = productList
-            DispatchQueue.main.async {
-                let data = productList[0]
-                self?.setUIView(data: data)
-            }
-            
-        }
+        labelScore.layer.cornerRadius = labelScore.frame.width/2.0
+        labelScore.clipsToBounds = true
         
-        //print(productList.count)
-        //labelProductName.text = productList[0].name
-        // Do any additional setup after loading the view.
-    }
+        
+        view.addSubview(scrollView)
+        
+        labelProductName.text = productItem.name
+        labelProductNameDetail.text = productItem.name
+        pictureImage.loadImage(urlString: productItem.urlphoto)
+        labelTotalComment.text = "235"
+        labelScore.text = productItem.score
     
+    }
+    override func viewWillLayoutSubviews(){
+        super.viewWillLayoutSubviews()
+        self.scrollView.contentSize = CGSize(width: view.frame.size.width, height: 800);
+    }
     func setUIView(data: ProductItem){
-        labelProductName.text = data.name
+        
     }
 
     override func didReceiveMemoryWarning() {
