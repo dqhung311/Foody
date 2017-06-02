@@ -23,7 +23,7 @@ class Users: NSObject {
     }
     
     func insertUser() -> String{
-//        var request = URLRequest(url: URL(string: "http://anphatkhanh.vn/foody/edit.php")!)
+//        var request = URLRequest(url: URL(string: "http://anphatkhanh.vn/foody/user/edit.php")!)
 //        request.httpMethod = "POST"
 //        let postString = "email=\(self.getEmail())&password=\(self.getPassword())&name=\(self.getName())"
 //        request.httpBody = postString.data(using: .utf8)

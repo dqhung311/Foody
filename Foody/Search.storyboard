@@ -59,6 +59,73 @@
                                             <outlet property="picturePreview" destination="0r7-Xl-krG" id="48V-QM-IFL"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProvinceListCell" id="IGa-Jp-vtG" customClass="ProvinceListCell" customModule="Foody" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="79" width="375" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IGa-Jp-vtG" id="8pb-bS-zNF">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-map" translatesAutoresizingMaskIntoConstraints="NO" id="WdW-MD-Px5">
+                                                    <rect key="frame" x="10" y="9.5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="mGA-bt-H18"/>
+                                                        <constraint firstAttribute="height" constant="32" id="yrp-49-Eaz"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ber-2i-3D5">
+                                                    <rect key="frame" x="47" y="18.5" width="30" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ber-2i-3D5" firstAttribute="centerY" secondItem="8pb-bS-zNF" secondAttribute="centerY" id="3wd-Au-7X2"/>
+                                                <constraint firstItem="WdW-MD-Px5" firstAttribute="centerY" secondItem="8pb-bS-zNF" secondAttribute="centerY" id="Ad3-zt-DlI"/>
+                                                <constraint firstItem="WdW-MD-Px5" firstAttribute="leading" secondItem="8pb-bS-zNF" secondAttribute="leading" constant="10" id="YbZ-Tb-vbp"/>
+                                                <constraint firstItem="Ber-2i-3D5" firstAttribute="leading" secondItem="WdW-MD-Px5" secondAttribute="trailing" constant="5" id="l4w-uD-VEC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="labelProvinceName" destination="Ber-2i-3D5" id="V45-iL-AVT"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryListCell" id="Hdp-sy-06Z" customClass="CategoryListCell" customModule="Foody" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="130" width="375" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hdp-sy-06Z" id="O67-lE-DKK">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="shv-Tv-Xzd">
+                                                    <rect key="frame" x="10" y="9.5" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="CSC-HK-Sov"/>
+                                                        <constraint firstAttribute="width" constant="32" id="EWV-Ze-PNT"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFa-JO-obr">
+                                                    <rect key="frame" x="47" y="18.5" width="30" height="13.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LFa-JO-obr" firstAttribute="leading" secondItem="shv-Tv-Xzd" secondAttribute="trailing" constant="5" id="0xr-K4-Z2W"/>
+                                                <constraint firstItem="shv-Tv-Xzd" firstAttribute="leading" secondItem="O67-lE-DKK" secondAttribute="leading" constant="10" id="GY6-z4-unE"/>
+                                                <constraint firstItem="shv-Tv-Xzd" firstAttribute="centerY" secondItem="O67-lE-DKK" secondAttribute="centerY" id="QVo-if-6xh"/>
+                                                <constraint firstItem="LFa-JO-obr" firstAttribute="centerY" secondItem="O67-lE-DKK" secondAttribute="centerY" id="hYi-mE-Iht"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="labelCategoryName" destination="LFa-JO-obr" id="Slm-SF-CYU"/>
+                                            <outlet property="picturePreview" destination="shv-Tv-Xzd" id="T4J-ZT-xoO"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Hk5-Ql-XOj" id="xkc-Ez-1Af"/>
@@ -120,6 +187,9 @@
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="clickCatBtn:" destination="Hk5-Ql-XOj" eventType="touchUpInside" id="N8x-Et-PCj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7i-OI-zXz" userLabel="Search">
                                         <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
@@ -131,6 +201,9 @@
                                                 <integer key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="clickProvinceBtn:" destination="Hk5-Ql-XOj" eventType="touchUpInside" id="zDY-P8-x69"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -165,6 +238,7 @@
                         <outlet property="categoryBtn" destination="KUW-Ni-kaA" id="1bu-Pn-jtN"/>
                         <outlet property="cityBtn" destination="R7i-OI-zXz" id="lgb-Om-bki"/>
                         <outlet property="searchResultTableView" destination="6N4-1y-avI" id="Sfp-5K-9SZ"/>
+                        <outlet property="searchTextField" destination="eCd-3u-2H6" id="jxP-Pl-jgK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8k5-y8-sir" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -172,4 +246,7 @@
             <point key="canvasLocation" x="-204" y="175.86206896551727"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon-map" width="512" height="512"/>
+    </resources>
 </document>
