@@ -30,7 +30,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="51"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3ma-Xm-aVC" id="AVp-sI-UnJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r7-Xl-krG">
@@ -74,6 +74,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="textEditSearch:" destination="Hk5-Ql-XOj" eventType="editingChanged" id="Lws-2p-W4C"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPV-2e-iEC">
                                         <rect key="frame" x="310" y="0.0" width="60" height="40"/>
@@ -108,19 +111,8 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUW-Ni-kaA" userLabel="RecentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
-                                        <state key="normal" title="Xem gần đây">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                                <integer key="value" value="1"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IzZ-NC-NxC" userLabel="RecentOrder">
-                                        <rect key="frame" x="125" y="0.0" width="125" height="40"/>
-                                        <state key="normal" title="Đặt gần đây">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="40"/>
+                                        <state key="normal" title="Danh mục">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -130,8 +122,8 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R7i-OI-zXz" userLabel="Search">
-                                        <rect key="frame" x="250" y="0.0" width="125" height="40"/>
-                                        <state key="normal" title="Đã tìm">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="40"/>
+                                        <state key="normal" title="Tỉnh thành">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -143,19 +135,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="IzZ-NC-NxC" secondAttribute="bottom" id="4S3-Yz-jKR"/>
                                     <constraint firstAttribute="bottom" secondItem="KUW-Ni-kaA" secondAttribute="bottom" id="7UI-Gn-Ix1"/>
                                     <constraint firstAttribute="trailing" secondItem="R7i-OI-zXz" secondAttribute="trailing" id="G53-rf-tZS"/>
-                                    <constraint firstItem="IzZ-NC-NxC" firstAttribute="leading" secondItem="KUW-Ni-kaA" secondAttribute="trailing" id="GSC-vb-Rjs"/>
                                     <constraint firstAttribute="height" constant="40" id="NJf-Pj-UX0"/>
-                                    <constraint firstItem="IzZ-NC-NxC" firstAttribute="width" secondItem="07X-56-vjV" secondAttribute="width" multiplier="1:3" id="QhK-tW-SkE"/>
                                     <constraint firstItem="KUW-Ni-kaA" firstAttribute="top" secondItem="07X-56-vjV" secondAttribute="top" id="RUC-Uf-Pn5"/>
-                                    <constraint firstItem="R7i-OI-zXz" firstAttribute="width" secondItem="07X-56-vjV" secondAttribute="width" multiplier="1:3" id="RZu-Q9-Moo"/>
+                                    <constraint firstItem="R7i-OI-zXz" firstAttribute="width" secondItem="07X-56-vjV" secondAttribute="width" multiplier="1:2" id="RZu-Q9-Moo"/>
                                     <constraint firstItem="KUW-Ni-kaA" firstAttribute="leading" secondItem="07X-56-vjV" secondAttribute="leading" id="Vp1-rc-TIu"/>
                                     <constraint firstItem="R7i-OI-zXz" firstAttribute="top" secondItem="07X-56-vjV" secondAttribute="top" id="XXv-eG-O8P"/>
                                     <constraint firstAttribute="bottom" secondItem="R7i-OI-zXz" secondAttribute="bottom" id="dUo-r7-wfA"/>
-                                    <constraint firstItem="KUW-Ni-kaA" firstAttribute="width" secondItem="07X-56-vjV" secondAttribute="width" multiplier="1:3" id="lDx-i1-Egx"/>
-                                    <constraint firstItem="IzZ-NC-NxC" firstAttribute="top" secondItem="07X-56-vjV" secondAttribute="top" id="qcs-f0-D2b"/>
+                                    <constraint firstItem="KUW-Ni-kaA" firstAttribute="width" secondItem="07X-56-vjV" secondAttribute="width" multiplier="1:2" id="lDx-i1-Egx"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -174,10 +162,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="recentOrderBtn" destination="IzZ-NC-NxC" id="b48-7D-Tn8"/>
-                        <outlet property="recentViewBtn" destination="KUW-Ni-kaA" id="Oep-U9-0qS"/>
+                        <outlet property="categoryBtn" destination="KUW-Ni-kaA" id="1bu-Pn-jtN"/>
+                        <outlet property="cityBtn" destination="R7i-OI-zXz" id="lgb-Om-bki"/>
                         <outlet property="searchResultTableView" destination="6N4-1y-avI" id="Sfp-5K-9SZ"/>
-                        <outlet property="searchedBtn" destination="R7i-OI-zXz" id="33x-yR-dMa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8k5-y8-sir" userLabel="First Responder" sceneMemberID="firstResponder"/>

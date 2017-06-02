@@ -8,7 +8,6 @@
 
 import AFNetworking
 import UIKit
-import CoreData
 
 
 class SignUpViewController: UIViewController {

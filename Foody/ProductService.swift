@@ -40,7 +40,6 @@ class ProductService:ProtocolProductService{
     }
     
     func fetchAllProduct(query: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
-        
         if(query != ""){
             urlJson += query
         }
