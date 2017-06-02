@@ -40,7 +40,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     
     @IBAction func textEditSearch(_ sender: UITextField){
-        productService.fetchAllProduct(query: "?name=\(sender.text!)"){ [weak self] (productList, error) in
+        productService.fetchAllProduct(query: "name=\(sender.text!)"){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
                 self?.searchResultTableView.reloadData()

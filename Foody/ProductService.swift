@@ -20,7 +20,7 @@ protocol ProtocolProductService {
 }
 class ProductService:ProtocolProductService{
     
-    var urlJson: String = "http://anphatkhanh.vn/foody/product/"
+    let urlJson: String = "http://anphatkhanh.vn/foody/product/?"
     private let session : URLSession!
     
     init() {
@@ -36,15 +36,16 @@ class ProductService:ProtocolProductService{
     }
     
     func fetchByID(id: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
-        self.fetchAllProduct(query: "?id=" + id, completion: completion)
+        self.fetchAllProduct(query: "id=" + id, completion: completion)
     }
     
     func fetchAllProduct(query: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
+        var urlJsonRes: String = urlJson
         if(query != ""){
-            urlJson += query
+            urlJsonRes = urlJson + query
         }
         
-        guard let url = URL(string: urlJson) else {
+        guard let url = URL(string: urlJsonRes) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
             return
