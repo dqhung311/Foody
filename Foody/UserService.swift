@@ -30,7 +30,6 @@ class UserService {
                 completion([], error)
                 return
             }
-            
             self?.parseJson(json: jsonObject as? [String: Any], completion: completion)
         })
         
@@ -40,9 +39,12 @@ class UserService {
     
     func parseJson(json: [String: Any]?, completion: ([Users], NSError?) -> Void){
         var userStore = [Users]()
-        if let user = json?["user"] as? [[String:Any]] {
+        if let user = json?["users"] as? [[String:Any]] {
             for p in user{
                 let user = Users()
+                if let id = p["id"] as? String {
+                    user.id = id
+                }
                 if let email = p["email"] as? String {
                     user.email = email
                 }

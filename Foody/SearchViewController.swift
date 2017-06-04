@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     let provinceService = ProvinceService()
     var provinceList  = [ProductProvince]()
     
+    
     var searchType: String = "name"
     
     override func viewDidLoad() {
@@ -36,6 +37,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         callprovince()
         callcategory()
         callproduct("")
+        
     }
 
     func reloadtableview(){

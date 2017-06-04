@@ -46,7 +46,7 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpClick(sender: AnyObject) {
-        let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
+//        let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
         
     }
     
