@@ -8,7 +8,12 @@
 
 import UIKit
 
-class UserService {
+protocol ProtocolUser {
+    func fetchAllUser(query: String, completion: @escaping ([Users], NSError?) -> Void)
+    func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void)
+}
+
+class UserService:ProtocolUser {
     let urlJson = "http://anphatkhanh.vn/foody/user/?"
     
     private let session : URLSession!
@@ -17,8 +22,12 @@ class UserService {
         session = URLSession(configuration: .default)
     }
     
-    func fetchUser(completion:  @escaping ([Users], NSError?) -> Void){
-        guard let url = URL(string: urlJson) else {
+    func fetchAllUser(query: String, completion:  @escaping ([Users], NSError?) -> Void){
+        var urlJsonRes: String = urlJson
+        if(query != ""){
+            urlJsonRes = urlJson + query
+        }
+        guard let url = URL(string: urlJsonRes) else {
             let error = NSError(domain: "UserService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
             return
@@ -36,6 +45,9 @@ class UserService {
         task.resume()
     }
     
+    func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void) {
+        fetchAllUser(query: "email="+email, completion: completion)
+    }
     
     func parseJson(json: [String: Any]?, completion: ([Users], NSError?) -> Void){
         var userStore = [Users]()
