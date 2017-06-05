@@ -6,4 +6,70 @@
 //  Copyright © 2017 Dao Quang Hung. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol ProtocolUser {
+    func fetchAllUser(query: String, completion: @escaping ([Users], NSError?) -> Void)
+    func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void)
+}
+
+class UserService:ProtocolUser {
+    let urlJson = "http://anphatkhanh.vn/foody/user/?"
+    
+    private let session : URLSession!
+    
+    init() {
+        session = URLSession(configuration: .default)
+    }
+    
+    func fetchAllUser(query: String, completion:  @escaping ([Users], NSError?) -> Void){
+        var urlJsonRes: String = urlJson
+        if(query != ""){
+            urlJsonRes = urlJson + query
+        }
+        guard let url = URL(string: urlJsonRes) else {
+            let error = NSError(domain: "UserService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
+            completion([], error)
+            return
+        }
+        
+        let task = session.dataTask(with: url, completionHandler: {[weak self] (data, res, err) in
+            guard let jsonData = data, let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: []) else {
+                let error = NSError(domain: "UserService", code: 501, userInfo: [NSLocalizedDescriptionKey: "Response is invalid!"])
+                completion([], error)
+                return
+            }
+            self?.parseJson(json: jsonObject as? [String: Any], completion: completion)
+        })
+        
+        task.resume()
+    }
+    
+    func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void) {
+        fetchAllUser(query: "email="+email, completion: completion)
+    }
+    
+    func parseJson(json: [String: Any]?, completion: ([Users], NSError?) -> Void){
+        var userStore = [Users]()
+        if let user = json?["users"] as? [[String:Any]] {
+            for p in user{
+                let user = Users()
+                if let id = p["id"] as? String {
+                    user.id = id
+                }
+                if let email = p["email"] as? String {
+                    user.email = email
+                }
+                if let password = p["password"] as? String {
+                    user.password = password
+                }
+                if let name = p["name"] as? String {
+                    user.name = name
+                }
+                userStore.append(user)
+            }
+        }
+        completion(userStore, nil)
+    }
+    
+}

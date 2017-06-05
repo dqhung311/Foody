@@ -66,7 +66,6 @@ class ProductService:ProtocolProductService{
         var productItems = [ProductItem]()
         if let product = json?["product"] as? [[String:Any]] {
                         for p in product{
-                            
                             //if let item = object as? ProductItem {
                             let item = ProductItem()
                             if let id = p["id"] as? String {
