@@ -137,10 +137,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var str = "?"
-        if query.range(of:"?") != nil{
-            str = "&"
-        }
+        let str = "&"
+        //if query.range(of:"?") != nil{
+        //    str = ""
+        //}
         
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
@@ -166,7 +166,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
         }else{
             productItemInfo = productList[indexPath.row]
-            self.performSegue(withIdentifier: "ProductDetail", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ProductDetail", sender: self)
+            }
         }
     }
     
