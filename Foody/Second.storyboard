@@ -289,6 +289,9 @@
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickLoginWith_sender:" destination="Kem-dp-MGP" eventType="touchUpInside" id="Bye-ed-8fI"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNA-Lp-weI">
                                 <rect key="frame" x="42.5" y="368.5" width="290" height="30"/>
@@ -350,6 +353,7 @@
                         <outlet property="emailField" destination="hcS-ep-U25" id="UGC-4C-zmt"/>
                         <outlet property="forgetBtn" destination="XNA-Lp-weI" id="7lW-hy-B2H"/>
                         <outlet property="loginBtn" destination="LtH-H5-qfb" id="fUf-Sq-1mT"/>
+                        <outlet property="passwordField" destination="cty-uo-F4r" id="0eo-Dw-UzT"/>
                         <outlet property="registerBtn" destination="4BX-nS-n00" id="WEG-jT-Wjj"/>
                         <segue destination="jcr-gA-rTH" kind="show" identifier="ToRegisterSegue" id="Ax5-NP-r9q"/>
                         <segue destination="fV2-FW-kUa" kind="show" identifier="ToForgetSegue" id="Lpd-lk-2hq"/>
@@ -729,6 +733,6 @@
         <image name="yahoo_btn" width="114" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hNf-5a-c3d"/>
+        <segue reference="Ax5-NP-r9q"/>
     </inferredMetricsTieBreakers>
 </document>

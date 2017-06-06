@@ -29,9 +29,11 @@ class SignUpViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.SignInBtn.layer.borderColor = UIColor.white.cgColor
         self.SignUpBtn.layer.borderColor = UIColor.white.cgColor
-        let password: String = UserDefaults.standard.value(forKey: "password") as! String
-        if password.characters.count > 0 {
-            perform(#selector(goToHome), with: nil, afterDelay: 0)
+//        let password: String = UserDefaults.standard.value(forKey: "password") as! String
+        if let password = UserDefaults.standard.value(forKey: "password") as? String{
+            if password.characters.count > 0 {
+                perform(#selector(goToHome), with: nil, afterDelay: 0)
+            }
         }
     }
 

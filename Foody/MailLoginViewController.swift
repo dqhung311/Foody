@@ -18,6 +18,9 @@ class MailLoginViewController: UIViewController {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var forgetBtn: UIButton!
     
+    let userService = UserService()
+    var userList  = [Users]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
@@ -42,5 +45,50 @@ class MailLoginViewController: UIViewController {
         UserDefaults.standard.setValue("no", forKey: "password")
     }
     
+    @IBAction func clickLogin(_sender: UIButton){
+        if emailField.text == "" || passwordField.text == "" {
+            self.showAlertMessage("Tên đăng nhập và mật khẩu không được để trống")
+            return
+        }
+        userService.fetchUserByEmail(email: "123@123.com"){ [weak self] (userList, error) in
+            if userList.count == 1 {
+                UserDefaults.standard.setValue(userList[0].password, forKey: "password")
+                UserDefaults.standard.setValue(userList[0].email, forKey: "email")
+                UserDefaults.standard.setValue(userList[0].name, forKey: "name")
+                DispatchQueue.main.async {
+                    self?.showSuccessMessage("Đăng nhập thành công")
+                }
+            }else{
+                DispatchQueue.main.async {
+                    self?.showAlertMessage("Không đúng thông tin đăng nhập")
+                }
+            }
+        }
+
+    }
+    func showAlertMessage(_ message: String){
+        let alertController = UIAlertController(title: "Warning", message: "\(message)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    func showSuccessMessage(_ message: String){
+        let alertController = UIAlertController(title: "Success", message: "\(message)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: { action in
+            self.goToHome()
+        })
+        alertController.addAction(defaultAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func goToHome(){
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryboard")
+        self.present(vc, animated: true, completion: nil)
+    }
+
+
 }
 
