@@ -45,21 +45,28 @@ extension UIViewController {
     }
     
     func showAlertMessage(_ message: String){
-        let alertController = UIAlertController(title: "Warning", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        let alertController = UIAlertController(title: "Lỗi", message: "\(message)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Đóng", style: .default, handler: nil)
         alertController.addAction(defaultAction)
         
         present(alertController, animated: true, completion: nil)
     }
     
     func showSuccessMessage(_ message: String){
-        let alertController = UIAlertController(title: "Success", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: { action in
+        let alertController = UIAlertController(title: "Thành công", message: "\(message)", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "Đóng", style: .default, handler: { action in
             self.dismissAll()
         })
         alertController.addAction(defaultAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func getLoginEmail() -> String{
+        return UserDefaults.standard.value(forKey: "email") as! String
+    }
+    func getLoginName() -> String{
+        return UserDefaults.standard.value(forKey: "name") as! String
     }
 }
 
