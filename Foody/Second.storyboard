@@ -172,7 +172,7 @@
         <!--Mail Login View Controller-->
         <scene sceneID="fT4-47-TMs">
             <objects>
-                <viewController id="Kem-dp-MGP" customClass="MailLoginViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginWithEmail" id="Kem-dp-MGP" customClass="MailLoginViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7df-fJ-Nbm"/>
                         <viewControllerLayoutGuide type="bottom" id="qdP-Hc-Han"/>

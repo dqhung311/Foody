@@ -32,7 +32,7 @@ class SignUpViewController: UIViewController {
 //        let password: String = UserDefaults.standard.value(forKey: "password") as! String
         if let password = UserDefaults.standard.value(forKey: "password") as? String{
             if password.characters.count > 0 {
-                perform(#selector(goToHome), with: nil, afterDelay: 0)
+                perform(#selector(dissmissall), with: nil, afterDelay: 0)
             }
         }
     }

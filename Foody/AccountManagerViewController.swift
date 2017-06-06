@@ -15,8 +15,15 @@ class AccountManagerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(self.checkLogin())
 //        if self.checkLogin() {
-//            TopAccountManager.frame.size.height = 200
+//            print(self.checkLogin())
+//            if let password = UserDefaults.standard.value(forKey: "password") as? String,
+//                let email = UserDefaults.standard.value(forKey: "email") as? String{
+//                print(password)
+//                print(email)
+//            }
+////            TopAccountManager.frame.size.height = 200
 //        }
     }
 
@@ -26,25 +33,36 @@ class AccountManagerViewController: UIViewController {
     }
     
     func checkLogin() -> Bool{
-        let password: String = UserDefaults.standard.value(forKey: "password") as! String
-        let email: String = UserDefaults.standard.value(forKey: "email") as! String
-        if password.characters.count > 0 && email.characters.count > 0{
-            return true
-        }else{
-            return false
+        var res: Bool = false
+        if let password = UserDefaults.standard.value(forKey: "password") as? String,
+            let email = UserDefaults.standard.value(forKey: "email") as? String{
+            if password.characters.count > 0 && email.characters.count > 0{
+                res = true
+            }else{
+                res = false
+            }
         }
+        return res
     }
     
-    func goToLogin(){
-        let storyboard = UIStoryboard(name: "Second", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
+    func goToStory(_ name: String,_ story: String){
+        let storyboard = UIStoryboard(name: name, bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: story)
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func clickBack(_ sender: UIButton){
+        self.dismissAll()
+    }
+    
+    @IBAction func clickToLogin(_ sender: UIButton){
+        self.goToStory("Second","LoginWithEmail")
     }
     
     @IBAction func commentManager(_ sender: UIButton){
         if !self.checkLogin() {
             // chưa login
-            self.goToLogin()
+            self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
         }
@@ -53,7 +71,7 @@ class AccountManagerViewController: UIViewController {
     @IBAction func collectionManager(_ sender: UIButton){
         if !self.checkLogin() {
             // chưa login
-            self.goToLogin()
+            self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
         }
@@ -62,7 +80,7 @@ class AccountManagerViewController: UIViewController {
     @IBAction func contactManager(_sender: UIButton){
         if !self.checkLogin() {
             // chưa login
-            self.goToLogin()
+            self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
         }
@@ -71,7 +89,7 @@ class AccountManagerViewController: UIViewController {
     @IBAction func productManager(_sender: UIButton){
         if !self.checkLogin() {
             // chưa login
-            self.goToLogin()
+            self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
         }

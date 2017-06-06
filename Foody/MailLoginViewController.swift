@@ -51,6 +51,7 @@ class MailLoginViewController: UIViewController {
             return
         }
         userService.fetchUserByEmail(email: "123@123.com"){ [weak self] (userList, error) in
+            print(userList.count)
             if userList.count == 1 {
                 UserDefaults.standard.setValue(userList[0].password, forKey: "password")
                 UserDefaults.standard.setValue(userList[0].email, forKey: "email")

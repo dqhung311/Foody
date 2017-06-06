@@ -33,6 +33,9 @@
                                         <state key="normal" title="F">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickBack:" destination="bmH-Mf-KiJ" eventType="touchUpInside" id="vfE-Zf-7WR"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5t-gK-h6A">
                                         <rect key="frame" x="137.5" y="0.0" width="100" height="40"/>
@@ -250,12 +253,6 @@
                                             <constraint firstAttribute="width" constant="30" id="zXe-Ku-COZ"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng nhập tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kir-jp-4UL">
-                                        <rect key="frame" x="44" y="7" width="287" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3c-bL-W9q">
                                         <rect key="frame" x="338" y="7" width="30" height="30"/>
                                         <constraints>
@@ -265,20 +262,33 @@
                                         <state key="normal" title="&gt;">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="clickToLogin:" destination="bmH-Mf-KiJ" eventType="touchUpInside" id="vr2-94-vEI"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFO-0L-wTq">
+                                        <rect key="frame" x="37" y="0.0" width="301" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <state key="normal" title="Đăng nhập tài khoản">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clickToLogin:" destination="bmH-Mf-KiJ" eventType="touchUpInside" id="Odx-gW-F2a"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="kir-jp-4UL" firstAttribute="leading" secondItem="qBq-Rb-pQs" secondAttribute="trailing" constant="7" id="3Q3-Fs-yFL"/>
+                                    <constraint firstItem="KFO-0L-wTq" firstAttribute="leading" secondItem="qBq-Rb-pQs" secondAttribute="trailing" id="3dQ-ag-mQa"/>
                                     <constraint firstAttribute="trailing" secondItem="T3c-bL-W9q" secondAttribute="trailing" constant="7" id="4oB-c7-bx1"/>
+                                    <constraint firstItem="KFO-0L-wTq" firstAttribute="top" secondItem="ycN-8O-qXT" secondAttribute="top" id="9Lw-We-To7"/>
                                     <constraint firstItem="T3c-bL-W9q" firstAttribute="top" secondItem="ycN-8O-qXT" secondAttribute="top" constant="7" id="CcC-5x-58l"/>
                                     <constraint firstItem="qBq-Rb-pQs" firstAttribute="leading" secondItem="ycN-8O-qXT" secondAttribute="leading" constant="7" id="GC2-Hy-cdu"/>
                                     <constraint firstItem="qBq-Rb-pQs" firstAttribute="top" secondItem="ycN-8O-qXT" secondAttribute="top" constant="7" id="JFU-vn-eP1"/>
-                                    <constraint firstItem="T3c-bL-W9q" firstAttribute="leading" secondItem="kir-jp-4UL" secondAttribute="trailing" constant="7" id="aKv-1v-W87"/>
+                                    <constraint firstItem="T3c-bL-W9q" firstAttribute="leading" secondItem="KFO-0L-wTq" secondAttribute="trailing" id="Y9x-2K-huc"/>
                                     <constraint firstAttribute="height" constant="44" id="bkA-zS-qwj"/>
                                     <constraint firstAttribute="bottom" secondItem="qBq-Rb-pQs" secondAttribute="bottom" constant="7" id="dXa-kR-pJU"/>
-                                    <constraint firstAttribute="bottom" secondItem="kir-jp-4UL" secondAttribute="bottom" constant="7" id="tEd-wf-cMI"/>
-                                    <constraint firstItem="kir-jp-4UL" firstAttribute="top" secondItem="ycN-8O-qXT" secondAttribute="top" constant="7" id="tN5-e1-RtD"/>
+                                    <constraint firstAttribute="bottom" secondItem="KFO-0L-wTq" secondAttribute="bottom" id="eZY-ys-9Ov"/>
                                     <constraint firstAttribute="bottom" secondItem="T3c-bL-W9q" secondAttribute="bottom" constant="7" id="wz6-n1-Xpb"/>
                                 </constraints>
                             </view>
