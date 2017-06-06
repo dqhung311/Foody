@@ -19,14 +19,9 @@ class ForgetPassViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.sendBtn.layer.borderColor = UIColor.white.cgColor
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
     
     @IBAction func clickBack(_ sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismissOne()
     }
     
 

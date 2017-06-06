@@ -38,7 +38,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         callprovince()
         callcategory()
         callproduct("")
-        
+        reloadtableview()
     }
 
     func reloadtableview(){
@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     func callproduct(_ callquery: String){
         productService.fetchAllProduct(query: callquery){ [weak self] (productList, error) in
             self?.productList = productList
-            self?.reloadtableview()
+//            self?.reloadtableview()
         }
     }
     
