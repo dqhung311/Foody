@@ -27,22 +27,17 @@ class MailLoginViewController: UIViewController {
         self.loginBtn.layer.borderColor = UIColor.white.cgColor
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     @IBAction func clickBack(_ sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismissOne()
     }
     
     @IBAction func clickSignUp(_ sender: UIButton){
-        self.performSegue(withIdentifier: "ToRegisterSegue", sender: sender)
-        UserDefaults.standard.setValue("ok", forKey: "password")
+        self.goToStory("Second", "SignUpStory")
     }
     
     @IBAction func clickForgetPass(_ sender: UIButton){
-        self.performSegue(withIdentifier: "ToForgetSegue", sender: sender)
-        UserDefaults.standard.setValue("no", forKey: "password")
+        self.goToStory("Second", "ForgetPassStory")
     }
     
     @IBAction func clickLogin(_sender: UIButton){
@@ -50,9 +45,8 @@ class MailLoginViewController: UIViewController {
             self.showAlertMessage("Tên đăng nhập và mật khẩu không được để trống")
             return
         }
-        userService.fetchUserByEmail(email: "123@123.com"){ [weak self] (userList, error) in
-            print(userList.count)
-            if userList.count == 1 {
+        userService.fetchUserByEmail(email: self.emailField.text!){ [weak self] (userList, error) in
+            if userList.count == 1  && userList[0].password == self?.passwordField.text {
                 UserDefaults.standard.setValue(userList[0].password, forKey: "password")
                 UserDefaults.standard.setValue(userList[0].email, forKey: "email")
                 UserDefaults.standard.setValue(userList[0].name, forKey: "name")
@@ -67,29 +61,8 @@ class MailLoginViewController: UIViewController {
         }
 
     }
-    func showAlertMessage(_ message: String){
-        let alertController = UIAlertController(title: "Warning", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    func showSuccessMessage(_ message: String){
-        let alertController = UIAlertController(title: "Success", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: { action in
-            self.goToHome()
-        })
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
     
-    func goToHome(){
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryboard")
-        self.present(vc, animated: true, completion: nil)
-    }
-
+    
 
 }
 

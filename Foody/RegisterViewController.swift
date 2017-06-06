@@ -20,9 +20,6 @@ class RegisterViewController: UIViewController {
         self.signInEmail.layer.borderColor = UIColor.white.cgColor
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     @IBAction func emailLoginClick(_ sender: UIButton){
         self.performSegue(withIdentifier: "MailLoginSegue", sender: sender)
@@ -34,7 +31,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func clickBack(_ sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismissOne()
     }
     
 }

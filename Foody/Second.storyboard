@@ -366,7 +366,7 @@
         <!--Forget Pass View Controller-->
         <scene sceneID="HIu-dA-gfD">
             <objects>
-                <viewController id="fV2-FW-kUa" customClass="ForgetPassViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgetPassStory" id="fV2-FW-kUa" customClass="ForgetPassViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YU6-VW-fay"/>
                         <viewControllerLayoutGuide type="bottom" id="muB-3i-lFJ"/>
@@ -476,7 +476,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="olJ-lg-Ibm">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="jcr-gA-rTH" customClass="SignUpViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpStory" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jcr-gA-rTH" customClass="SignUpViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BfL-pt-coe"/>
                         <viewControllerLayoutGuide type="bottom" id="uLA-Hn-rjP"/>

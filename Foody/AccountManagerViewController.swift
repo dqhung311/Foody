@@ -32,29 +32,17 @@ class AccountManagerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func checkLogin() -> Bool{
-        var res: Bool = false
-        if let password = UserDefaults.standard.value(forKey: "password") as? String,
-            let email = UserDefaults.standard.value(forKey: "email") as? String{
-            if password.characters.count > 0 && email.characters.count > 0{
-                res = true
-            }else{
-                res = false
-            }
-        }
-        return res
-    }
     
-    func goToStory(_ name: String,_ story: String){
-        let storyboard = UIStoryboard(name: name, bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: story)
-        self.present(vc, animated: true, completion: nil)
-    }
+    
+    
     
     @IBAction func clickBack(_ sender: UIButton){
         self.dismissAll()
     }
     
+    @IBAction func clickSignout(_sender: UIButton){
+        self.signOut()
+    }
     @IBAction func clickToLogin(_ sender: UIButton){
         self.goToStory("Second","LoginWithEmail")
     }
