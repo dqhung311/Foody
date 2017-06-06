@@ -101,6 +101,9 @@ class ProductService:ProtocolProductService{
                             if let province_name = p["province_name"] as? String {
                                 item.province_name = province_name
                             }
+                            if let other_image = p["other_image"] as? [String] {
+                                item.otherimage = other_image
+                            }
                             productItems.append(item)
                             
                         }
