@@ -140,8 +140,6 @@ class HomeViewController: UIViewController {
         tabBarController.selectedIndex = 1
         self.present(tabBarController, animated: true, completion: nil)
         
-        
-        
     }
     
     func onTabToLogin(sender:UITapGestureRecognizer){
@@ -150,8 +148,6 @@ class HomeViewController: UIViewController {
         self.present(vc, animated: true, completion: nil)
         
     }
-    
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
        

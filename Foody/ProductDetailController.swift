@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductDetailController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
+class ProductDetailController: UIViewController{
     
     @IBOutlet weak var btnComment: UIButton!
     @IBOutlet weak var btnLike: UIButton!
@@ -27,30 +27,59 @@ class ProductDetailController: UIViewController,  UICollectionViewDataSource, UI
     @IBOutlet weak var labelPrice: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var viewOtherImage: UIView!
+    @IBOutlet weak var viewCommentList: UIView!
+    
+    
+    var heightOtherImageView: CGFloat = 0
+    var heightCommentView: CGFloat = 0
     
     var productItem  = ProductItem()
     let productService = ProductService()
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+    func listViewCommentUIView(){
         
+       
+       
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionOtherImageCell", for: indexPath) as! CollectionOtherImageCell
-        
-        
-        return cell
+    func listOtherImageUIView(){
+        let screenSize: CGRect = UIScreen.main.bounds
+        let paddingBetweenImage = Int(screenSize.width * 0.5 + 5)
+        let widthImage = Int(screenSize.width * 0.5), heightImage = Int(screenSize.width * 0.35)
+        var row = 1
+        var indexrowBreak = 0
+        let maxChOn1Row = 2
+        //for p in productItem.otherimage{
+        for i in 0..<productItem.otherimage.count{
+            //print(productItem.otherimage.)
+            var x_button = i * paddingBetweenImage
+            var y_button = 0
+            if(i != 0 && i == maxChOn1Row * row){
+                indexrowBreak = 0
+                row += 1
+            }
+            if(i >= maxChOn1Row && i <= maxChOn1Row * row) {
+                x_button = indexrowBreak * paddingBetweenImage
+                y_button = ((heightImage + 5) * row) - (heightImage + 5)
+                indexrowBreak += 1
+            }
+            let imageView = UIImageView()
+            imageView.loadImage(urlString: productItem.otherimage[i])
+            imageView.frame = CGRect(x: x_button, y: y_button, width: widthImage, height: heightImage)
+            viewOtherImage.addSubview(imageView)
+        }
+        self.viewOtherImage.frame.size.height = CGFloat(row * heightImage) + 5
+        heightOtherImageView = self.viewOtherImage.frame.size.height
     }
-        
+    
+ 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
         
-        
-        view.addSubview(scrollView)
         
         labelProductName.text = productItem.name
         labelProductNameDetail.text = productItem.name
@@ -61,16 +90,26 @@ class ProductDetailController: UIViewController,  UICollectionViewDataSource, UI
         labelAddress.text = productItem.address + " " + productItem.province_name
         labelCategory.text = productItem.category_name
         
-    
-    }
-    override func viewWillLayoutSubviews(){
-        super.viewWillLayoutSubviews()
-        self.scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height);
-    }
-    func setUIView(data: ProductItem){
+        self.listOtherImageUIView()
+        self.listViewCommentUIView()
         
     }
-
+    
+    
+    override func viewDidLayoutSubviews(){
+        super.viewDidLayoutSubviews()
+        DispatchQueue.main.async {
+            
+            self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + self.heightOtherImageView)
+            
+            self.viewCommentList.translatesAutoresizingMaskIntoConstraints = false
+            let cn5 = NSLayoutConstraint(item: self.viewCommentList, attribute: .top, relatedBy: .equal, toItem: self.viewOtherImage, attribute: .bottom, multiplier: 1.0, constant: self.heightOtherImageView - 20)
+            
+            self.view.addConstraint(cn5)
+            
+            self.view.addSubview(self.scrollView)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -82,5 +121,3 @@ class ProductDetailController: UIViewController,  UICollectionViewDataSource, UI
     
 
 }
-
-

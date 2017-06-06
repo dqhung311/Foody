@@ -20,11 +20,12 @@ class ProductItem{
     var province_name: String = ""
     var category_id: String = ""
     var category_name: String = ""
+    var otherimage = [String]()
     
     init(){
         
     }
-    init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String ) {
+    init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String, otherimage: [String] ) {
         self.code = code
         self.id = id
         self.name = name
@@ -36,6 +37,7 @@ class ProductItem{
         self.province_name = province_name
         self.category_id = category_id
         self.category_name = category_name
+        self.otherimage = otherimage
     }
   
     
