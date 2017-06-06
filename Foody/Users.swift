@@ -21,4 +21,11 @@ class Users{
         self.name = ""
     }
     
+    init(_ email: String,_ password: String,_ name: String) {
+        self.id = ""
+        self.email = email
+        self.password = password
+        self.name = name
+    }
+    
 }

@@ -21,15 +21,26 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var SignInBtn:UIButton!
     @IBOutlet weak var SignUpBtn:UIButton!
 
+    let userService = UserService()
+    var userList  = [Users]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.SignInBtn.layer.borderColor = UIColor.white.cgColor
         self.SignUpBtn.layer.borderColor = UIColor.white.cgColor
-    
+        let password: String = UserDefaults.standard.value(forKey: "password") as! String
+        if password.characters.count > 0 {
+            perform(#selector(goToHome), with: nil, afterDelay: 0)
+        }
     }
 
+    func goToHome(){
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryboard")
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -46,8 +57,8 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpClick(sender: AnyObject) {
-//        let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
-        
+        let newuser = Users(self.emailField.text!, passwordField!.text!, displayNameField!.text!)
+        userService.registerUser(sender: newuser)
     }
     
     func dissmissall(){

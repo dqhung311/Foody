@@ -15,6 +15,7 @@ protocol ProtocolUser {
 
 class UserService:ProtocolUser {
     let urlJson = "http://anphatkhanh.vn/foody/user/?"
+    let newUserUrl = "http://anphatkhanh.vn/foody/user/edit.php"
     
     private let session : URLSession!
     
@@ -72,4 +73,51 @@ class UserService:ProtocolUser {
         completion(userStore, nil)
     }
     
+    func registerUser(sender: AnyObject){
+        if let user = sender as? Users{
+            var request = URLRequest(url: URL(string: newUserUrl)!)
+            request.httpMethod = "POST"
+            let postString = "email=\(user.email)&password=\(user.password)&name=\(user.name)"
+            request.httpBody = postString.data(using: .utf8)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                }
+                
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                if(responseString == "ok"){
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Chúc mừng", message: "Đăng ký thành công", preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil))
+                        
+                        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+                        alertWindow.rootViewController = UIViewController()
+                        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+                        alertWindow.makeKeyAndVisible()
+                        alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+                        
+                        UserDefaults.standard.setValue(user.password, forKey: "password")
+                        UserDefaults.standard.setValue(user.email, forKey: "email")
+                        UserDefaults.standard.setValue(user.name, forKey: "name")
+                    }
+                }else{
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Lỗi", message: responseString, preferredStyle: UIAlertControllerStyle.alert)
+                        alertController.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil))
+                    
+                        let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+                        alertWindow.rootViewController = UIViewController()
+                        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+                        alertWindow.makeKeyAndVisible()
+                        alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
 }
