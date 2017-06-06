@@ -89,6 +89,19 @@ class CollectionService: ProtocolCollectionService{
                 if let total_like = p["total_like"] as? String {
                     item.total_like = total_like
                 }
+                if let product_score = p["product_score"] as? String {
+                    item.product_score = product_score
+                }
+                if let product_province_name = p["product_province_name"] as? String {
+                    item.product_province_name = product_province_name
+                }
+                if let product_category_name = p["product_category_name"] as? String {
+                    item.product_category_name = product_category_name
+                }
+                if let product_price = p["product_price"] as? String {
+                    item.product_price = product_price
+                }
+                
                 
                 collectionItems.append(item)
                 
