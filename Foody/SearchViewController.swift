@@ -25,6 +25,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     let provinceService = ProvinceService()
     var provinceList  = [ProductProvince]()
+    var productItemInfo = ProductItem()
     
     
     var searchType: String = "name"
@@ -137,6 +138,19 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         if(searchType == "province"){
             searchType = "name"
             callproduct("province=\(provinceList[indexPath.row].name)&name=\(searchTextField.text!)")
+        }
+        if(searchType == "name"){
+            searchType = "name"
+            DispatchQueue.main.async {
+                self.productItemInfo = self.productList[indexPath.row]
+                self.performSegue(withIdentifier: "ProductDetail", sender: self)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let svc = segue.destination as? ProductDetailController {
+            svc.productItem = self.productItemInfo
         }
     }
 }
