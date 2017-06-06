@@ -13,7 +13,7 @@
         <!--Product Detail Controller-->
         <scene sceneID="6V5-t2-rjJ">
             <objects>
-                <viewController id="a1S-ct-U3y" customClass="ProductDetailController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailStoryBoard" id="a1S-ct-U3y" customClass="ProductDetailController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CcR-p1-c58"/>
                         <viewControllerLayoutGuide type="bottom" id="1tq-eU-azp"/>
@@ -145,16 +145,16 @@
                                                 <rect key="frame" x="0.0" y="293" width="374" height="40"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OrN-SO-AiP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="93.5" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McC-Qp-eRu">
-                                                                <rect key="frame" x="0.0" y="5" width="93.5" height="13.5"/>
+                                                                <rect key="frame" x="0.0" y="5" width="94" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bình luận" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tB-eT-yep">
-                                                                <rect key="frame" x="0.0" y="21.5" width="93.5" height="13.5"/>
+                                                                <rect key="frame" x="0.0" y="21.5" width="94" height="13.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="11"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -170,16 +170,16 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-1n-Qka">
-                                                        <rect key="frame" x="187" y="0.0" width="93.5" height="40"/>
+                                                        <rect key="frame" x="187" y="0.0" width="94" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VNP-Te-Nhy">
-                                                                <rect key="frame" x="0.0" y="5" width="93.5" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="5" width="94" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lưu lại" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bur-AE-zYv">
-                                                                <rect key="frame" x="0.0" y="20.5" width="93.5" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="94" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -195,16 +195,16 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nDo-N8-eph">
-                                                        <rect key="frame" x="93.5" y="0.0" width="93.5" height="40"/>
+                                                        <rect key="frame" x="94" y="0.0" width="93" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZl-dr-yJ7">
-                                                                <rect key="frame" x="0.0" y="5" width="93.5" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="5" width="93" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hình ảnh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBg-Rj-xen">
-                                                                <rect key="frame" x="0.0" y="20.5" width="93.5" height="14.5"/>
+                                                                <rect key="frame" x="0.0" y="20.5" width="93" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -220,10 +220,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EGJ-Ui-QCW">
-                                                        <rect key="frame" x="280.5" y="0.0" width="93.5" height="40"/>
+                                                        <rect key="frame" x="281" y="0.0" width="93" height="40"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OiJ-ar-dUp">
-                                                                <rect key="frame" x="31.5" y="4" width="32" height="32"/>
+                                                                <rect key="frame" x="31" y="4" width="32" height="32"/>
                                                                 <color key="backgroundColor" red="0.1756223341" green="0.68750768900000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="32" id="VFD-UN-I2j"/>

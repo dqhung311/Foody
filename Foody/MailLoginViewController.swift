@@ -18,29 +18,51 @@ class MailLoginViewController: UIViewController {
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var forgetBtn: UIButton!
     
+    let userService = UserService()
+    var userList  = [Users]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.loginBtn.layer.borderColor = UIColor.white.cgColor
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     @IBAction func clickBack(_ sender: UIButton){
-        self.dismiss(animated: true, completion: nil)
+        self.dismissOne()
     }
     
     @IBAction func clickSignUp(_ sender: UIButton){
-        self.performSegue(withIdentifier: "ToRegisterSegue", sender: sender)
-        UserDefaults.standard.setValue("ok", forKey: "password")
+        self.goToStory("Second", "SignUpStory")
     }
     
     @IBAction func clickForgetPass(_ sender: UIButton){
-        self.performSegue(withIdentifier: "ToForgetSegue", sender: sender)
-        UserDefaults.standard.setValue("no", forKey: "password")
+        self.goToStory("Second", "ForgetPassStory")
     }
     
+    @IBAction func clickLogin(_sender: UIButton){
+        if emailField.text == "" || passwordField.text == "" {
+            self.showAlertMessage("Tên đăng nhập và mật khẩu không được để trống")
+            return
+        }
+        userService.fetchUserByEmail(email: self.emailField.text!){ [weak self] (userList, error) in
+            if userList.count == 1  && userList[0].password == self?.passwordField.text {
+                UserDefaults.standard.setValue(userList[0].password, forKey: "password")
+                UserDefaults.standard.setValue(userList[0].email, forKey: "email")
+                UserDefaults.standard.setValue(userList[0].name, forKey: "name")
+                DispatchQueue.main.async {
+                    self?.showSuccessMessage("Đăng nhập thành công")
+                }
+            }else{
+                DispatchQueue.main.async {
+                    self?.showAlertMessage("Không đúng thông tin đăng nhập")
+                }
+            }
+        }
+
+    }
+    
+    
+
 }
 

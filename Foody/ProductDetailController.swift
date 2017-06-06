@@ -64,9 +64,6 @@ class ProductDetailController: UIViewController{
                 y_button = ((heightImage + 5) * row) - (heightImage + 5)
                 indexrowBreak += 1
             }
-            
-            //let imageName = productItem.otherimage[i]
-            //let image = UIImage(named: imageName)
             let imageView = UIImageView()
             imageView.loadImage(urlString: productItem.otherimage[i])
             imageView.frame = CGRect(x: x_button, y: y_button, width: widthImage, height: heightImage)

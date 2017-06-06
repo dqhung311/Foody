@@ -29,21 +29,9 @@ class SignUpViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         self.SignInBtn.layer.borderColor = UIColor.white.cgColor
         self.SignUpBtn.layer.borderColor = UIColor.white.cgColor
-        let password: String = UserDefaults.standard.value(forKey: "password") as! String
-        if password.characters.count > 0 {
-            perform(#selector(goToHome), with: nil, afterDelay: 0)
+        if self.checkLogin(){
+            perform(#selector(dismissAll), with: nil, afterDelay: 0)
         }
-    }
-
-    func goToHome(){
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "HomeStoryboard")
-        self.present(vc, animated: true, completion: nil)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
     }
     
     @IBAction func clickBack(_ sender: UIButton){
@@ -61,24 +49,4 @@ class SignUpViewController: UIViewController {
         userService.registerUser(sender: newuser)
     }
     
-    func dissmissall(){
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    func showAlertMessage(_ message: String){
-        let alertController = UIAlertController(title: "Warning", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    func showSuccessMessage(_ message: String){
-        let alertController = UIAlertController(title: "Success", message: "\(message)", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "Close", style: .default, handler: { action in
-            self.dissmissall()
-        })
-        alertController.addAction(defaultAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
 }
