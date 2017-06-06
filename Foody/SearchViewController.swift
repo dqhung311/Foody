@@ -143,8 +143,15 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             searchType = "name"
             DispatchQueue.main.async {
                 self.productItemInfo = self.productList[indexPath.row]
-                self.performSegue(withIdentifier: "ProductDetail", sender: self)
-            }
+//                self.performSegue(withIdentifier: "ProductDetail", sender: self)
+                let storyboard = UIStoryboard(name: "ProductDetail", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailStoryBoard")
+                if let vc = vc as? ProductDetailController {
+                    vc.productItem = self.productItemInfo
+                    self.present(vc, animated: true, completion: nil)
+                }
+                
+            }   
         }
     }
     
