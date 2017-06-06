@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductDetailController: UIViewController {
+class ProductDetailController: UIViewController,  UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var btnComment: UIButton!
     @IBOutlet weak var btnLike: UIButton!
@@ -21,13 +21,28 @@ class ProductDetailController: UIViewController {
     @IBOutlet weak var labelTotalPicture: UILabel!
     @IBOutlet weak var labelTotalCollection: UILabel!
     @IBOutlet weak var labelScore: UILabel!
+    @IBOutlet weak var labelAddress: UILabel!
+    @IBOutlet weak var labelCategory: UILabel!
+    @IBOutlet weak var labelProvince: UILabel!
+    @IBOutlet weak var labelPrice: UILabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     var productItem  = ProductItem()
     let productService = ProductService()
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+        
+    }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionOtherImageCell", for: indexPath) as! CollectionOtherImageCell
+        
+        
+        return cell
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +57,15 @@ class ProductDetailController: UIViewController {
         pictureImage.loadImage(urlString: productItem.urlphoto)
         labelTotalComment.text = "235"
         labelScore.text = productItem.score
+        labelPrice.text = productItem.price
+        labelAddress.text = productItem.address + " " + productItem.province_name
+        labelCategory.text = productItem.category_name
+        
     
     }
     override func viewWillLayoutSubviews(){
         super.viewWillLayoutSubviews()
-        self.scrollView.contentSize = CGSize(width: view.frame.size.width, height: 800);
+        self.scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height);
     }
     func setUIView(data: ProductItem){
         
@@ -59,5 +78,9 @@ class ProductDetailController: UIViewController {
     @IBAction func disMist(_ sender: UIButton){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
 
 }
+
+

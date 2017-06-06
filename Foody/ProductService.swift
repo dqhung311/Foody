@@ -44,7 +44,7 @@ class ProductService:ProtocolProductService{
         if(query != ""){
             urlJsonRes = urlJson + query
         }
-        
+        print(urlJsonRes)
         guard let url = URL(string: urlJsonRes) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
@@ -85,6 +85,21 @@ class ProductService:ProtocolProductService{
                             }
                             if let score = p["score"] as? String {
                                 item.score = score
+                            }
+                            if let price = p["price"] as? String {
+                                item.price = price
+                            }
+                            if let category_id = p["category_id"] as? String {
+                                item.category_id = category_id
+                            }
+                            if let category_name = p["category_name"] as? String {
+                                item.category_name = category_name
+                            }
+                            if let province_id = p["province_id"] as? String {
+                                item.province_id = province_id
+                            }
+                            if let province_name = p["province_name"] as? String {
+                                item.province_name = province_name
                             }
                             productItems.append(item)
                             

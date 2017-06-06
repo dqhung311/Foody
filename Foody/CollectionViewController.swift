@@ -26,6 +26,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     let tabMyCollection = Config().getTabMyCollection()
     let tabLatestCollection = Config().getTabLatestCollection()
     
+    var productItemInfo = ProductItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +99,28 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionList.count
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let data = collectionList[indexPath.row]
+        productItemInfo.address = data.product_address
+        productItemInfo.name = data.product_name
+        productItemInfo.urlphoto = data.product_image
+        productItemInfo.score = data.product_score
+        productItemInfo.category_name = data.product_category_name
+        productItemInfo.province_name = data.product_province_name
+        productItemInfo.price =  data.product_price
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "ProductDetail", sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let svc = segue.destination as? ProductDetailController {
+            svc.productItem = self.productItemInfo
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

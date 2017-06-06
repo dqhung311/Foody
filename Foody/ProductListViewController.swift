@@ -92,15 +92,13 @@ class ProductListViewController: UIViewController{
     }
     
     @IBAction func disMist(_ sender: UIButton){
-        self.performSegue(withIdentifier: "Home", sender: nil)
+        self.performSegue(withIdentifier: "Home", sender: sender)
     }
    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) { //Ham lay screen moi .
-        //let dest = segue.destination as? UIViewController
-        let svc = segue.destination as! ProductDetailController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let svc = segue.destination as? ProductDetailController {
         svc.productItem = self.productItemInfo
-        
-        
+        }
     }
     
     @IBAction func tabToChangeView(_ sender: UIButton){
@@ -137,11 +135,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var str = "?"
-        if query.range(of:"?") != nil{
-            str = "&"
-        }
-        
+        let str = "&"
+        //if query.range(of:"?") != nil{
+        //    str = ""
+        //}
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
             self.viewCurrent = tabProduct
@@ -166,7 +163,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
         }else{
             productItemInfo = productList[indexPath.row]
-            self.performSegue(withIdentifier: "ProductDetail", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "ProductDetail", sender: self)
+            }
         }
     }
     
