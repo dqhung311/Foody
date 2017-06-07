@@ -60,7 +60,8 @@ class HomeViewController: UIViewController {
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        
         if(checkLogin()){
-            print("Da dang nhap")
+            welcomeText.text = "Xin chào " + getLoginName()
+            labelWelcome.isHidden = true
         }
         
         self.homeLogo.layer.cornerRadius = self.homeLogo.frame.width/2.0
