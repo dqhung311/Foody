@@ -85,10 +85,13 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
-            /if let barViewControllers = segue.destination as? UITabBarController{
-                let destinationViewController = barViewControllers.viewControllers?[1] as! ProductListViewController
-                destinationViewController.viewCurrent = self.selectView
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "CollectionStoryBoard")
+            if let vc = vc as? CollectionViewController {
+                vc.viewCurrent = Config().getTabMyCollection()
+                self.present(vc, animated: true, completion: nil)
             }
+            
         }
     }
     

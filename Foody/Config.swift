@@ -15,6 +15,9 @@ class Config{
     let tabProvince: String = "Province"
     let tabMyCollection: String = "MyCollection"
     let tabLatestCollection: String = "LatestCollection"
+    
+    var currentUserInfo: Users?
+    
     init(){
 
     }

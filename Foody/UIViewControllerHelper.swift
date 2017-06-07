@@ -78,5 +78,13 @@ extension UIViewController {
     func getLoginName() -> String{
         return UserDefaults.standard.value(forKey: "name") as! String
     }
+    func getUserImageUrl(user: Users?) -> String{
+        if let user = user{
+            return (user.image_url)
+        }else{
+            return "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png"
+        }
+        
+    }
 }
 

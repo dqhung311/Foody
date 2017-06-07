@@ -67,6 +67,7 @@ class UserService:ProtocolUser {
                 if let name = p["name"] as? String {
                     user.name = name
                 }
+                user.image_url = "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png"
                 userStore.append(user)
             }
         }

@@ -13,19 +13,14 @@ class Users{
     var email: String
     var password: String
     var name: String
+    var image_url: String
     
     init() {
         self.id = ""
         self.email = ""
         self.password = ""
         self.name = ""
-    }
-    
-    init(_ email: String,_ password: String,_ name: String) {
-        self.id = ""
-        self.email = email
-        self.password = password
-        self.name = name
+        self.image_url = ""
     }
     
 }
