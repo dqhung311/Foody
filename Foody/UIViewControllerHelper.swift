@@ -61,30 +61,4 @@ extension UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    func heightForView(text:String, font: UIFont, width: CGFloat) -> CGFloat{
-        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = font
-        label.text = text
-        label.sizeToFit()
-        return label.bounds.height
-    }
-    
-    func getLoginEmail() -> String{
-        return UserDefaults.standard.value(forKey: "email") as! String
-    }
-    func getLoginName() -> String{
-        return UserDefaults.standard.value(forKey: "name") as! String
-    }
-    func getUserImageUrl(user: Users?) -> String{
-        if let user = user{
-            return (user.image_url)
-        }else{
-            return "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png"
-        }
-        
-    }
 }
-

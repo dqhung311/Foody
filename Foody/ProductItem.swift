@@ -21,11 +21,16 @@ class ProductItem{
     var category_id: String = ""
     var category_name: String = ""
     var otherimage = [String]()
+    var total_like: Int = 0
+    var total_comment: Int = 0
+    
     
     init(){
         
     }
-    init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String, otherimage: [String] ) {
+    init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String, otherimage: [String],
+         total_like: Int, total_comment: Int
+         ) {
         self.code = code
         self.id = id
         self.name = name
@@ -38,6 +43,8 @@ class ProductItem{
         self.category_id = category_id
         self.category_name = category_name
         self.otherimage = otherimage
+        self.total_like = total_like
+        self.total_comment = total_comment
     }
   
     

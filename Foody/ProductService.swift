@@ -15,20 +15,45 @@ protocol ProtocolProductService {
     
     func updateProduct(_ id: String) -> String
     
-    func addNewProduct() -> String
+    func addNewProduct(sender: AnyObject) -> Void
 
 }
 class ProductService:ProtocolProductService{
     
     let urlJson: String = "http://anphatkhanh.vn/foody/product/?"
+    let urlEdit: String = "http://anphatkhanh.vn/foody/product/edit.php"
     private let session : URLSession!
     
     init() {
         session = URLSession(configuration: .default)
     }
     
-    func addNewProduct() -> String {
-        return ""
+    func addNewProduct(sender: AnyObject) -> Void {
+        if let product = sender as? ProductItem{
+            var request = URLRequest(url: URL(string: urlEdit)!)
+            request.httpMethod = "POST"
+            let postString = "name=\(product.name)&price=\(product.price)&address=\(product.address)&categoryid=\(product.category_id)&provinceid=\(product.province_id)"
+         
+            request.httpBody = postString.data(using: .utf8)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                
+                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                }
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                if(responseString == "ok"){
+                    print("Thanh cong")
+                }else{
+                    print("Loi")
+                }
+            }
+            task.resume()
+        }
+        
+        
     }
     
     func updateProduct(_ id: String) -> String {
@@ -103,6 +128,12 @@ class ProductService:ProtocolProductService{
                             }
                             if let other_image = p["other_image"] as? [String] {
                                 item.otherimage = other_image
+                            }
+                            if let total_like = p["total_like"] as? Int {
+                                item.total_like = total_like
+                            }
+                            if let total_comment = p["total_comment"] as? Int {
+                                item.total_comment = total_comment
                             }
                             productItems.append(item)
                             
