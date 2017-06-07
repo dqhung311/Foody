@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 extension UIViewController {
     
@@ -62,6 +61,4 @@ extension UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-
-
-
+}
