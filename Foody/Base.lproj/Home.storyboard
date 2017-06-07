@@ -45,6 +45,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="tapSearch:" destination="BYZ-38-t0r" eventType="touchDown" id="aOu-di-TPs"/>
+                                </connections>
                             </textField>
                             <view contentMode="scaleToFill" restorationIdentifier="123" translatesAutoresizingMaskIntoConstraints="NO" id="FuN-xK-qsR" userLabel="View Kham Pha">
                                 <rect key="frame" x="10" y="232" width="145" height="145"/>

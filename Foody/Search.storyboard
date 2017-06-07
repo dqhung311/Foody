@@ -13,7 +13,7 @@
         <!--Search View Controller-->
         <scene sceneID="tIy-jD-Nt9">
             <objects>
-                <viewController id="Hk5-Ql-XOj" customClass="SearchViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchView" id="Hk5-Ql-XOj" customClass="SearchViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ETc-SC-LFN"/>
                         <viewControllerLayoutGuide type="bottom" id="jTo-N5-fZR"/>

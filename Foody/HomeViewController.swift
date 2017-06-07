@@ -172,7 +172,9 @@ class HomeViewController: UIViewController {
         }
     }
     
-    
+    @IBAction func tapSearch(_ sender: UITextField){
+        self.goToStory("Search", "SearchView")
+    }
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue){
        
