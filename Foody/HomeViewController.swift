@@ -50,11 +50,12 @@ class HomeViewController: UIViewController {
             }
         }
         
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
+        let tapGestureRecognizerIcon = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         homeLogo.isUserInteractionEnabled = true
-        homeLogo.addGestureRecognizer(tapGestureRecognizer)
+        homeLogo.addGestureRecognizer(tapGestureRecognizerIcon)
+        let tapGestureRecognizerLabel = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         welcomeText.isUserInteractionEnabled = true
-        welcomeText.addGestureRecognizer(tapGestureRecognizer)
+        welcomeText.addGestureRecognizer(tapGestureRecognizerLabel)
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        
@@ -190,6 +191,15 @@ class HomeViewController: UIViewController {
             self.goToStory("Second", "LoginStoryBoard")
         }
     }
+
+    @IBAction func tapUserInfoLabel(tapGestureRecognizer: UITapGestureRecognizer){
+        if checkLogin(){
+            self.goToStory("AcountManager", "AccountManagerView")
+        }else{
+            self.goToStory("Second", "LoginStoryBoard")
+        }
+    }
+
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue){
        
