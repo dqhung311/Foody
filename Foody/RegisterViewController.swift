@@ -22,12 +22,11 @@ class RegisterViewController: UIViewController {
 
     
     @IBAction func emailLoginClick(_ sender: UIButton){
-        self.performSegue(withIdentifier: "MailLoginSegue", sender: sender)
-        
+        self.goToStory("Second","LoginWithEmail")
     }
     
     @IBAction func signUpClick(_ sender: UIButton){
-        self.performSegue(withIdentifier: "ToSignUpSegue", sender: sender)
+        self.goToStory("Second","SignUpStory")
     }
     
     @IBAction func clickBack(_ sender: UIButton){

@@ -11,28 +11,52 @@ import UIKit
 class AccountManagerViewController: UIViewController {
 
     @IBOutlet weak var TopAccountManager: UIView!
+    @IBOutlet weak var MenuBar: UIView!
     
+    @IBOutlet weak var newHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var newTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var LoginBtn: UIButton!
+    @IBOutlet weak var ContinueBtn: UIButton!
+    @IBOutlet weak var UserIcon: UIImageView!
+    
+    @IBOutlet weak var BackBtn: UIButton!
+    @IBOutlet weak var NameLabel: UILabel!
+    var avatar: UIImageView = UIImageView()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(self.checkLogin())
-//        if self.checkLogin() {
-//            print(self.checkLogin())
-//            if let password = UserDefaults.standard.value(forKey: "password") as? String,
-//                let email = UserDefaults.standard.value(forKey: "email") as? String{
-//                print(password)
-//                print(email)
-//            }
-////            TopAccountManager.frame.size.height = 200
-//        }
+        BackBtn.isHidden = true
+        NameLabel.isHidden = true
+        if self.checkLogin() {
+            newHeightConstraint.constant = 200
+            newTopConstraint.constant = 0
+            LoginBtn.isHidden = true
+            ContinueBtn.isHidden = true
+            UserIcon.isHidden = true
+            MenuBar.isHidden = true
+            BackBtn.isHidden = false
+            NameLabel.isHidden = false
+            NameLabel.text = self.getLoginName()
+            
+            avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
+            avatar.backgroundColor = UIColor.red
+            avatar.layer.borderWidth = 1
+            avatar.layer.borderColor = UIColor.white.cgColor
+            avatar.layer.cornerRadius = avatar.frame.height/2
+            avatar.clipsToBounds = true
+            avatar.loadImage(urlString: "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png")
+            self.view.addSubview(avatar)
+            
+            TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
     
     
     
@@ -49,10 +73,9 @@ class AccountManagerViewController: UIViewController {
     
     @IBAction func commentManager(_ sender: UIButton){
         if !self.checkLogin() {
-            // chưa login
             self.goToStory("Second","LoginStoryBoard")
         }else{
-            // login rồi
+            self.goToStory("AcountManager","CommentView")
         }
     }
     
@@ -62,6 +85,10 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
+            /if let barViewControllers = segue.destination as? UITabBarController{
+                let destinationViewController = barViewControllers.viewControllers?[1] as! ProductListViewController
+                destinationViewController.viewCurrent = self.selectView
+            }
         }
     }
     
