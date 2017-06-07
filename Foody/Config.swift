@@ -36,4 +36,11 @@ class Config{
     }
 }
 
+final class UserInfo {
+    static let user = UserInfo()
+    
+    var name : String!
+    var email : String!
+    var imageUrl : String!
+}
 
