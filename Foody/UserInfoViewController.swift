@@ -23,7 +23,7 @@ class UserInfoViewController: UIViewController {
     var userStore = [Users]()
     
 //    var user = Users()
-    let config = Config()
+//    let config = Config()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,8 @@ class UserInfoViewController: UIViewController {
 //            
 //        }
         
-        self.displayName.text = self.config.currentUserInfo?.name
+        
+        self.displayName.text = UserInfo.user.name
         avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
         avatar.backgroundColor = UIColor.red
         avatar.layer.borderWidth = 1

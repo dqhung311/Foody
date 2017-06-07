@@ -27,18 +27,12 @@ class AccountManagerViewController: UIViewController {
     let userService = UserService()
     var userStore = [Users]()
     
-    let config = Config()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         BackBtn.isHidden = true
         NameLabel.isHidden = true
         if self.checkLogin() {
-            userService.fetchUserByEmail(email: self.getLoginEmail()){ [weak self] (userList, error) in
-                if userList.count == 1{
-                    self?.config.currentUserInfo = userList[0]
-                }
-            }
             
             newHeightConstraint.constant = 200
             newTopConstraint.constant = 0
@@ -105,7 +99,7 @@ class AccountManagerViewController: UIViewController {
         }
     }
     
-    @IBAction func contactManager(_sender: UIButton){
+    @IBAction func userInfoManager(_sender: UIButton){
         if !self.checkLogin() {
             // chưa login
             self.goToStory("Second","LoginStoryBoard")

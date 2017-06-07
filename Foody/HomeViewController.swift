@@ -31,6 +31,8 @@ class HomeViewController: UIViewController {
     
     var selectView: String = ""
     
+    let userService = UserService()
+    
     let tabProduct = Config().getTabProduct()
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
@@ -39,6 +41,13 @@ class HomeViewController: UIViewController {
     //@IBOutlet weak var homeLogo: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        userService.fetchUserByEmail(email: self.getLoginEmail()){  (userList, error) in
+            if userList.count == 1{
+                UserInfo.user.name = userList[0].name
+                UserInfo.user.email = userList[0].name
+            }
+        }
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        

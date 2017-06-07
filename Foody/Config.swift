@@ -16,8 +16,6 @@ class Config{
     let tabMyCollection: String = "MyCollection"
     let tabLatestCollection: String = "LatestCollection"
     
-    var currentUserInfo: Users?
-    
     init(){
 
     }
