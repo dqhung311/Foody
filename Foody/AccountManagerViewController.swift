@@ -24,12 +24,22 @@ class AccountManagerViewController: UIViewController {
     @IBOutlet weak var NameLabel: UILabel!
     var avatar: UIImageView = UIImageView()
 
+    let userService = UserService()
+    var userStore = [Users]()
+    
+    let config = Config()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         BackBtn.isHidden = true
         NameLabel.isHidden = true
         if self.checkLogin() {
+            userService.fetchUserByEmail(email: self.getLoginEmail()){ [weak self] (userList, error) in
+                if userList.count == 1{
+                    self?.config.currentUserInfo = userList[0]
+                }
+            }
+            
             newHeightConstraint.constant = 200
             newTopConstraint.constant = 0
             LoginBtn.isHidden = true
@@ -101,6 +111,8 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
+            
+            self.goToStory("AcountManager", "UserInfoView")
         }
     }
     

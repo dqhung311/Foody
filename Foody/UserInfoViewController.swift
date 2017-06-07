@@ -22,18 +22,20 @@ class UserInfoViewController: UIViewController {
     let userService = UserService()
     var userStore = [Users]()
     
-    var user = Users()
+//    var user = Users()
+    let config = Config()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        
+//        userService.fetchUserByEmail(email: self.getLoginEmail()){ [weak self] (userList, error) in
+//            if userList.count == 1{
+//                self?.user = userList[0]
+//            }
+//            
+//        }
         
-        userService.fetchUserByEmail(email: self.getLoginEmail()){ [weak self] (userList, error) in
-            if userList.count == 1{
-                self?.user = userList[0]
-            }
-            self?.displayName.text = self?.user.name
-        }
-        
+        self.displayName.text = self.config.currentUserInfo?.name
         avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
         avatar.backgroundColor = UIColor.red
         avatar.layer.borderWidth = 1
@@ -46,10 +48,7 @@ class UserInfoViewController: UIViewController {
         TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
         
         NameLabel.text = self.getLoginName()
-        print("ttt" + user.email)
-        DispatchQueue.main.async {
-            print("ttt" + self.user.email)
-        }
+        
     }
 
     @IBAction func clickBack(_ sender: UIButton){
