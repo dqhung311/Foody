@@ -22,11 +22,7 @@ class AccountManagerViewController: UIViewController {
     
     @IBOutlet weak var BackBtn: UIButton!
     @IBOutlet weak var NameLabel: UILabel!
-    var avatar: UIImageView = UIImageView()
-
-    let userService = UserService()
-    var userStore = [Users]()
-    
+    var avatar: UIImageView = UIImageView()    
     
     override func viewDidLoad() {
         super.viewDidLoad()
