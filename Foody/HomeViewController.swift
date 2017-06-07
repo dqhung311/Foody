@@ -49,6 +49,10 @@ class HomeViewController: UIViewController {
             }
         }
         
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
+        homeLogo.isUserInteractionEnabled = true
+        homeLogo.addGestureRecognizer(tapGestureRecognizer)
+        
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        
         if(checkLogin()){
@@ -173,6 +177,18 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func tapSearch(_ sender: UITextField){
+        self.goToStory("Search", "SearchView")
+    }
+    
+    @IBAction func tapUserInfoIcon(tapGestureRecognizer: UITapGestureRecognizer){
+        if checkLogin(){
+            self.goToStory("AcountManager", "AccountManagerView")
+        }else{
+            self.goToStory("Second", "LoginStoryBoard")
+        }
+    }
+    
+    @IBAction func tapUserInfoLabel(_ sender: UILabel){
         self.goToStory("Search", "SearchView")
     }
     
