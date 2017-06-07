@@ -86,7 +86,7 @@ class CollectionService: ProtocolCollectionService{
                 if let product_name = p["product_name"] as? String {
                     item.product_name = product_name
                 }
-                if let total_like = p["total_like"] as? String {
+                if let total_like = p["total_like"] as? Int {
                     item.total_like = total_like
                 }
                 if let product_score = p["product_score"] as? String {
@@ -100,6 +100,12 @@ class CollectionService: ProtocolCollectionService{
                 }
                 if let product_price = p["product_price"] as? String {
                     item.product_price = product_price
+                }
+                if let total_comment = p["total_comment"] as? Int {
+                    item.total_comment = total_comment
+                }
+                if let product_otherimage = p["product_otherimage"] as? [String] {
+                    item.product_otherimage = product_otherimage
                 }
                 
                 

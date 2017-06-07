@@ -14,6 +14,8 @@ class ProductListCell: UITableViewCell {
     @IBOutlet weak var labelProductAddress: UILabel!
     @IBOutlet weak var picturePreview: UIImageView!
     @IBOutlet weak var labelScore: UILabel!
+    @IBOutlet weak var labelTotalComment: UILabel!
+    @IBOutlet weak var labelTotalImage: UILabel!
     
     var productItem: ProductItem!
     
@@ -31,6 +33,8 @@ class ProductListCell: UITableViewCell {
         labelProductName.text = data.name
         labelProductAddress.text = data.address
         labelScore.text = data.score
+        labelTotalImage.text = String(data.otherimage.count)
+        labelTotalComment.text = String(data.total_comment)
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
         picturePreview.loadImage(urlString: data.urlphoto)

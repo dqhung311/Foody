@@ -110,6 +110,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         productItemInfo.score = data.product_score
         productItemInfo.category_name = data.product_category_name
         productItemInfo.province_name = data.product_province_name
+        productItemInfo.total_like = data.total_like
+        productItemInfo.total_comment = data.total_comment
+        productItemInfo.otherimage = data.product_otherimage
         productItemInfo.price =  data.product_price
         
         DispatchQueue.main.async {

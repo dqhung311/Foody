@@ -15,6 +15,8 @@ class ProductListViewController: UIViewController{
     @IBOutlet weak var btnCategory: UIButton!
     @IBOutlet weak var btnProvince: UIButton!
     
+    
+    
     @IBOutlet weak var productListView: UITableView!
     @IBOutlet weak var boundButtonMenu: UIView!
     
@@ -94,7 +96,16 @@ class ProductListViewController: UIViewController{
     @IBAction func disMist(_ sender: UIButton){
         self.performSegue(withIdentifier: "Home", sender: sender)
     }
-   
+    @IBAction func addProduct(_ sender: UIButton){
+        if checkLogin() {
+          self.performSegue(withIdentifier: "AddProduct", sender: sender)
+        }else{
+            let storyboard = UIStoryboard(name: "Second", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let svc = segue.destination as? ProductDetailController {
         svc.productItem = self.productItemInfo
@@ -128,7 +139,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 44
         if(viewCurrent == tabProduct || viewCurrent == ""){
-            height = self.view.frame.size.height * 0.4
+            height = self.view.frame.size.height * 0.5
         }
         return height
     }

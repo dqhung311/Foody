@@ -42,6 +42,10 @@ class HomeViewController: UIViewController {
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        
+        if(checkLogin()){
+            print("Da dang nhap")
+        }
+        
         self.homeLogo.layer.cornerRadius = self.homeLogo.frame.width/2.0
         self.homeLogo.clipsToBounds = true
         
@@ -94,9 +98,11 @@ class HomeViewController: UIViewController {
         
         //homeTextSearch.leftView = searchImageView
         
+        
         let tapKhamPha = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
         self.khamPhaView.isUserInteractionEnabled = true
         self.khamPhaView.addGestureRecognizer(tapKhamPha)
+        
         
         let tabTinhThanh = UITapGestureRecognizer(target: self, action: #selector(HomeViewController.onTabToViewProductList))
         self.tinhThanhView.isUserInteractionEnabled = true

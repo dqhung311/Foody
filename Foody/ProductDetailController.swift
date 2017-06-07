@@ -31,6 +31,8 @@ class ProductDetailController: UIViewController{
     @IBOutlet weak var viewCommentList: UIView!
     
     
+    
+    
     var heightOtherImageView: CGFloat = 0
     var heightCommentView: CGFloat = 0
     
@@ -50,9 +52,9 @@ class ProductDetailController: UIViewController{
         var row = 1
         var indexrowBreak = 0
         let maxChOn1Row = 2
-        //for p in productItem.otherimage{
+       
         for i in 0..<productItem.otherimage.count{
-            //print(productItem.otherimage.)
+            
             var x_button = i * paddingBetweenImage
             var y_button = 0
             if(i != 0 && i == maxChOn1Row * row){
@@ -84,7 +86,9 @@ class ProductDetailController: UIViewController{
         labelProductName.text = productItem.name
         labelProductNameDetail.text = productItem.name
         pictureImage.loadImage(urlString: productItem.urlphoto)
-        labelTotalComment.text = "235"
+        labelTotalComment.text = String(productItem.total_comment)
+        labelTotalPicture.text = String(productItem.otherimage.count)
+        labelTotalCollection.text = String(productItem.total_like)
         labelScore.text = productItem.score
         labelPrice.text = productItem.price
         labelAddress.text = productItem.address + " " + productItem.province_name
@@ -92,6 +96,7 @@ class ProductDetailController: UIViewController{
         
         self.listOtherImageUIView()
         self.listViewCommentUIView()
+        self.view.addSubview(self.scrollView)
         
     }
     
@@ -100,15 +105,16 @@ class ProductDetailController: UIViewController{
         super.viewDidLayoutSubviews()
         DispatchQueue.main.async {
             
-            self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + self.heightOtherImageView)
+            self.scrollView.contentSize = CGSize(width: self.view.frame.size.width, height: self.scrollView.frame.height + self.heightOtherImageView)
+            
+            print(self.heightOtherImageView)
             
             self.viewCommentList.translatesAutoresizingMaskIntoConstraints = false
             let cn5 = NSLayoutConstraint(item: self.viewCommentList, attribute: .top, relatedBy: .equal, toItem: self.viewOtherImage, attribute: .bottom, multiplier: 1.0, constant: self.heightOtherImageView - 20)
             
             self.view.addConstraint(cn5)
-            
-            self.view.addSubview(self.scrollView)
         }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

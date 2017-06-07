@@ -30,7 +30,7 @@ class CollectionListCell: UICollectionViewCell {
         if(currentTab == tabMyCollection){
             labelTotalLike.text = ""
         }else{
-            labelTotalLike.text = (data.total_like) + " lưu"
+            labelTotalLike.text = String(data.total_like) + " lưu"
         }
     }
 }
