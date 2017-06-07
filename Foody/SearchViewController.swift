@@ -50,7 +50,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     func callproduct(_ callquery: String){
         productService.fetchAllProduct(query: callquery){ [weak self] (productList, error) in
             self?.productList = productList
-//            self?.reloadtableview()
         }
     }
     

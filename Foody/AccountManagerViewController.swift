@@ -73,10 +73,9 @@ class AccountManagerViewController: UIViewController {
     
     @IBAction func commentManager(_ sender: UIButton){
         if !self.checkLogin() {
-            // chưa login
             self.goToStory("Second","LoginStoryBoard")
         }else{
-            // login rồi
+            self.goToStory("AcountManager","CommentView")
         }
     }
     
@@ -86,6 +85,10 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
+            /if let barViewControllers = segue.destination as? UITabBarController{
+                let destinationViewController = barViewControllers.viewControllers?[1] as! ProductListViewController
+                destinationViewController.viewCurrent = self.selectView
+            }
         }
     }
     
