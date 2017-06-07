@@ -236,6 +236,7 @@
                         <outlet property="tinhThanhIcon" destination="TtC-BT-CEX" id="3Ai-cu-P4q"/>
                         <outlet property="tinhThanhImage" destination="Fc6-mh-t2k" id="1c4-un-gde"/>
                         <outlet property="tinhThanhView" destination="08D-fK-oxC" id="O5K-jI-fhK"/>
+                        <outlet property="welcomeText" destination="4cL-dB-f9w" id="n2W-jV-TGE"/>
                         <segue destination="N3v-ev-BAR" kind="presentation" identifier="HomeStoryBoard" id="CNb-aO-Lvy"/>
                     </connections>
                 </viewController>

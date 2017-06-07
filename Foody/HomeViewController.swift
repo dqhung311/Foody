@@ -10,6 +10,7 @@ import UIKit
 
 class HomeViewController: UIViewController {
     @IBOutlet weak var homeLogo: UIImageView!
+    @IBOutlet weak var welcomeText: UILabel!
     @IBOutlet weak var homeTextSearch: UITextField!
     
     @IBOutlet weak var khamPhaImage: UIImageView!
@@ -52,6 +53,8 @@ class HomeViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         homeLogo.isUserInteractionEnabled = true
         homeLogo.addGestureRecognizer(tapGestureRecognizer)
+        welcomeText.isUserInteractionEnabled = true
+        welcomeText.addGestureRecognizer(tapGestureRecognizer)
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
        
@@ -186,10 +189,6 @@ class HomeViewController: UIViewController {
         }else{
             self.goToStory("Second", "LoginStoryBoard")
         }
-    }
-    
-    @IBAction func tapUserInfoLabel(_ sender: UILabel){
-        self.goToStory("Search", "SearchView")
     }
     
     @IBAction func unwindSegue(segue: UIStoryboardSegue){

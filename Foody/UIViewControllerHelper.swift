@@ -71,11 +71,19 @@ extension UIViewController {
     }
     
     func getLoginEmail() -> String{
-        return UserDefaults.standard.value(forKey: "email") as! String
+        if let mail = UserDefaults.standard.value(forKey: "email") as? String{
+            return mail
+        }else{
+            return ""
+        }
     }
     
     func getLoginName() -> String{
-        return UserDefaults.standard.value(forKey: "name") as! String
+        if let name = UserDefaults.standard.value(forKey: "name") as? String{
+            return name
+        }else{
+            return ""
+        }
     }
     func getUserImageUrl(user: Users?) -> String{
         if let user = user{
