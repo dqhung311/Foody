@@ -74,7 +74,8 @@ class ProductListViewController: UIViewController{
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
         
-        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
+//        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
+        let myViews = boundButtonMenu.subviews
         for view in myViews {
           view.backgroundColor = UIColor.clear
         }
