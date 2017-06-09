@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
         let tapGestureRecognizerIcon = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         homeLogo.isUserInteractionEnabled = true
         homeLogo.addGestureRecognizer(tapGestureRecognizerIcon)
+        
         let tapGestureRecognizerLabel = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         welcomeText.isUserInteractionEnabled = true
         welcomeText.addGestureRecognizer(tapGestureRecognizerLabel)

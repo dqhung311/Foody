@@ -42,7 +42,9 @@ class ProductDetailController: UIViewController{
     var productItem  = ProductItem()
     let productService = ProductService()
     
-    func listViewCommentUIView(){
+    var productCategoryItem  = [ProductItem]()
+    
+    func createViewCommentUIView(){
         var y_position = 0
         let heightLabel = 30
         let heightAvatar = 32
@@ -90,11 +92,15 @@ class ProductDetailController: UIViewController{
         var widthImage = Int(screenSize.width * 0.5)
         var heightPercent = 0.45
         var maxImageOnRow = 2
+        
+        var totalImage = productItem.otherimage.count
+       
         if(view === viewOtherCategoryProduct){
             paddingBetweenImage = Int(screenSize.width * 0.333 + spaceLine)
             widthImage = Int(screenSize.width * 0.333)
             heightPercent = 0.25
             maxImageOnRow = 3
+            totalImage = productCategoryItem.count
         }
         
         
@@ -103,7 +109,7 @@ class ProductDetailController: UIViewController{
         
         
         var heightImage = 0
-        for i in 0..<productItem.otherimage.count{
+        for i in 0..<totalImage{
             heightImage = Int(screenSize.width * CGFloat(heightPercent))
             var x_button = i * paddingBetweenImage
             var y_button = 0
@@ -123,9 +129,33 @@ class ProductDetailController: UIViewController{
                 
             }
             let imageView = UIImageView()
-            imageView.loadImage(urlString: productItem.otherimage[i])
+            
+            if (view === viewOtherCategoryProduct){
+                
+                imageView.loadImage(urlString: productCategoryItem[i].urlphoto)
+                
+                
+                
+                
+                
+            }else{
+                imageView.loadImage(urlString: productItem.otherimage[i])
+            }
+            
             imageView.frame = CGRect(x: x_button, y: y_button, width: widthImage, height: heightImage)
+            if (view === viewOtherCategoryProduct){
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ProductDetailController.imageTapped(gesture:)))
+            
+            // add it to the image view;
+            view.addGestureRecognizer(tapGesture)
+            // make sure imageView can be interacted with by user
+            imageView.isUserInteractionEnabled = true
+            }
             view.addSubview(imageView)
+            
+            //view.isUserInteractionEnabled = false
+            
+            
         }
         
         view.frame.size.height = CGFloat(row * heightImage)
@@ -136,14 +166,40 @@ class ProductDetailController: UIViewController{
         }
     }
     
-    func listOtherProductUIView(){
-        self.listOtherImageUIView(view: viewOtherCategoryProduct)
+    
+    func imageTapped(gesture: UIGestureRecognizer){
+        //self.performSegue(withIdentifier: "AddProduct", sender: sender)
+        if (gesture.view as? UIImageView) != nil {
+            print("Image Tapped")
+            //Here you can initiate your new ViewController
+            
+        }
+    
     }
     
+    func createOtherProductUIView(){
+        let query = "catID=\(productItem.category_id)"
+        productService.fetchAllProduct(query: query){ [weak self] (productCategoryItem, error) in
+            self?.productCategoryItem = productCategoryItem
+            DispatchQueue.main.async {
+                self?.listOtherImageUIView(view: (self?.viewOtherCategoryProduct)!)
+                self?.view.addSubview((self?.scrollView)!)
+            }
+        }
+        
+    }
+    
+    
+    
+    func createOtherImageUIView(){
+        self.listOtherImageUIView(view: viewOtherImage)
+    }
  
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
         
@@ -160,18 +216,18 @@ class ProductDetailController: UIViewController{
         labelAddress.text = productItem.address + " " + productItem.province_name
         labelCategory.text = productItem.category_name
         
-        self.listOtherImageUIView(view: viewOtherImage)
-        self.listViewCommentUIView()
-        self.listOtherProductUIView()
-        self.view.addSubview(self.scrollView)
+        self.createOtherImageUIView()
+        self.createViewCommentUIView()
+        self.createOtherProductUIView()
+        
         
     }
     
     
     override func viewDidLayoutSubviews(){
         super.viewDidLayoutSubviews()
+        
         DispatchQueue.main.async {
-            
             self.viewCommentList.translatesAutoresizingMaskIntoConstraints = false
             let cnComment = NSLayoutConstraint(item: self.viewCommentList, attribute: .top, relatedBy: .equal, toItem: self.viewOtherImage, attribute: .bottom, multiplier: 1.0, constant: self.heightOtherImageView - 8)
             

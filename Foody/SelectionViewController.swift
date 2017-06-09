@@ -51,11 +51,6 @@ class SelectionViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func disMist(_ sender: Any?){
-        
-    }
-      
 }
 
 extension SelectionViewController: UITableViewDataSource, UITableViewDelegate {

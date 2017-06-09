@@ -373,7 +373,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" image="back"/>
                                         <connections>
-                                            <action selector="disMist:" destination="Cg1-2H-pUr" eventType="touchUpInside" id="4cU-gT-lFG"/>
                                             <segue destination="8Tl-3h-cu0" kind="unwind" unwindAction="unwindToThisViewWithSender:" id="ETW-HH-76L"/>
                                         </connections>
                                     </button>
