@@ -15,8 +15,6 @@ class ProductListViewController: UIViewController{
     @IBOutlet weak var btnCategory: UIButton!
     @IBOutlet weak var btnProvince: UIButton!
     
-    
-    
     @IBOutlet weak var productListView: UITableView!
     @IBOutlet weak var boundButtonMenu: UIView!
     
@@ -39,13 +37,6 @@ class ProductListViewController: UIViewController{
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.setUIView()
-        
         productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
@@ -57,7 +48,7 @@ class ProductListViewController: UIViewController{
             DispatchQueue.main.async {
                 self?.productListView.reloadData()
             }
-           
+            
         }
         provinceService.fetchProvince(){ [weak self] (provinceList, error) in
             self?.provinceList = provinceList
@@ -66,7 +57,17 @@ class ProductListViewController: UIViewController{
             }
             
         }
+    }
+    
+    
+    
+    override func viewDidLoad() {
         
+        super.viewDidLoad()
+        self.setUIView()
+        self.productListView.reloadData()
+        
+        //self.productListView.reloadData()
     
     }
     
@@ -139,9 +140,13 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 44
         if(viewCurrent == tabProduct || viewCurrent == ""){
-            height = self.view.frame.size.height * 0.5
+             height = (self.view.frame.size.height * 0.5)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
+            if let cell = cell as? ProductListCell {
+                //height = 200 + cell.picturePreview.frame.height
+            }
         }
-        return height
+      return height
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -181,6 +186,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(viewCurrent == tabCategory){
             return categoryList.count
@@ -213,7 +219,20 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             
             if let cell = cell as? ProductListCell {
                 let dataProduct = productList[indexPath.row]
+                
+                
+                //cell.viewCommentList.frame.size.height = 200
+                //cell.contentView.addSubview(cell.viewCommentList)
                 cell.loadCell(data: dataProduct)
+                /*let y_position = Int(cell.picturePreview.frame.size.height) + 70
+                for i in 0..<4 {
+                    let label = UILabel(frame: CGRect(x: 0, y: Int(i * y_position), width: 100, height: 20))
+                    label.text = "dqhung"
+                    label.font = UIFont(name: label.font.fontName, size: 12)
+                    label.sizeToFit()
+                    label.numberOfLines = 1
+                    cell.contentView.addSubview(label)
+                }*/
                 
             }
             return cell!

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class AddProductViewController: UIViewController{
     @IBOutlet weak var viewAddProduct: UIView!
     @IBOutlet weak var btnLabel: UIButton!
     @IBOutlet weak var txtName: UITextField!
@@ -20,18 +20,14 @@ class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPicker
     @IBOutlet weak var txtHiddenProvince: UITextField!
     @IBOutlet weak var txtHiddenCategory: UITextField!
     
-    @IBOutlet weak var pickerCategory: UIPickerView!
-    @IBOutlet weak var pickerProvince: UIPickerView!
+    @IBOutlet weak var btnSelectCategory: UIButton!
+    @IBOutlet weak var btnSelectProvince: UIButton!
     
-    var provinceList = [ProductProvince]()
-    var categoryList = [ProductCategory]()
+    @IBOutlet weak var labelTinhThanh: UILabel!
+    @IBOutlet weak var labelDanhMuc: UILabel!
     
     let productService = ProductService()
     
-    let list = ["1","2","4","5"]
-    let categoryService = CategoryService()
-    let provinceService = ProvinceService()
-
     
     
     override func viewDidLoad() {
@@ -39,25 +35,9 @@ class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.viewAddProduct.backgroundColor = UIColor(patternImage: UIImage(named: "register-bg")!)
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
-        
-        
-        categoryService.fetchAllCategory(){ [weak self] (categoryList, error) in
-            self?.categoryList = categoryList
-            DispatchQueue.main.async {
-                self?.pickerCategory.reloadAllComponents()
-            }
-            
-        }
-        provinceService.fetchProvince(){ [weak self] (provinceList, error) in
-            self?.provinceList = provinceList
-            DispatchQueue.main.async {
-                self?.pickerProvince.reloadAllComponents()
-            }
-        }
-        
-        // Do any additional setup after loading the view.
+                // Do any additional setup after loading the view.
     }
-
+    /*
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
         
@@ -131,6 +111,7 @@ class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPicker
         textField.endEditing(true)
         
     }
+    */
     
     @IBAction func saveProduct(){
         let newProduct = ProductItem()
@@ -144,6 +125,41 @@ class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPicker
         productService.addNewProduct(sender: newProduct)
     }
     
+    
+    @IBAction func gotoSelectionView(_ sender: UIButton){
+        self.performSegue(withIdentifier: "SelectionView", sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) { //Ham lay screen moi .
+     
+        if let vc = segue.destination as? SelectionViewController {
+            if let sender = sender as! UIButton? {
+                if sender === btnSelectCategory {
+                    vc.viewCurrent = Config().getTabCategory()
+                }
+                if sender === btnSelectProvince {
+                    vc.viewCurrent = Config().getTabProvince()
+                }
+            }
+        }
+    }
+    
+    @IBAction func unwindToThisView(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? SelectionViewController {
+            let indexCategory = sourceViewController.indexCategorySelected
+            let indexProvince = sourceViewController.indexProvinceSelected
+            
+            if(indexCategory > 0){
+                labelDanhMuc.text = sourceViewController.categoryList[indexCategory].name
+                txtHiddenCategory.text = sourceViewController.categoryList[indexCategory].id
+            }
+            if(indexProvince > 0){
+                labelTinhThanh.text = sourceViewController.provinceList[indexProvince].name
+                txtHiddenProvince.text = sourceViewController.provinceList[indexProvince].id
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -151,5 +167,5 @@ class AddProductViewController: UIViewController, UIPickerViewDelegate, UIPicker
     @IBAction func disMist(_ sender: UIButton){
         self.dismiss(animated: true, completion: nil)
     }
-
+    
 }
