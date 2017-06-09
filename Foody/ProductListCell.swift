@@ -17,6 +17,9 @@ class ProductListCell: UITableViewCell {
     @IBOutlet weak var labelTotalComment: UILabel!
     @IBOutlet weak var labelTotalImage: UILabel!
     
+    @IBOutlet weak var viewCommentList: UIView!
+    
+   
     var productItem: ProductItem!
     
     override func awakeFromNib() {
@@ -29,7 +32,8 @@ class ProductListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadCell(data: ProductItem){
+    func loadCell( data: ProductItem){
+        
         labelProductName.text = data.name
         labelProductAddress.text = data.address
         labelScore.text = data.score
@@ -38,6 +42,10 @@ class ProductListCell: UITableViewCell {
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
         picturePreview.loadImage(urlString: data.urlphoto)
+        
+        
+        //viewCommentList.frame.size.height = 200
+        //print(viewCommentList.frame.height)
     }
     
     
