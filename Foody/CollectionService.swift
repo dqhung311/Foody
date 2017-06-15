@@ -14,17 +14,56 @@ protocol ProtocolCollectionService {
     
     func updateCollection(_ id: String) -> String
     
-    func addNewCollection() -> String
+    func addNewCollection(sender: AnyObject, handler:@escaping (_ result:String?)-> Void)
 }
 
 
 import Foundation
 class CollectionService: ProtocolCollectionService{
     
-    func addNewCollection() -> String {
-        return ""
+    var urlCollection: String = "http://anphatkhanh.vn/foody/collection/"
+    var urlEditCollection: String = "http://anphatkhanh.vn/foody/collection/edit.php"
+    
+    private let session : URLSession!
+    
+    init() {
+        session = URLSession(configuration: .default)
     }
-
+    
+    
+    func addNewCollection(sender: AnyObject, handler: @escaping (String?) -> Void) {
+        
+        if let collection = sender as? CollectionItem {
+            
+            let param = [
+                "productid" : collection.product_id,
+                "userid": collection.user_id,
+             ] as NSMutableDictionary
+            
+            
+            let boundary = "Boundary-\(NSUUID().uuidString)"
+            let url = NSURL(string: urlEditCollection)
+            let request = NSMutableURLRequest(url: url! as URL)
+            
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                guard error == nil else {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                handler(responseString)
+                
+            })
+            task.resume()
+        }
+    }
+    
     func updateCollection(_ id: String) -> String {
         return ""
     }
@@ -33,13 +72,6 @@ class CollectionService: ProtocolCollectionService{
         self.fetchAllCollection("?id=" + id, completion: completion)
     }
 
-    
-    var urlCollection: String = "http://anphatkhanh.vn/foody/collection/"
-    private let session : URLSession!
-    
-    init() {
-        session = URLSession(configuration: .default)
-    }
     
     func fetchAllCollection(_ query: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
         let urlJson: String
@@ -64,6 +96,9 @@ class CollectionService: ProtocolCollectionService{
         })
         task.resume()
     }
+    
+  
+    
     
     func parseJson(json: [String: Any]?, completion: ([CollectionItem], NSError?) -> Void){
         var collectionItems = [CollectionItem]()
@@ -113,7 +148,6 @@ class CollectionService: ProtocolCollectionService{
                 
             }
         }
-       
         completion(collectionItems, nil)
         
     }

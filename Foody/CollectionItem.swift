@@ -22,6 +22,7 @@ class CollectionItem{
     var product_price: String = ""
     var product_otherimage = [String]()
     var total_comment: Int = 0
+    var user_id: String = ""
     
     init(){
         
@@ -32,7 +33,8 @@ class CollectionItem{
          product_category_name: String,
          product_price: String,
          product_otherimage: [String],
-         total_comment: Int
+         total_comment: Int,
+         user_id: String
          ){
         
         self.id = id
@@ -47,7 +49,7 @@ class CollectionItem{
         self.product_category_name = product_category_name
         self.product_price = product_price
         self.product_otherimage = product_otherimage
-        
+        self.user_id = user_id
         
     }
     

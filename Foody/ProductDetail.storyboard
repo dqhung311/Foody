@@ -90,6 +90,9 @@
                                                 <inset key="titleEdgeInsets" minX="0.0" minY="22" maxX="0.0" maxY="-11"/>
                                                 <inset key="imageEdgeInsets" minX="62" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="Yêu thích" image="like"/>
+                                                <connections>
+                                                    <action selector="tabToAddCollection:" destination="a1S-ct-U3y" eventType="touchUpInside" id="okN-z2-MMY"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -568,7 +571,7 @@
                                         </constraints>
                                         <state key="normal" image="back"/>
                                         <connections>
-                                            <action selector="disMist:" destination="EL9-7n-1q5" eventType="touchUpInside" id="f2k-iU-RB9"/>
+                                            <action selector="disMist:" destination="EL9-7n-1q5" eventType="touchUpInside" id="hJn-Pz-Pan"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHF-Q3-6eo">
@@ -580,6 +583,9 @@
                                         <state key="normal" title="Đăng">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="saveComment" destination="EL9-7n-1q5" eventType="touchUpInside" id="iGh-Vt-g6X"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.69019607839999997" green="0.12549019610000001" blue="0.074509803920000006" alpha="0.99098351880000002" colorSpace="calibratedRGB"/>
@@ -597,6 +603,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dtd-vi-bxo">
                                 <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                 <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dC3-Lq-E77">
+                                        <rect key="frame" x="177" y="269" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQP-9b-Ubh">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                         <subviews>
@@ -664,6 +673,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="fH6-8b-42V" firstAttribute="top" secondItem="6eA-lw-WyU" secondAttribute="bottom" id="7Gw-lc-Ikt"/>
                                             <constraint firstItem="fH6-8b-42V" firstAttribute="leading" secondItem="WPO-OZ-mAy" secondAttribute="leading" id="Rk5-uL-aKi"/>
@@ -680,7 +690,9 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="WPO-OZ-mAy" secondAttribute="bottom" constant="20" id="1j8-ri-F6c"/>
+                                    <constraint firstItem="dC3-Lq-E77" firstAttribute="centerX" secondItem="Dtd-vi-bxo" secondAttribute="centerX" id="FH1-mo-0UY"/>
                                     <constraint firstItem="WPO-OZ-mAy" firstAttribute="top" secondItem="MQP-9b-Ubh" secondAttribute="bottom" id="K3q-Mf-cqh"/>
+                                    <constraint firstItem="dC3-Lq-E77" firstAttribute="centerY" secondItem="Dtd-vi-bxo" secondAttribute="centerY" id="XDi-SF-4pa"/>
                                     <constraint firstItem="MQP-9b-Ubh" firstAttribute="top" secondItem="Dtd-vi-bxo" secondAttribute="top" id="cQc-dX-Z4Z"/>
                                     <constraint firstItem="WPO-OZ-mAy" firstAttribute="leading" secondItem="Dtd-vi-bxo" secondAttribute="leading" constant="8" id="dXz-du-0JR"/>
                                     <constraint firstAttribute="trailing" secondItem="WPO-OZ-mAy" secondAttribute="trailing" constant="8" id="jBg-qu-Dyy"/>
@@ -701,9 +713,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activity" destination="dC3-Lq-E77" id="uD5-bW-bxf"/>
                         <outlet property="btnLabel" destination="aV8-b0-zIv" id="Csh-qh-bok"/>
                         <outlet property="labelProductAddress" destination="go3-2N-Iz1" id="d9b-zq-sB1"/>
                         <outlet property="labelProductName" destination="6vt-0g-a3A" id="la7-nf-5xA"/>
+                        <outlet property="txtComment" destination="jpL-aq-Ue4" id="45c-Eq-T8Y"/>
+                        <outlet property="txtTitle" destination="6eA-lw-WyU" id="sKS-jU-aaR"/>
                         <outlet property="viewAddComment" destination="Dtd-vi-bxo" id="iEw-Jk-b6A"/>
                     </connections>
                 </viewController>

@@ -12,6 +12,7 @@ class Comments{
     var id: String
     var name: String
     var comment: String
+    var user_id: String
     var product_id: String
     var product_address: String
     var product_name: String
@@ -35,6 +36,7 @@ class Comments{
         self.product_category_name = ""
         self.product_price = ""
         self.total_like = ""
+        self.user_id = ""
     }
     
 }

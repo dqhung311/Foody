@@ -9,9 +9,23 @@
 import UIKit
 import Alamofire
 
-class CommentService{
+protocol ProtocolCommentService {
+    
+    func fetchAll(_ query: String, completion: @escaping ([Comments], NSError?) -> Void)
+    
+    func addNewComment(sender: AnyObject, handler:@escaping (_ result:String?)-> Void)
+    
+}
+class CommentService: ProtocolCommentService{
     
     let strUrl = "http://anphatkhanh.vn/foody/comment/?email="
+    let strUrlEdit = "http://anphatkhanh.vn/foody/comment/edit.php"
+    
+    private let session : URLSession!
+    
+    init() {
+        session = URLSession(configuration: .default)
+    }
     
     func parseJson(json: [String: Any]?, completion: ([Comments], NSError?) -> Void){
         var commentStore = [Comments]()
@@ -54,11 +68,14 @@ class CommentService{
                 if let total_like = p["total_like"] as? String {
                     comment.total_like = total_like
                 }
+                
                 commentStore.append(comment)
             }
         }
         completion(commentStore, nil)
     }
+    
+    
     
     func fetchAll(_ query: String, completion: @escaping ([Comments], NSError?) -> Void){
         Alamofire.request(strUrl+query).responseJSON { response in
@@ -68,5 +85,40 @@ class CommentService{
         }
         
     }
+    
+    func addNewComment(sender: AnyObject, handler: @escaping (String?) -> Void) {
+        if let comment = sender as? Comments{
+            
+            let param = [
+                "name" : comment.name,
+                "content": comment.comment,
+                "user_id": comment.user_id,
+                "product_id": comment.product_id
+            ] as NSMutableDictionary
+            
+            
+            let boundary = "Boundary-\(NSUUID().uuidString)"
+            let url = NSURL(string: strUrlEdit)
+            let request = NSMutableURLRequest(url: url! as URL)
+            
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                guard error == nil else {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                handler(responseString)
+                
+            })
+            task.resume()
+        }
+    }
+
     
 }

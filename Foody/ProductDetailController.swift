@@ -41,6 +41,9 @@ class ProductDetailController: UIViewController{
     
     var productItem  = ProductItem()
     let productService = ProductService()
+    let collectionService = CollectionService()
+    var collectionOfUser = [CollectionItem]()
+    var isHaveCollection: Bool = false
     
     var productCategoryItem  = [ProductItem]()
     
@@ -183,6 +186,9 @@ class ProductDetailController: UIViewController{
         
     }
     
+    
+    
+    
     @IBAction func tabToWriteComment(_ sender: UIButton){
         if checkLogin() {
             self.performSegue(withIdentifier: "AddComment", sender: sender)
@@ -191,6 +197,46 @@ class ProductDetailController: UIViewController{
             
         }
     }
+    @IBAction func tabToAddCollection(_ sender: UIButton){
+        if checkLogin() {
+            if(self.isHaveCollection){
+                showAlertMessage("Sản phẩm này đã được lưu vào bộ sưu tập")
+            }else{
+                let newCollection = CollectionItem()
+                newCollection.product_id = productItem.id
+                newCollection.user_id = self.getId()
+                
+                collectionService.addNewCollection(sender: newCollection){ (result) -> Void in
+                    var title = "Lỗi"
+                    var success = false
+                    var message = result
+                    if(result == "ok"){
+                        success = true
+                        title = "Chúc mừng"
+                        message = "Đã lưu vào bộ sưu tập thành công"
+                    }
+                    
+                    DispatchQueue.main.async {
+                       
+                        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "Đóng", style: .default, handler: { action in
+                            if(success){
+                                self.isHaveCollection = true
+                            }
+                        })
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+            }
+        }else{
+            self.goToStory("Second","LoginStoryBoard")
+            
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let svc = segue.destination as? AddCommentViewController {
             svc.productItem = self.productItem
@@ -226,6 +272,20 @@ class ProductDetailController: UIViewController{
         self.createOtherImageUIView()
         self.createViewCommentUIView()
         self.createOtherProductUIView()
+        
+        //Check User has collection this product
+        if(self.checkLogin()){
+            collectionService.fetchAllCollection("?userID=\(self.getId())&action=checkUser&productID=\(productItem.id)"){ [weak self] (collectionList, error) in
+                self?.collectionOfUser = collectionList
+                DispatchQueue.main.async {
+                    if ((self?.collectionOfUser.count)! > 0){
+                        self?.isHaveCollection = true
+                    }
+                }
+            }
+        }
+        
+        
         
         
     }
