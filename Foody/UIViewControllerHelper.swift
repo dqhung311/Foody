@@ -78,6 +78,14 @@ extension UIViewController {
         }
     }
     
+    func getId() -> String{
+        if let id = UserDefaults.standard.value(forKey: "id") as? String{
+            return id
+        }else{
+            return ""
+        }
+    }
+    
     func getLoginName() -> String{
         if let name = UserDefaults.standard.value(forKey: "name") as? String{
             return name

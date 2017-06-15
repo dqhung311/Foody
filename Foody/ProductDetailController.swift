@@ -131,13 +131,7 @@ class ProductDetailController: UIViewController{
             let imageView = UIImageView()
             
             if (view === viewOtherCategoryProduct){
-                
                 imageView.loadImage(urlString: productCategoryItem[i].urlphoto)
-                
-                
-                
-                
-                
             }else{
                 imageView.loadImage(urlString: productItem.otherimage[i])
             }
@@ -189,6 +183,19 @@ class ProductDetailController: UIViewController{
         
     }
     
+    @IBAction func tabToWriteComment(_ sender: UIButton){
+        if checkLogin() {
+            self.performSegue(withIdentifier: "AddComment", sender: sender)
+        }else{
+            self.goToStory("Second","LoginStoryBoard")
+            
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let svc = segue.destination as? AddCommentViewController {
+            svc.productItem = self.productItem
+        }
+    }
     
     
     func createOtherImageUIView(){

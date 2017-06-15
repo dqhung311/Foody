@@ -41,19 +41,11 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
             }
         }
         
-        if let password = UserDefaults.standard.value(forKey: "password") as? String{
-            if (password == "ok"){
-                print("Da dang nhap")
-            }
-        }
-        
         // Do any additional setup after loading the view.
     }
     
     
     func setUIView(){
-        
-        
         
         let myButtons = boundButtonMenu.subviews.filter{$0 is UIButton}
         for button in myButtons {
@@ -73,11 +65,16 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     @IBAction func tabToChangeView(_ sender: UIButton){
         
         if (sender === btnMyCollection){
-            self.viewCurrent = tabMyCollection
-            query += "?userID=2"
+            if(checkLogin()) {
+                self.viewCurrent = tabMyCollection
+                query += "?userID=\(self.getId())"
+            }else{
+                self.goToStory("Second","LoginStoryBoard")
+            }
         }else if (sender === btnLatestCollection){
             query = ""
             self.viewCurrent = tabLatestCollection
@@ -125,7 +122,13 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
             svc.productItem = self.productItemInfo
         }
     }
-    
+    @IBAction func tabToAddProduct(_ sender: UIButton){
+        if checkLogin() {
+            self.performSegue(withIdentifier: "AddProduct", sender: sender)
+        }else{
+            self.goToStory("Second","LoginStoryBoard")
+        }
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionListCell", for: indexPath) as! CollectionListCell

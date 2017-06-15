@@ -50,6 +50,7 @@ class MailLoginViewController: UIViewController {
                 UserDefaults.standard.setValue(userList[0].password, forKey: "password")
                 UserDefaults.standard.setValue(userList[0].email, forKey: "email")
                 UserDefaults.standard.setValue(userList[0].name, forKey: "name")
+                UserDefaults.standard.setValue(userList[0].id, forKey: "id")
                 DispatchQueue.main.async {
                     self?.showSuccessMessage("Đăng nhập thành công")
                 }

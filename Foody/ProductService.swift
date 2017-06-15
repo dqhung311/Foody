@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 protocol ProtocolProductService {
     
     func fetchAllProduct(query: String, completion: @escaping ([ProductItem], NSError?) -> Void)
@@ -15,46 +17,20 @@ protocol ProtocolProductService {
     
     func updateProduct(_ id: String) -> String
     
-    func addNewProduct(sender: AnyObject) -> Void
+    func addNewProduct(sender: AnyObject, imagesdata: [UIImage], handler:@escaping (_ result:String?)-> Void)
 
 }
 class ProductService:ProtocolProductService{
     
     let urlJson: String = "http://anphatkhanh.vn/foody/product/?"
-    let urlEdit: String = "http://anphatkhanh.vn/foody/product/edit.php"
+    let urlEdit: String = "http://anphatkhanh.vn/foody/product/edit.php?"
     private let session : URLSession!
     
     init() {
         session = URLSession(configuration: .default)
     }
     
-    func addNewProduct(sender: AnyObject) -> Void {
-        if let product = sender as? ProductItem{
-            var request = URLRequest(url: URL(string: urlEdit)!)
-            request.httpMethod = "POST"
-            let postString = "name=\(product.name)&price=\(product.price)&address=\(product.address)&categoryid=\(product.category_id)&provinceid=\(product.province_id)"
-         
-            request.httpBody = postString.data(using: .utf8)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                
-                if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                    print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                }
-                let responseString = String(data: data, encoding: .utf8) ?? ""
-                if(responseString == "ok"){
-                    print("Thanh cong")
-                }else{
-                    print("Loi")
-                }
-            }
-            task.resume()
-        }
-        
-        
-    }
+    
     
     func updateProduct(_ id: String) -> String {
         return ""
@@ -69,7 +45,6 @@ class ProductService:ProtocolProductService{
         if(query != ""){
             urlJsonRes = urlJson + query
         }
-        print(urlJsonRes)
         guard let url = URL(string: urlJsonRes) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
@@ -143,4 +118,46 @@ class ProductService:ProtocolProductService{
                     
     }
     
+    
+    func addNewProduct(sender: AnyObject, imagesdata: [UIImage], handler:@escaping (_ result:String?)-> Void) {
+        if let product = sender as? ProductItem{
+            
+            let param = [
+                "name" : product.name,
+                "price": product.price,
+                "address": product.address,
+                "categoryid": product.category_id,
+                "provinceid": product.province_id,
+                "images[]": imagesdata
+                ] as NSMutableDictionary
+            
+            
+            let boundary = "Boundary-\(NSUUID().uuidString)"
+            
+            let url = NSURL(string: urlEdit)
+            let request = NSMutableURLRequest(url: url! as URL)
+            
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                guard error == nil else {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                handler(responseString)
+                
+            })
+            task.resume()
+       }
+    }
+    
+        
+    
 }
+
+

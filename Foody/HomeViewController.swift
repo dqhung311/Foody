@@ -47,6 +47,7 @@ class HomeViewController: UIViewController {
             if userList.count == 1{
                 UserInfo.user.name = userList[0].name
                 UserInfo.user.email = userList[0].email
+                UserInfo.user.id = userList[0].id
             }
         }
         

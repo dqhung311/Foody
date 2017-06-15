@@ -32,7 +32,7 @@
                                             <color key="titleColor" red="0.96078431369999995" green="0.95686274510000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="addProduct:" destination="YvF-Cl-USX" eventType="touchUpInside" id="HoO-6X-8t0"/>
+                                            <action selector="tabToAddProduct:" destination="YvF-Cl-USX" eventType="touchUpInside" id="QcA-Q5-4fK"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siu-rG-2mA">
@@ -276,33 +276,33 @@
                                                     </constraints>
                                                 </view>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bUk-2F-eT5">
-                                                    <rect key="frame" x="0.0" y="42" width="375" height="296.5"/>
+                                                    <rect key="frame" x="0.0" y="42" width="375" height="279.5"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWX-mB-5yJ">
-                                                    <rect key="frame" x="0.0" y="346.5" width="375" height="17"/>
+                                                    <rect key="frame" x="0.0" y="321.5" width="375" height="50"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fill-comment" translatesAutoresizingMaskIntoConstraints="NO" id="7is-7N-6MC">
-                                                            <rect key="frame" x="8" y="0.5" width="16" height="16"/>
+                                                            <rect key="frame" x="8" y="17" width="16" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="16" id="F06-nY-Mz1"/>
                                                                 <constraint firstAttribute="width" constant="16" id="dHz-fX-vFw"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBY-Jn-WH0">
-                                                            <rect key="frame" x="29" y="0.0" width="36" height="17"/>
+                                                            <rect key="frame" x="29" y="0.0" width="36" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fill-camera" translatesAutoresizingMaskIntoConstraints="NO" id="hmb-jF-TNt">
-                                                            <rect key="frame" x="85" y="0.5" width="16" height="16"/>
+                                                            <rect key="frame" x="85" y="17" width="16" height="16"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="16" id="Boj-3n-c1l"/>
                                                                 <constraint firstAttribute="height" constant="16" id="aSO-Ov-GdY"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdK-eY-1ET">
-                                                            <rect key="frame" x="106" y="0.0" width="36" height="17"/>
+                                                            <rect key="frame" x="106" y="0.0" width="36" height="50"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -326,11 +326,12 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="gds-8Q-BGT" secondAttribute="trailing" id="5Pc-av-Cck"/>
                                                 <constraint firstAttribute="trailing" secondItem="SWX-mB-5yJ" secondAttribute="trailing" id="7ty-He-eJH"/>
-                                                <constraint firstAttribute="bottom" secondItem="SWX-mB-5yJ" secondAttribute="bottom" constant="8" id="9E0-Ez-2uK"/>
+                                                <constraint firstAttribute="bottom" secondItem="SWX-mB-5yJ" secondAttribute="bottom" id="9E0-Ez-2uK"/>
                                                 <constraint firstAttribute="trailing" secondItem="bUk-2F-eT5" secondAttribute="trailing" id="AAp-Zi-1fO"/>
                                                 <constraint firstItem="gds-8Q-BGT" firstAttribute="top" secondItem="w4U-Ui-gVS" secondAttribute="top" constant="5" id="FiL-Sv-Uyc"/>
+                                                <constraint firstAttribute="bottom" secondItem="bUk-2F-eT5" secondAttribute="bottom" constant="50" id="KLQ-r6-RK9"/>
                                                 <constraint firstItem="bUk-2F-eT5" firstAttribute="top" secondItem="gds-8Q-BGT" secondAttribute="bottom" constant="5" id="cOk-ak-efV"/>
-                                                <constraint firstItem="SWX-mB-5yJ" firstAttribute="top" secondItem="bUk-2F-eT5" secondAttribute="bottom" constant="8" id="cai-yt-zXO"/>
+                                                <constraint firstItem="SWX-mB-5yJ" firstAttribute="top" secondItem="bUk-2F-eT5" secondAttribute="bottom" id="cai-yt-zXO"/>
                                                 <constraint firstItem="gds-8Q-BGT" firstAttribute="leading" secondItem="njk-Yb-1Pg" secondAttribute="trailing" constant="2" id="dCy-AR-tnt"/>
                                                 <constraint firstItem="SWX-mB-5yJ" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="e40-oI-hXO"/>
                                                 <constraint firstItem="bUk-2F-eT5" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="hcw-hv-vlu"/>
@@ -410,6 +411,9 @@
                                         <state key="normal" title="+">
                                             <color key="titleColor" red="0.96078431369999995" green="0.95686274510000002" blue="0.94509803920000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="tabToAddProduct:" destination="rZM-WD-W7A" eventType="touchUpInside" id="eOT-yK-Ivz"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acd-mI-Jm4">
                                         <rect key="frame" x="10" y="8" width="30" height="24"/>
@@ -563,6 +567,7 @@
                         <outlet property="btnMyCollection" destination="668-wk-I9y" id="OWx-n6-ZSZ"/>
                         <outlet property="productCollectionView" destination="vwo-LD-L4Q" id="TLA-Zx-Pad"/>
                         <segue destination="1rh-Sm-55c" kind="show" identifier="ProductDetail" id="DQd-UM-v4A"/>
+                        <segue destination="yHm-bU-Z2R" kind="show" identifier="AddProduct" id="jTA-eM-hVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bHb-VR-AoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -624,6 +629,7 @@
         <image name="tab-home" width="28" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="mVq-IB-TCB"/>
         <segue reference="xyP-zy-5cM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>

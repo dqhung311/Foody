@@ -66,7 +66,6 @@ class ProductListViewController: UIViewController{
         super.viewDidLoad()
         self.setUIView()
         self.productListView.reloadData()
-        
         //self.productListView.reloadData()
     
     }
@@ -98,13 +97,11 @@ class ProductListViewController: UIViewController{
     @IBAction func disMist(_ sender: UIButton){
         self.performSegue(withIdentifier: "Home", sender: sender)
     }
-    @IBAction func addProduct(_ sender: UIButton){
+    @IBAction func tabToAddProduct(_ sender: UIButton){
         if checkLogin() {
           self.performSegue(withIdentifier: "AddProduct", sender: sender)
         }else{
-            let storyboard = UIStoryboard(name: "Second", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "LoginStoryBoard")
-            self.present(vc, animated: true, completion: nil)
+            self.goToStory("Second","LoginStoryBoard")
             
         }
     }
@@ -141,7 +138,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 44
         if(viewCurrent == tabProduct || viewCurrent == ""){
-             height = (self.view.frame.size.height * 0.5)
+             height = (self.view.frame.size.height * 0.6)
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
             if let cell = cell as? ProductListCell {
                 //height = 200 + cell.picturePreview.frame.height
