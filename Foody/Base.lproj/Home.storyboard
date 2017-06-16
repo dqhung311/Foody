@@ -50,19 +50,19 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" restorationIdentifier="123" translatesAutoresizingMaskIntoConstraints="NO" id="FuN-xK-qsR" userLabel="View Kham Pha">
-                                <rect key="frame" x="10" y="232" width="145" height="145"/>
+                                <rect key="frame" x="10" y="232" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-khampha" translatesAutoresizingMaskIntoConstraints="NO" id="0rX-Gc-Kdi">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="105"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Khám phá" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEp-NF-XfT">
-                                        <rect key="frame" x="0.0" y="115" width="145" height="20"/>
+                                        <rect key="frame" x="0.0" y="120" width="145" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-logo" translatesAutoresizingMaskIntoConstraints="NO" id="D4E-lv-M8P">
-                                        <rect key="frame" x="56" y="83" width="32" height="32"/>
+                                        <rect key="frame" x="56" y="88" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="TRt-K9-jlb"/>
                                             <constraint firstAttribute="width" constant="32" id="hq6-bB-78G"/>
@@ -76,7 +76,7 @@
                                     <constraint firstItem="0rX-Gc-Kdi" firstAttribute="leading" secondItem="FuN-xK-qsR" secondAttribute="leading" id="FqY-1k-RGU"/>
                                     <constraint firstItem="0rX-Gc-Kdi" firstAttribute="top" secondItem="FuN-xK-qsR" secondAttribute="top" id="QN7-fN-Tqy"/>
                                     <constraint firstItem="iEp-NF-XfT" firstAttribute="leading" secondItem="FuN-xK-qsR" secondAttribute="leading" id="Sk6-Ua-ggU"/>
-                                    <constraint firstAttribute="height" constant="145" id="UOs-xi-4rm"/>
+                                    <constraint firstAttribute="height" constant="150" id="UOs-xi-4rm"/>
                                     <constraint firstAttribute="bottom" secondItem="iEp-NF-XfT" secondAttribute="bottom" constant="10" id="jtn-Hx-3Mn"/>
                                     <constraint firstAttribute="bottom" secondItem="0rX-Gc-Kdi" secondAttribute="bottom" constant="40" id="lNG-qo-fHD"/>
                                     <constraint firstItem="D4E-lv-M8P" firstAttribute="centerX" secondItem="FuN-xK-qsR" secondAttribute="centerX" id="s9T-ps-7NX"/>
@@ -85,19 +85,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGC-xI-QDs" userLabel="View Bo Suu Tap">
-                                <rect key="frame" x="165" y="232" width="145" height="145"/>
+                                <rect key="frame" x="165" y="232" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-bosuutap" translatesAutoresizingMaskIntoConstraints="NO" id="6WI-bY-swr">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="105"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bộ sưu tập" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nM3-Su-8Pq">
-                                        <rect key="frame" x="0.0" y="115" width="145" height="20"/>
+                                        <rect key="frame" x="0.0" y="120" width="145" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-logo" translatesAutoresizingMaskIntoConstraints="NO" id="cRo-Vk-Aj1">
-                                        <rect key="frame" x="56.5" y="83" width="32" height="32"/>
+                                        <rect key="frame" x="56.5" y="88" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="32U-By-90x"/>
                                             <constraint firstAttribute="height" constant="32" id="oke-tk-xyc"/>
@@ -108,7 +108,7 @@
                                     <constraint firstItem="cRo-Vk-Aj1" firstAttribute="leading" secondItem="6WI-bY-swr" secondAttribute="trailing" constant="-88.5" id="5iJ-4a-wBh"/>
                                     <constraint firstItem="nM3-Su-8Pq" firstAttribute="top" secondItem="6WI-bY-swr" secondAttribute="bottom" constant="10" id="87l-iX-1RJ"/>
                                     <constraint firstAttribute="trailing" secondItem="nM3-Su-8Pq" secondAttribute="trailing" id="CMQ-si-X5v"/>
-                                    <constraint firstAttribute="height" constant="145" id="GXK-dT-3IS"/>
+                                    <constraint firstAttribute="height" constant="150" id="GXK-dT-3IS"/>
                                     <constraint firstItem="6WI-bY-swr" firstAttribute="leading" secondItem="BGC-xI-QDs" secondAttribute="leading" id="MRe-mq-1qk"/>
                                     <constraint firstItem="nM3-Su-8Pq" firstAttribute="leading" secondItem="BGC-xI-QDs" secondAttribute="leading" id="MuI-Im-PPZ"/>
                                     <constraint firstItem="6WI-bY-swr" firstAttribute="top" secondItem="BGC-xI-QDs" secondAttribute="top" id="S3b-pC-Rtb"/>
@@ -120,19 +120,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08D-fK-oxC" userLabel="View Tinh Thanh">
-                                <rect key="frame" x="10" y="387" width="145" height="145"/>
+                                <rect key="frame" x="10" y="392" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-tinhthanh" translatesAutoresizingMaskIntoConstraints="NO" id="Fc6-mh-t2k">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="105"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tỉnh thành" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRD-Yq-1xf">
-                                        <rect key="frame" x="0.0" y="115" width="145" height="20"/>
+                                        <rect key="frame" x="0.0" y="120" width="145" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-logo" translatesAutoresizingMaskIntoConstraints="NO" id="TtC-BT-CEX">
-                                        <rect key="frame" x="56.5" y="83" width="32" height="32"/>
+                                        <rect key="frame" x="56.5" y="88" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="JWn-gz-Onj"/>
                                             <constraint firstAttribute="width" constant="32" id="f5a-RA-6ZZ"/>
@@ -144,7 +144,7 @@
                                     <constraint firstAttribute="trailing" secondItem="Fc6-mh-t2k" secondAttribute="trailing" id="BKt-yO-ws9"/>
                                     <constraint firstItem="gRD-Yq-1xf" firstAttribute="top" secondItem="TtC-BT-CEX" secondAttribute="bottom" id="Nnh-6N-9W0"/>
                                     <constraint firstItem="TtC-BT-CEX" firstAttribute="leading" secondItem="Fc6-mh-t2k" secondAttribute="trailing" constant="-88.5" id="QrC-0O-9MH"/>
-                                    <constraint firstAttribute="height" constant="145" id="Squ-3N-xRQ"/>
+                                    <constraint firstAttribute="height" constant="150" id="Squ-3N-xRQ"/>
                                     <constraint firstItem="gRD-Yq-1xf" firstAttribute="leading" secondItem="08D-fK-oxC" secondAttribute="leading" id="Wld-V6-duQ"/>
                                     <constraint firstAttribute="bottom" secondItem="Fc6-mh-t2k" secondAttribute="bottom" constant="40" id="iDY-LU-TLB"/>
                                     <constraint firstItem="Fc6-mh-t2k" firstAttribute="leading" secondItem="08D-fK-oxC" secondAttribute="leading" id="lyp-pQ-rWa"/>
@@ -155,19 +155,19 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEP-Ag-ihr" userLabel="View Danh Muc">
-                                <rect key="frame" x="165" y="387" width="145" height="145"/>
+                                <rect key="frame" x="165" y="392" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-category" translatesAutoresizingMaskIntoConstraints="NO" id="ab9-SO-tja">
-                                        <rect key="frame" x="0.0" y="0.0" width="145" height="105"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Danh mục" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd7-lR-xYR">
-                                        <rect key="frame" x="0.0" y="115" width="145" height="20"/>
+                                        <rect key="frame" x="0.0" y="120" width="145" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-logo" translatesAutoresizingMaskIntoConstraints="NO" id="bfP-Dx-kzN">
-                                        <rect key="frame" x="56.5" y="83" width="32" height="32"/>
+                                        <rect key="frame" x="56.5" y="88" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="L9K-bd-G7h"/>
                                             <constraint firstAttribute="width" constant="32" id="rHH-gx-LXs"/>
@@ -178,7 +178,7 @@
                                     <constraint firstItem="fd7-lR-xYR" firstAttribute="top" secondItem="bfP-Dx-kzN" secondAttribute="bottom" id="1et-aw-nPL"/>
                                     <constraint firstItem="fd7-lR-xYR" firstAttribute="leading" secondItem="LEP-Ag-ihr" secondAttribute="leading" id="5Zd-9Z-NXc"/>
                                     <constraint firstItem="bfP-Dx-kzN" firstAttribute="centerX" secondItem="LEP-Ag-ihr" secondAttribute="centerX" id="5jf-7G-pqt"/>
-                                    <constraint firstAttribute="height" constant="145" id="M5s-B8-hqj"/>
+                                    <constraint firstAttribute="height" constant="150" id="M5s-B8-hqj"/>
                                     <constraint firstAttribute="bottom" secondItem="ab9-SO-tja" secondAttribute="bottom" constant="40" id="MK8-6V-YP3"/>
                                     <constraint firstItem="fd7-lR-xYR" firstAttribute="top" secondItem="ab9-SO-tja" secondAttribute="bottom" constant="10" id="S7c-un-r61"/>
                                     <constraint firstAttribute="bottom" secondItem="fd7-lR-xYR" secondAttribute="bottom" constant="10" id="Uqt-C8-4aK"/>
@@ -254,10 +254,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="home-bosuutap" width="480" height="300"/>
-        <image name="home-category" width="480" height="300"/>
-        <image name="home-khampha" width="550" height="471"/>
+        <image name="home-bosuutap" width="320" height="200"/>
+        <image name="home-category" width="320" height="200"/>
+        <image name="home-khampha" width="320" height="200"/>
         <image name="home-logo" width="100" height="100"/>
-        <image name="home-tinhthanh" width="480" height="300"/>
+        <image name="home-tinhthanh" width="320" height="200"/>
     </resources>
 </document>

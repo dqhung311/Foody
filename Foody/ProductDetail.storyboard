@@ -42,7 +42,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69019607839999997" green="0.12549019610000001" blue="0.074509803920000006" alpha="0.99098351880000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.14117647058823529" alpha="0.99098351880000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8Bi-nt-Wnq"/>
                                     <constraint firstItem="heU-zi-PWJ" firstAttribute="top" secondItem="MB6-OZ-hxT" secondAttribute="top" id="BgW-T1-cga"/>
@@ -588,7 +588,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.69019607839999997" green="0.12549019610000001" blue="0.074509803920000006" alpha="0.99098351880000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92941176470588238" green="0.10588235294117647" blue="0.14117647058823529" alpha="0.99098351880000002" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="aV8-b0-zIv" firstAttribute="centerY" secondItem="0Oi-cf-LVX" secondAttribute="centerY" id="5JH-DH-V2m"/>
                                     <constraint firstItem="aV8-b0-zIv" firstAttribute="centerX" secondItem="0Oi-cf-LVX" secondAttribute="centerX" id="9cz-eL-crW"/>

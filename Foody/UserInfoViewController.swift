@@ -11,14 +11,10 @@ import UIKit
 class UserInfoViewController: UIViewController {
     
     @IBOutlet weak var TopAccountManager: UIView!
+    @IBOutlet weak var labelWelcomeName: UILabel!
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var btnSaveInfo: UIButton!
 
-    @IBOutlet weak var NameLabel: UILabel!
-    @IBOutlet weak var displayName: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var confirmPassword: UITextField!
-    
-    var avatar: UIImageView = UIImageView()
-    
     let userService = UserService()
     var userStore = [Users]()
     
@@ -27,16 +23,8 @@ class UserInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        
-//        userService.fetchUserByEmail(email: self.getLoginEmail()){ [weak self] (userList, error) in
-//            if userList.count == 1{
-//                self?.user = userList[0]
-//            }
-//            
-//        }
-        
-        
-        self.displayName.text = UserInfo.user.name
+        self.labelWelcomeName.text = self.getLoginName()
+        /*
         avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
         avatar.backgroundColor = UIColor.red
         avatar.layer.borderWidth = 1
@@ -45,15 +33,19 @@ class UserInfoViewController: UIViewController {
         avatar.clipsToBounds = true
         avatar.loadImage(urlString: getUserImageUrl(user: nil))
         self.view.addSubview(avatar)
-        
+        */
+        avatar.loadImage(urlString: getUserImageUrl(user: nil))
+        avatar.layer.cornerRadius = avatar.frame.height/2
+        avatar.clipsToBounds = true
         TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
+        //btnSaveInfo.layer.cornerRadius = 2
+        //btnSaveInfo.layer.masksToBounds = true
         
-        NameLabel.text = self.getLoginName()
         
     }
 
     @IBAction func clickBack(_ sender: UIButton){
-        self.dismissOne()
+        self.dismiss(animated: true, completion: nil)
     }
     
 

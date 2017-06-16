@@ -138,7 +138,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 44
         if(viewCurrent == tabProduct || viewCurrent == ""){
-             height = (self.view.frame.size.height * 0.6)
+             height = (self.view.frame.size.height * 0.5)
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
             if let cell = cell as? ProductListCell {
                 //height = 200 + cell.picturePreview.frame.height

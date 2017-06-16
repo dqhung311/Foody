@@ -101,7 +101,6 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
-            
             self.goToStory("AcountManager", "UserInfoView")
         }
     }
