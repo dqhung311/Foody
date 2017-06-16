@@ -28,7 +28,7 @@ class SelectionViewController: UIViewController{
     
     var delegate : SelectionDelegate?
     
-    
+    var hasMultiple: Bool = true
     var imgManager: PHImageManager!
     var requestOptions: PHImageRequestOptions!
     var fetchOptions: PHFetchOptions!
@@ -39,10 +39,12 @@ class SelectionViewController: UIViewController{
     @IBOutlet weak var btnSelect: UIButton!
     @IBOutlet weak var tableViewSelection: UITableView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnSelect.isHidden = true
         if(viewCurrent == tabCategory){
-            btnSelect.isHidden = true
+            
         categoryService.fetchAllCategory(){ [weak self] (categoryList, error) in
             self?.categoryList = categoryList
             DispatchQueue.main.async {
@@ -52,7 +54,7 @@ class SelectionViewController: UIViewController{
         }
         }
         if(viewCurrent == tabProvince){
-            btnSelect.isHidden = true
+            
         provinceService.fetchProvince(){ [weak self] (provinceList, error) in
             self?.provinceList = provinceList
             DispatchQueue.main.async {
@@ -62,9 +64,12 @@ class SelectionViewController: UIViewController{
         }
         }
         if(viewCurrent == tabAlbum){
-            btnSelect.isHidden = false
-            tableViewSelection.allowsMultipleSelectionDuringEditing = true
-            tableViewSelection.setEditing(true, animated: false)
+            
+            if(hasMultiple){
+                btnSelect.isHidden = false
+                tableViewSelection.allowsMultipleSelectionDuringEditing = true
+                tableViewSelection.setEditing(true, animated: false)
+            }
             DispatchQueue.main.async {
                 self.getAllPhotos()
             }
@@ -87,7 +92,6 @@ class SelectionViewController: UIViewController{
         
         for index in 0..<fetchResult.count {
             imgManager.requestImage(for: fetchResult.object(at: index) as PHAsset, targetSize: UIScreen.main.bounds.size, contentMode: PHImageContentMode.aspectFill, options: requestOptions) { (image, _) in
-                
                 if let image = image {
                     self.resultArray.append(image)
                 }
@@ -129,10 +133,17 @@ extension SelectionViewController: UITableViewDataSource, UITableViewDelegate {
         }else if(viewCurrent == tabProvince){
             self.delegate?.didSelect(value: provinceList[indexPath.row])
             self.dismiss(animated: true, completion: nil)
-        }else if(viewCurrent == tabAlbum){            
-            selectImages.append(resultArray[indexPath.row])
+        }else if(viewCurrent == tabAlbum){
             
-           
+            
+            if(!hasMultiple){
+                DispatchQueue.main.async {
+                    self.delegate?.didSelect(value: self.resultArray[indexPath.row])
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                selectImages.append(resultArray[indexPath.row])
+            }
         }
         //
         

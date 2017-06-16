@@ -11,9 +11,11 @@ import UIKit
 protocol ProtocolUser {
     func fetchAllUser(query: String, completion: @escaping ([Users], NSError?) -> Void)
     func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void)
+    func updateUser(sender: AnyObject, imagesdata: UIImage, handler:@escaping (_ result:String?)-> Void)
 }
 
 class UserService:ProtocolUser {
+    
     let urlJson = "http://anphatkhanh.vn/foody/user/?"
     let newUserUrl = "http://anphatkhanh.vn/foody/user/edit.php"
     
@@ -74,6 +76,40 @@ class UserService:ProtocolUser {
         completion(userStore, nil)
     }
     
+    func updateUser(sender: AnyObject, imagesdata: UIImage, handler: @escaping (String?) -> Void) {
+        if let user = sender as? Users {
+            
+            let param = [
+                "name" : user.name,
+                "email": user.email,
+                "id": user.id,
+                "photo": imagesdata
+                ] as NSMutableDictionary
+            
+            let boundary = "Boundary-\(NSUUID().uuidString)"
+            let url = NSURL(string: newUserUrl)
+            let request = NSMutableURLRequest(url: url! as URL)
+            
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            request.httpMethod = "POST"
+            request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+            
+            let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                guard error == nil else {
+                    return
+                }
+                guard let data = data else {
+                    return
+                }
+                let responseString = String(data: data, encoding: .utf8) ?? ""
+                handler(responseString)
+                
+            })
+            task.resume()
+        }
+    }
+
+    
     func registerUser(sender: AnyObject){
         if let user = sender as? Users{
             var request = URLRequest(url: URL(string: newUserUrl)!)
@@ -90,7 +126,8 @@ class UserService:ProtocolUser {
                 }
                 
                 let responseString = String(data: data, encoding: .utf8) ?? ""
-                if(responseString == "ok"){
+                let arResult = responseString.components(separatedBy: "|")
+                if(arResult[0] == "ok"){
                     DispatchQueue.main.async {
                         let alertController = UIAlertController(title: "Chúc mừng", message: "Đăng ký thành công", preferredStyle: UIAlertControllerStyle.alert)
                         alertController.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil))
@@ -101,9 +138,14 @@ class UserService:ProtocolUser {
                         alertWindow.makeKeyAndVisible()
                         alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
                         
+                        
                         UserDefaults.standard.setValue(user.password, forKey: "password")
                         UserDefaults.standard.setValue(user.email, forKey: "email")
                         UserDefaults.standard.setValue(user.name, forKey: "name")
+                        UserDefaults.standard.setValue(arResult[1], forKey: "id")
+                        
+                        
+
                     }
                 }else{
                     DispatchQueue.main.async {

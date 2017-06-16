@@ -98,7 +98,7 @@ class AddProductViewController: UIViewController{
                 }
                 if sender === btnSelectAlbum {
                     vc.viewCurrent = Config().getTabAlbum()
-                }
+                                    }
             }
         }
     }

@@ -120,6 +120,7 @@ class ProductService:ProtocolProductService{
     
     
     func addNewProduct(sender: AnyObject, imagesdata: [UIImage], handler:@escaping (_ result:String?)-> Void) {
+        
         if let product = sender as? ProductItem {
             
             let param = [

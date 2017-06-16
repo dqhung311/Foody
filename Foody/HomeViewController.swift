@@ -40,16 +40,21 @@ class HomeViewController: UIViewController {
     let tabLatestCollection = Config().getTabLatestCollection()
     
     //@IBOutlet weak var homeLogo: UIImageView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if(checkLogin()){
+            welcomeText.text = "Xin chào " + getLoginName()
+            labelWelcome.text = "Foody giúp gì được bạn"
+        }else{
+            welcomeText.text = "Xin chào Foodee"
+            labelWelcome.text = "Đăng nhập để trải nghiệm tốt hơn"
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userService.fetchUserByEmail(email: self.getLoginEmail()){  (userList, error) in
-            if userList.count == 1{
-                UserInfo.user.name = userList[0].name
-                UserInfo.user.email = userList[0].email
-                UserInfo.user.id = userList[0].id
-            }
-        }
         
         let tapGestureRecognizerIcon = UITapGestureRecognizer(target: self, action: #selector(tapUserInfoIcon(tapGestureRecognizer:)))
         homeLogo.isUserInteractionEnabled = true
@@ -60,11 +65,8 @@ class HomeViewController: UIViewController {
         welcomeText.addGestureRecognizer(tapGestureRecognizerLabel)
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "home-body")!)
-       
-        if(checkLogin()){
-            welcomeText.text = "Xin chào " + getLoginName()
-            labelWelcome.isHidden = true
-        }
+        
+        
         
         self.homeLogo.layer.cornerRadius = self.homeLogo.frame.width/2.0
         self.homeLogo.clipsToBounds = true

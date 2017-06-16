@@ -24,6 +24,14 @@ class AccountManagerViewController: UIViewController {
     @IBOutlet weak var NameLabel: UILabel!
     var avatar: UIImageView = UIImageView()    
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if(checkLogin()){
+            NameLabel.text = self.getLoginName()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         BackBtn.isHidden = true
@@ -38,7 +46,7 @@ class AccountManagerViewController: UIViewController {
             MenuBar.isHidden = true
             BackBtn.isHidden = false
             NameLabel.isHidden = false
-            NameLabel.text = self.getLoginName()
+            
             
             avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
             avatar.backgroundColor = UIColor.red

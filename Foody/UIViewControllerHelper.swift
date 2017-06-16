@@ -41,6 +41,7 @@ extension UIViewController {
         UserDefaults.standard.removeObject(forKey: "password")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "id")
         self.dismissAll()
     }
     

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "home-khampha.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "edit.png",
       "scale" : "2x"
     },
     {

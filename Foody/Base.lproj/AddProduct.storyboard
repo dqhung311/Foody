@@ -67,8 +67,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5q-W3-3u0">
                                 <rect key="frame" x="0.0" y="60" width="375" height="558"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="pwq-Oq-EST">
-                                        <rect key="frame" x="177" y="269" width="20" height="20"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pwq-Oq-EST">
+                                        <rect key="frame" x="169" y="261" width="37" height="37"/>
                                     </activityIndicatorView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bo9-ty-SyP">
                                         <rect key="frame" x="20" y="20" width="335" height="518"/>
@@ -367,7 +367,7 @@
         <!--Selection View Controller-->
         <scene sceneID="3QG-5w-NTG">
             <objects>
-                <viewController id="Cg1-2H-pUr" customClass="SelectionViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectionView" id="Cg1-2H-pUr" customClass="SelectionViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G9k-XE-bn7"/>
                         <viewControllerLayoutGuide type="bottom" id="5I7-JV-CLj"/>
