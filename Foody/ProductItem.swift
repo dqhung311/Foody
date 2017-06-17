@@ -23,13 +23,15 @@ class ProductItem{
     var otherimage = [String]()
     var total_like: Int = 0
     var total_comment: Int = 0
+    var userid: String = ""
     
     
     init(){
         
     }
     init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String, otherimage: [String],
-         total_like: Int, total_comment: Int
+         total_like: Int, total_comment: Int,
+         userid: String
          ) {
         self.code = code
         self.id = id
@@ -45,6 +47,7 @@ class ProductItem{
         self.otherimage = otherimage
         self.total_like = total_like
         self.total_comment = total_comment
+        self.userid = userid
     }
   
     

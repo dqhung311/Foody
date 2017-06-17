@@ -70,6 +70,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         
         if (sender === btnMyCollection){
             if(checkLogin()) {
+                print(self.getId())
                 self.viewCurrent = tabMyCollection
                 query += "?userID=\(self.getId())"
             }else{

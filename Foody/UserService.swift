@@ -11,7 +11,7 @@ import UIKit
 protocol ProtocolUser {
     func fetchAllUser(query: String, completion: @escaping ([Users], NSError?) -> Void)
     func fetchUserByEmail(email: String, completion: @escaping ([Users], NSError?) -> Void)
-    func updateUser(sender: AnyObject, imagesdata: UIImage, handler:@escaping (_ result:String?)-> Void)
+    func updateUser(sender: AnyObject, imagesdata: [UIImage], handler:@escaping (_ result:String?)-> Void)
 }
 
 class UserService:ProtocolUser {
@@ -69,23 +69,28 @@ class UserService:ProtocolUser {
                 if let name = p["name"] as? String {
                     user.name = name
                 }
-                user.image_url = "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png"
+                if let image_url = p["image_url"] as? String {
+                    user.image_url = image_url
+                }
                 userStore.append(user)
             }
         }
         completion(userStore, nil)
     }
     
-    func updateUser(sender: AnyObject, imagesdata: UIImage, handler: @escaping (String?) -> Void) {
+    func updateUser(sender: AnyObject, imagesdata: [UIImage], handler: @escaping (String?) -> Void) {
         if let user = sender as? Users {
             
             let param = [
                 "name" : user.name,
                 "email": user.email,
                 "id": user.id,
-                "photo": imagesdata
+                "photo": imagesdata,
+                "passwordconfirm": user.password_confirm,
+                "password": user.password
+                
                 ] as NSMutableDictionary
-            
+            print(param)
             let boundary = "Boundary-\(NSUUID().uuidString)"
             let url = NSURL(string: newUserUrl)
             let request = NSMutableURLRequest(url: url! as URL)
@@ -138,14 +143,11 @@ class UserService:ProtocolUser {
                         alertWindow.makeKeyAndVisible()
                         alertWindow.rootViewController?.present(alertController, animated: true, completion: nil)
                         
-                        
                         UserDefaults.standard.setValue(user.password, forKey: "password")
                         UserDefaults.standard.setValue(user.email, forKey: "email")
                         UserDefaults.standard.setValue(user.name, forKey: "name")
                         UserDefaults.standard.setValue(arResult[1], forKey: "id")
-                        
-                        
-
+                        UserDefaults.standard.setValue(arResult[2], forKey: "image_url")
                     }
                 }else{
                     DispatchQueue.main.async {

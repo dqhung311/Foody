@@ -12,6 +12,7 @@ class Users{
     var id: String
     var email: String
     var password: String
+    var password_confirm: String
     var name: String
     var image_url: String
     
@@ -21,6 +22,7 @@ class Users{
         self.password = ""
         self.name = ""
         self.image_url = ""
+        self.password_confirm = ""
     }
     
 }

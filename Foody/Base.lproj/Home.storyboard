@@ -35,13 +35,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng nhập để trải nghiệm tốt hơn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AF5-sC-f7D">
-                                <rect key="frame" x="0.0" y="131.5" width="320" height="16"/>
+                                <rect key="frame" x="0.0" y="126.5" width="320" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tìm kiếm đồ ăn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EVR-eP-vF9">
-                                <rect key="frame" x="10" y="181" width="300" height="30"/>
+                                <rect key="frame" x="10" y="176" width="300" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -50,7 +50,7 @@
                                 </connections>
                             </textField>
                             <view contentMode="scaleToFill" restorationIdentifier="123" translatesAutoresizingMaskIntoConstraints="NO" id="FuN-xK-qsR" userLabel="View Kham Pha">
-                                <rect key="frame" x="10" y="232" width="145" height="150"/>
+                                <rect key="frame" x="10" y="227" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-khampha" translatesAutoresizingMaskIntoConstraints="NO" id="0rX-Gc-Kdi">
                                         <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
@@ -85,7 +85,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGC-xI-QDs" userLabel="View Bo Suu Tap">
-                                <rect key="frame" x="165" y="232" width="145" height="150"/>
+                                <rect key="frame" x="165" y="227" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-bosuutap" translatesAutoresizingMaskIntoConstraints="NO" id="6WI-bY-swr">
                                         <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
@@ -120,7 +120,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="08D-fK-oxC" userLabel="View Tinh Thanh">
-                                <rect key="frame" x="10" y="392" width="145" height="150"/>
+                                <rect key="frame" x="10" y="387" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-tinhthanh" translatesAutoresizingMaskIntoConstraints="NO" id="Fc6-mh-t2k">
                                         <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
@@ -155,7 +155,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEP-Ag-ihr" userLabel="View Danh Muc">
-                                <rect key="frame" x="165" y="392" width="145" height="150"/>
+                                <rect key="frame" x="165" y="387" width="145" height="150"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-category" translatesAutoresizingMaskIntoConstraints="NO" id="ab9-SO-tja">
                                         <rect key="frame" x="0.0" y="0.0" width="145" height="110"/>
@@ -207,7 +207,7 @@
                             <constraint firstItem="LEP-Ag-ihr" firstAttribute="leading" secondItem="08D-fK-oxC" secondAttribute="trailing" constant="10" id="XmP-T4-LzO"/>
                             <constraint firstItem="08D-fK-oxC" firstAttribute="width" secondItem="LEP-Ag-ihr" secondAttribute="width" id="cCF-mf-why"/>
                             <constraint firstItem="BGC-xI-QDs" firstAttribute="top" secondItem="EVR-eP-vF9" secondAttribute="bottom" constant="21" id="dp5-0q-5e2"/>
-                            <constraint firstItem="AF5-sC-f7D" firstAttribute="top" secondItem="4cL-dB-f9w" secondAttribute="bottom" constant="10" id="iUJ-t4-3Sy"/>
+                            <constraint firstItem="AF5-sC-f7D" firstAttribute="top" secondItem="4cL-dB-f9w" secondAttribute="bottom" constant="5" id="iUJ-t4-3Sy"/>
                             <constraint firstItem="4cL-dB-f9w" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ihR-ck-2cD"/>
                             <constraint firstItem="FuN-xK-qsR" firstAttribute="top" secondItem="EVR-eP-vF9" secondAttribute="bottom" constant="21" id="lw2-hh-At8"/>
                             <constraint firstItem="4cL-dB-f9w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="n4J-Lv-W8z"/>

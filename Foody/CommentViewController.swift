@@ -24,16 +24,16 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
-        avatar.backgroundColor = UIColor.red
-        avatar.layer.borderWidth = 1
-        avatar.layer.borderColor = UIColor.white.cgColor
+        avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-35, y: 70, width: 70, height: 70))
+        //avatar.backgroundColor = UIColor.red
+        
         avatar.layer.cornerRadius = avatar.frame.height/2
         avatar.clipsToBounds = true
-        avatar.loadImage(urlString: "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png")
+        avatar.loadImage(urlString: getUserImageUrl(user: nil))
         self.view.addSubview(avatar)
         
-        TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
+        TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "background-cover")!)
+        TopAccountManager.contentMode = UIViewContentMode.scaleAspectFit
         
         NameLabel.text = self.getLoginName()
         self.fetchCommentByEmail(getLoginEmail())

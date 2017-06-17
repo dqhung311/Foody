@@ -42,6 +42,7 @@ extension UIViewController {
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "id")
+        UserDefaults.standard.removeObject(forKey: "image_url")
         self.dismissAll()
     }
     
@@ -95,10 +96,9 @@ extension UIViewController {
         }
     }
     func getUserImageUrl(user: Users?) -> String{
-        if let user = user{
-            return (user.image_url)
-        }else{
-            return "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png"
+        if let image_url = UserDefaults.standard.value(forKey: "image_url") as? String{
+            return image_url
         }
+        return ""
     }
 }

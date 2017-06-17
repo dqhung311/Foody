@@ -133,6 +133,12 @@ class CollectionService: ProtocolCollectionService{
                 if let product_category_name = p["product_category_name"] as? String {
                     item.product_category_name = product_category_name
                 }
+                if let product_province_id = p["product_province_id"] as? String {
+                    item.product_province_id = product_province_id
+                }
+                if let product_category_id = p["product_category_id"] as? String {
+                    item.product_category_id = product_category_id
+                }
                 if let product_price = p["product_price"] as? String {
                     item.product_price = product_price
                 }
@@ -142,6 +148,7 @@ class CollectionService: ProtocolCollectionService{
                 if let product_otherimage = p["product_otherimage"] as? [String] {
                     item.product_otherimage = product_otherimage
                 }
+                
                 
                 
                 collectionItems.append(item)

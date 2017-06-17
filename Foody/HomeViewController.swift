@@ -43,11 +43,15 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         if(checkLogin()){
+            homeLogo.loadImage(urlString: getUserImageUrl(user: nil))
             welcomeText.text = "Xin chào " + getLoginName()
             labelWelcome.text = "Foody giúp gì được bạn"
+            
         }else{
+            
             welcomeText.text = "Xin chào Foodee"
             labelWelcome.text = "Đăng nhập để trải nghiệm tốt hơn"
+            homeLogo.image = UIImage(named: "home-logo")
         }
 
     }

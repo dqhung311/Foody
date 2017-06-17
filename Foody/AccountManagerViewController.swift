@@ -24,12 +24,17 @@ class AccountManagerViewController: UIViewController {
     @IBOutlet weak var NameLabel: UILabel!
     var avatar: UIImageView = UIImageView()    
     
+    @IBOutlet weak var btnGoToProduct: UIButton!
+    @IBOutlet weak var btnGoToProductArrow: UIButton!
+    
+    @IBOutlet weak var btnGoToCollection: UIButton!
+    @IBOutlet weak var btnGoToCollectionArrow: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         if(checkLogin()){
             NameLabel.text = self.getLoginName()
         }
-        
+        avatar.loadImage(urlString: getUserImageUrl(user: nil))
     }
     
     override func viewDidLoad() {
@@ -38,7 +43,7 @@ class AccountManagerViewController: UIViewController {
         NameLabel.isHidden = true
         if self.checkLogin() {
             
-            newHeightConstraint.constant = 200
+            newHeightConstraint.constant = 160
             newTopConstraint.constant = 0
             LoginBtn.isHidden = true
             ContinueBtn.isHidden = true
@@ -48,16 +53,17 @@ class AccountManagerViewController: UIViewController {
             NameLabel.isHidden = false
             
             
-            avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-50, y: 70, width: 100, height: 100))
-            avatar.backgroundColor = UIColor.red
+            avatar = UIImageView(frame: CGRect(x: (self.view.frame.width/2)-35, y: 70, width: 70, height: 70))
+            //avatar.backgroundColor = UIColor.red
             avatar.layer.borderWidth = 1
             avatar.layer.borderColor = UIColor.white.cgColor
             avatar.layer.cornerRadius = avatar.frame.height/2
             avatar.clipsToBounds = true
-            avatar.loadImage(urlString: "http://www.iconsfind.com/wp-content/uploads/2015/08/20150831_55e46ad551392.png")
+            
             self.view.addSubview(avatar)
             
-            TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "login_bg")!)
+            TopAccountManager.backgroundColor = UIColor(patternImage: UIImage(named: "background-cover")!)
+            TopAccountManager.contentMode = UIViewContentMode.scaleAspectFit
         }
     }
 
@@ -86,24 +92,44 @@ class AccountManagerViewController: UIViewController {
             self.goToStory("AcountManager","CommentView")
         }
     }
+
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let svc = segue.destination as? CollectionManagerViewController {
+            
+            print("aaa")
+            
+            if let sender = sender as? UIButton{
+            if (sender === btnGoToCollection ||  sender === btnGoToCollectionArrow) {
+                svc.viewCurrent = Config().getTabMyCollection()
+            }
+                if (sender === btnGoToProduct ||  sender === btnGoToProductArrow) {
+                    svc.viewCurrent = Config().getTabProduct()
+                }
+            }
+            
+        }
+    }
     @IBAction func collectionManager(_ sender: UIButton){
         if !self.checkLogin() {
             // chưa login
             self.goToStory("Second","LoginStoryBoard")
         }else{
+            /*
             // login rồi
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "CollectionStoryBoard")
             if let vc = vc as? CollectionViewController {
                 vc.viewCurrent = Config().getTabMyCollection()
                 self.present(vc, animated: true, completion: nil)
-            }
+            }*/
+            //self.goToStory("AcountManager", "UserInfoView")
+            self.performSegue(withIdentifier: "ManageItems", sender: sender)
             
         }
     }
     
-    @IBAction func userInfoManager(_sender: UIButton){
+    @IBAction func userInfoManager(_ sender: UIButton){
         if !self.checkLogin() {
             // chưa login
             self.goToStory("Second","LoginStoryBoard")
@@ -113,12 +139,13 @@ class AccountManagerViewController: UIViewController {
         }
     }
     
-    @IBAction func productManager(_sender: UIButton){
+    @IBAction func productManager(_ sender: UIButton){
         if !self.checkLogin() {
             // chưa login
             self.goToStory("Second","LoginStoryBoard")
         }else{
             // login rồi
+            self.performSegue(withIdentifier: "ManageItems", sender: sender)
         }
     }
     

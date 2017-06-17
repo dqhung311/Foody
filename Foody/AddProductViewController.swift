@@ -53,6 +53,8 @@ class AddProductViewController: UIViewController{
         newProduct.price = (txtPrice?.text)!
         newProduct.province_id = (txtHiddenProvince?.text)!
         newProduct.category_id = (txtHiddenCategory?.text)!
+        newProduct.userid = self.getId()
+        
         productService.addNewProduct(sender: newProduct,imagesdata: listImage){ (result) -> Void in
             var title = "Lỗi"
             var dismiss = false
