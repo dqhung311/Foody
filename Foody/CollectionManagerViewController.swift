@@ -23,6 +23,7 @@ class CollectionManagerViewController: UIViewController {
     var productList  = [ProductItem]()
     let productService = ProductService()
     @IBOutlet weak var lblTitleFunc: UILabel!
+    @IBOutlet weak var btnEdit: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +57,12 @@ class CollectionManagerViewController: UIViewController {
             }
         }
         }
-    }
+        
+        
+        
 
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,15 +77,80 @@ class CollectionManagerViewController: UIViewController {
             svc.productItem = self.productItemInfo
         }
     }
-
+    @IBAction func toogleEditingMode(_ sender: UIButton){
+        
+        if(productListView.isEditing){
+            sender.setTitle("Edit", for: .normal)
+            productListView.setEditing(false, animated:true)
+        }else{
+            
+            sender.setTitle("Done", for: .normal)
+            productListView.setEditing(true, animated:true)
+        }
+        
+    }
 }
 
 extension CollectionManagerViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //var height: CGFloat = 44
         return 75
     }
-    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            
+            let title = "Delete"
+            let mesage = "Are you sure want to delete this item?"
+            let ac = UIAlertController(title: title, message: mesage, preferredStyle: .actionSheet)
+            let cancelaction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelaction)
+            let deleteaction = UIAlertAction(title: "Delete", style: .destructive, handler: {(action) -> Void in
+                self.btnEdit.setTitle("Edit", for: .normal)
+                self.productListView.setEditing(false, animated:true)
+                if(self.viewCurrent==self.tabProduct){
+                    let item = self.productList[indexPath.row]
+                    self.productService.deleteProduct(item.id){ (result) -> Void in}
+                    DispatchQueue.main.async {
+                        self.productService.fetchAllProduct(query: "userID=\(self.getId())"){ [weak self] (productList, error) in
+                            self?.productList = productList
+                            DispatchQueue.main.async {
+                                self?.productListView.reloadData()
+                            }
+                        }
+                    }
+                    
+                }
+                
+                if(self.viewCurrent==self.tabMyCollection){
+                    let item = self.collectionList[indexPath.row]
+                    self.collectionService.deleteCollection(item.id){ (result) -> Void in}
+                    DispatchQueue.main.async {
+                        self.collectionService.fetchAllCollection("?userID=\(self.getId())"){ [weak self] (collectionList, error) in
+                            self?.collectionList = collectionList
+                            DispatchQueue.main.async {
+                                self?.productListView.reloadData()
+                            }
+                        }
+                    }
+                    
+                }
+                
+            })
+            ac.addAction(deleteaction)
+            
+            present(ac, animated: true, completion: nil)
+            
+        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if(viewCurrent==tabProduct){
@@ -111,10 +181,6 @@ extension CollectionManagerViewController: UITableViewDataSource, UITableViewDel
             productItemInfo.price =  collectionList[indexPath.row].product_price
             productItemInfo.category_id = collectionList[indexPath.row].product_category_id
         }
-        
-        
-        
-        
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "ProductDetailStoryBoard", sender: self)
         }

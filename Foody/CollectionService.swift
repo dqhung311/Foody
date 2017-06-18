@@ -15,14 +15,19 @@ protocol ProtocolCollectionService {
     func updateCollection(_ id: String) -> String
     
     func addNewCollection(sender: AnyObject, handler:@escaping (_ result:String?)-> Void)
+    
+    func deleteCollection(_ id: String, handler:@escaping (_ result:String?)-> Void)
 }
 
 
 import Foundation
 class CollectionService: ProtocolCollectionService{
     
+
+    
     var urlCollection: String = "http://anphatkhanh.vn/foody/collection/"
     var urlEditCollection: String = "http://anphatkhanh.vn/foody/collection/edit.php"
+    var urlDeleteCollection: String = "http://anphatkhanh.vn/foody/collection/delete.php"
     
     private let session : URLSession!
     
@@ -71,7 +76,30 @@ class CollectionService: ProtocolCollectionService{
     func fetchByID(_ id: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
         self.fetchAllCollection("?id=" + id, completion: completion)
     }
-
+    
+    func deleteCollection(_ id: String, handler: @escaping (String?) -> Void) {
+        let param = ["id" : id] as NSMutableDictionary
+        let boundary = "Boundary-\(NSUUID().uuidString)"
+        let url = NSURL(string: urlDeleteCollection)
+        let request = NSMutableURLRequest(url: url! as URL)
+        
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else {
+                return
+            }
+            guard let data = data else {
+                return
+            }
+            let responseString = String(data: data, encoding: .utf8) ?? ""
+            handler(responseString)
+            
+        })
+        task.resume()
+    }
     
     func fetchAllCollection(_ query: String, completion:  @escaping ([CollectionItem], NSError?) -> Void){
         let urlJson: String

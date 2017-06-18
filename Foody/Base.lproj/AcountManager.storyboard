@@ -586,14 +586,27 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nkp-XB-NAS">
+                                        <rect key="frame" x="340" y="0.0" width="30" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toogleEditingMode:" destination="a8M-m4-bHx" eventType="touchUpInside" id="3RZ-Iv-A3S"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Pg1-uY-aCK"/>
                                     <constraint firstItem="939-gd-DLE" firstAttribute="leading" secondItem="sTO-ob-GNG" secondAttribute="leading" constant="5" id="RUo-4b-PJs"/>
+                                    <constraint firstItem="nkp-XB-NAS" firstAttribute="top" secondItem="sTO-ob-GNG" secondAttribute="top" id="Tj7-UF-JFf"/>
+                                    <constraint firstAttribute="trailing" secondItem="nkp-XB-NAS" secondAttribute="trailing" constant="5" id="dwK-sN-fly"/>
                                     <constraint firstAttribute="bottom" secondItem="939-gd-DLE" secondAttribute="bottom" id="fFW-Fg-d4I"/>
                                     <constraint firstItem="939-gd-DLE" firstAttribute="top" secondItem="sTO-ob-GNG" secondAttribute="top" id="ldq-iF-lvt"/>
                                     <constraint firstAttribute="trailing" secondItem="939-gd-DLE" secondAttribute="trailing" id="o1a-ss-mZ5"/>
+                                    <constraint firstAttribute="bottom" secondItem="nkp-XB-NAS" secondAttribute="bottom" id="ypz-3W-7sf"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -614,6 +627,7 @@
                     <connections>
                         <outlet property="TopAccountManager" destination="R74-cE-JYm" id="kif-FW-Bev"/>
                         <outlet property="avatar" destination="Lf1-BD-kKU" id="Qvt-Jt-h4f"/>
+                        <outlet property="btnEdit" destination="nkp-XB-NAS" id="NPD-f7-olu"/>
                         <outlet property="labelWelcomeName" destination="BdS-Fm-MmR" id="XZW-vU-eFb"/>
                         <outlet property="lblTitleFunc" destination="939-gd-DLE" id="5T3-lt-ldu"/>
                         <outlet property="productListView" destination="YtV-yc-jWd" id="SVr-p8-UTT"/>

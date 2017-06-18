@@ -28,6 +28,7 @@ class ProductListMangerCell: UITableViewCell {
     func loadCell( data: Any){
         labelProductScore.layer.cornerRadius = labelProductScore.frame.width/2.0
         labelProductScore.clipsToBounds = true
+        
         if let data = data as? CollectionItem{
         labelProductName.text = data.product_name
         labelProductAddress.text = data.product_address

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Foody/CollectionService.swift"
-            timestampString = "519193699.549908"
+            timestampString = "519458259.743127"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "fetchAllCollection(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -96,9 +96,6 @@ class AccountManagerViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let svc = segue.destination as? CollectionManagerViewController {
-            
-            print("aaa")
-            
             if let sender = sender as? UIButton{
             if (sender === btnGoToCollection ||  sender === btnGoToCollectionArrow) {
                 svc.viewCurrent = Config().getTabMyCollection()

@@ -18,12 +18,19 @@ protocol ProtocolProductService {
     func updateProduct(_ id: String) -> String
     
     func addNewProduct(sender: AnyObject, imagesdata: [UIImage], handler:@escaping (_ result:String?)-> Void)
+    
+    func deleteProduct(_ id: String, handler:@escaping (_ result:String?)-> Void)
+    
 
 }
 class ProductService:ProtocolProductService{
     
+  
+
+    
     let urlJson: String = "http://anphatkhanh.vn/foody/product/?"
     let urlEdit: String = "http://anphatkhanh.vn/foody/product/edit.php?"
+    let urlDelete: String = "http://anphatkhanh.vn/foody/product/delete.php?"
     private let session : URLSession!
     
     init() {
@@ -39,7 +46,30 @@ class ProductService:ProtocolProductService{
     func fetchByID(id: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
         self.fetchAllProduct(query: "id=" + id, completion: completion)
     }
-    
+    func deleteProduct(_ id: String, handler:@escaping (_ result:String?)-> Void){
+        
+        let param = ["id" : id] as NSMutableDictionary
+        let boundary = "Boundary-\(NSUUID().uuidString)"
+        let url = NSURL(string: urlDelete)
+        let request = NSMutableURLRequest(url: url! as URL)
+        
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
+        request.httpBody = Config().createBodyWithParameters(parameters: param, boundary: boundary) as Data
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            guard error == nil else {
+                return
+            }
+            guard let data = data else {
+                return
+            }
+            let responseString = String(data: data, encoding: .utf8) ?? ""
+            handler(responseString)
+            
+        })
+        task.resume()
+    }
     func fetchAllProduct(query: String, completion:  @escaping ([ProductItem], NSError?) -> Void){
         var urlJsonRes: String = urlJson
         if(query != ""){
@@ -139,7 +169,6 @@ class ProductService:ProtocolProductService{
             
             
             let boundary = "Boundary-\(NSUUID().uuidString)"
-            
             let url = NSURL(string: urlEdit)
             let request = NSMutableURLRequest(url: url! as URL)
             
