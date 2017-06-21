@@ -16,6 +16,8 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     @IBOutlet weak var NameLabel: UILabel!
     
+    @IBOutlet weak var btnEdit: UIButton!
+    
     var avatar: UIImageView = UIImageView()
     
     let commentService = CommentService()
@@ -54,14 +56,22 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
             }
         }
     }
+    @IBAction func toogleEditingMode(_ sender: UIButton){
+        if(tableViewComment.isEditing){
+            sender.setTitle("Edit", for: .normal)
+            tableViewComment.setEditing(false, animated:true)
+        }else{
+            sender.setTitle("Done", for: .normal)
+            tableViewComment.setEditing(true, animated:true)
+        }
+        
+    }
     
     @IBAction func clickBack(_ sender: UIButton){
         self.dismissOne()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if commentList.count == 0{
-            showAlertMessage("Bạn chưa có Comment nào cả, vui lòng comment!")        }
         return commentList.count
     }
     
@@ -77,13 +87,38 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
         var cellheight: CGFloat = CGFloat(0)
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell")
         if let cell = cell as? CommentCell {
-            let otherHeight = cell.frame.height - cell.commentContent.frame.height
+            let otherHeight = cell.thumbnail.frame.height + 10 + 10
             let content = commentList[indexPath.row].comment
             let paddingOfText : CGFloat = 2
             let heightOfText = heightForView(text: content, font: cell.commentContent.font, width: cell.bounds.width - paddingOfText)
-            cellheight = heightOfText + otherHeight
+            cellheight = heightOfText + otherHeight + 10
         }
         return cellheight
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            
+            let title = "Delete"
+            let mesage = "Are you sure want to delete this item?"
+            let ac = UIAlertController(title: title, message: mesage, preferredStyle: .actionSheet)
+            let cancelaction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            ac.addAction(cancelaction)
+            let deleteaction = UIAlertAction(title: "Delete", style: .destructive, handler: {(action) -> Void in
+                self.btnEdit.setTitle("Edit", for: .normal)
+                self.tableViewComment.setEditing(false, animated:true)
+                let item = self.commentList[indexPath.row]
+                self.commentService.deleteById(item.id)
+                DispatchQueue.main.async {
+                    self.fetchCommentUser("userID=" + self.getId())
+                }
+                
+            })
+            ac.addAction(deleteaction)
+            
+            present(ac, animated: true, completion: nil)
+            
+        }
     }
     
 }

@@ -516,7 +516,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mKZ-ck-HPh" id="eOW-bF-SOe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="74.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zhf-jB-JnS">
@@ -689,14 +689,14 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NBb-hp-PzG">
-                                <rect key="frame" x="0.0" y="180" width="375" height="487"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="457"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="100" id="saN-n7-5cv" customClass="CommentCell" customModule="Foody" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="saN-n7-5cv" id="Zke-vz-J0u">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HJL-kZ-rLO" userLabel="Thumbnail">
@@ -772,26 +772,62 @@
                                     <outlet property="delegate" destination="9US-Ca-Cpe" id="InH-LS-J4s"/>
                                 </connections>
                             </tableView>
+                            <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hz7-4H-B3o">
+                                <rect key="frame" x="0.0" y="180" width="375" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="::: Comment" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUT-AA-kLA">
+                                        <rect key="frame" x="5" y="0.0" width="370" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yf0-XD-2jc">
+                                        <rect key="frame" x="340" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="heN-FM-voI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toogleEditingMode:" destination="9US-Ca-Cpe" eventType="touchUpInside" id="zVl-vB-ZCh"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="4T4-Vy-2iK"/>
+                                    <constraint firstAttribute="trailing" secondItem="Yf0-XD-2jc" secondAttribute="trailing" constant="5" id="XmO-IU-bLo"/>
+                                    <constraint firstItem="Yf0-XD-2jc" firstAttribute="top" secondItem="Hz7-4H-B3o" secondAttribute="top" id="Z5j-p2-Ep5"/>
+                                    <constraint firstAttribute="bottom" secondItem="Yf0-XD-2jc" secondAttribute="bottom" id="mOQ-eG-hY6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="RYE-Qz-TRn" firstAttribute="top" secondItem="NBb-hp-PzG" secondAttribute="bottom" id="14x-Dv-yPt"/>
                             <constraint firstItem="u8h-2g-wVx" firstAttribute="top" secondItem="apW-ee-eGI" secondAttribute="top" constant="25" id="3NB-H3-yY0"/>
                             <constraint firstAttribute="trailing" secondItem="3p3-tZ-zqm" secondAttribute="trailing" id="6Rf-Qz-hkt"/>
+                            <constraint firstItem="Hz7-4H-B3o" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" id="9s4-up-9u7"/>
+                            <constraint firstItem="NBb-hp-PzG" firstAttribute="top" secondItem="Hz7-4H-B3o" secondAttribute="bottom" id="AYm-nw-r10"/>
                             <constraint firstItem="3p3-tZ-zqm" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" id="MLU-DS-QAC"/>
                             <constraint firstItem="3p3-tZ-zqm" firstAttribute="top" secondItem="apW-ee-eGI" secondAttribute="top" constant="25" id="N4Q-Hw-5GR"/>
                             <constraint firstItem="u8h-2g-wVx" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" constant="5" id="Q8x-ly-wql"/>
-                            <constraint firstAttribute="trailing" secondItem="NBb-hp-PzG" secondAttribute="trailing" id="WVQ-vc-BBg"/>
+                            <constraint firstAttribute="trailing" secondItem="Hz7-4H-B3o" secondAttribute="trailing" id="YUR-Gh-RKi"/>
                             <constraint firstAttribute="trailing" secondItem="fVC-2v-Zn6" secondAttribute="trailing" id="fDH-7Z-wkJ"/>
-                            <constraint firstItem="NBb-hp-PzG" firstAttribute="top" secondItem="fVC-2v-Zn6" secondAttribute="bottom" id="iFG-eb-EiU"/>
-                            <constraint firstItem="NBb-hp-PzG" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" id="qyK-lQ-7Qd"/>
+                            <constraint firstItem="RYE-Qz-TRn" firstAttribute="top" secondItem="NBb-hp-PzG" secondAttribute="bottom" id="gLO-SB-Hfw"/>
+                            <constraint firstItem="Hz7-4H-B3o" firstAttribute="top" secondItem="fVC-2v-Zn6" secondAttribute="bottom" id="kzL-sP-Ktw"/>
+                            <constraint firstAttribute="trailing" secondItem="NBb-hp-PzG" secondAttribute="trailing" id="rzc-as-uwc"/>
                             <constraint firstItem="fVC-2v-Zn6" firstAttribute="top" secondItem="xPT-aM-uk3" secondAttribute="bottom" id="sRN-h1-a5A"/>
                             <constraint firstItem="fVC-2v-Zn6" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" id="sbX-4s-Ewe"/>
+                            <constraint firstItem="NBb-hp-PzG" firstAttribute="leading" secondItem="apW-ee-eGI" secondAttribute="leading" id="z1c-9m-PK9"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="NameLabel" destination="3p3-tZ-zqm" id="9Tw-rE-Hwd"/>
                         <outlet property="TopAccountManager" destination="fVC-2v-Zn6" id="HJg-M1-YQD"/>
+                        <outlet property="btnEdit" destination="Yf0-XD-2jc" id="NI5-rM-VJO"/>
                         <outlet property="tableViewComment" destination="NBb-hp-PzG" id="aY9-ra-4bb"/>
                     </connections>
                 </viewController>

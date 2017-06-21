@@ -20,6 +20,9 @@ class CommentService: ProtocolCommentService{
     
     let strUrl = "http://anphatkhanh.vn/foody/comment/?"
     let strUrlEdit = "http://anphatkhanh.vn/foody/comment/edit.php"
+    let strUrlDelete = "http://anphatkhanh.vn/foody/comment/delete.php"
+    
+    
     
     private let session : URLSession!
     
@@ -83,7 +86,13 @@ class CommentService: ProtocolCommentService{
                 self.parseJson(json: JSON as? [String : Any], completion: completion)
             }
         }
-        
+    }
+    
+    func deleteById(_ commentID: String){
+        let parameters: Parameters = [
+            "id": commentID
+        ]
+        Alamofire.request(strUrlDelete, method: .post, parameters: parameters).responseJSON
     }
     
     func addNewComment(sender: AnyObject, handler: @escaping (String?) -> Void) {

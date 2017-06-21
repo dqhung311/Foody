@@ -30,7 +30,7 @@ class CommentCell: UITableViewCell {
     func loadCell(data: Comments){
             productName.text = data.product_name
             commentName.text = data.name 
-            commentContent.text = data.comment+"Interactively initiate low-risk high-yield innovation whereas pandemic innovation. Professionally orchestrate emerging resources for cutting-edge web-readiness. Appropriately maximize virtual networks after standards compliant relationships. Energistically formulate."
+            commentContent.text = data.comment
             score.text = data.product_score
             thumbnail.loadImage(urlString: data.product_image)
     }
