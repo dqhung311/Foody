@@ -74,6 +74,10 @@ class CommentService: ProtocolCommentService{
                 if let user_avatar = p["user_avatar"] as? String {
                     comment.user_avatar = user_avatar
                 }
+                if let date_create = p["datecreate"] as? String {
+                    comment.date_create = date_create
+                }
+                
                 
                 commentStore.append(comment)
             }

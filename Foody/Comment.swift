@@ -24,6 +24,7 @@ class Comments{
     var total_like: String
     var user_name: String
     var user_avatar: String
+    var date_create: String
     
     init() {
         self.id = ""
@@ -41,6 +42,7 @@ class Comments{
         self.user_id = ""
         self.user_name = ""
         self.user_avatar = ""
+        self.date_create = ""
     }
     
 }

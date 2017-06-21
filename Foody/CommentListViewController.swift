@@ -37,7 +37,20 @@ class CommentListViewController: UIViewController {
         super.viewDidLoad()
         labelProductName.text = productItem.name
         labelProductAddress.text = productItem.address
+        commentListView.estimatedRowHeight = 44.0
+        commentListView.rowHeight = UITableViewAutomaticDimension
+        commentListView.separatorStyle = .none
+        self.refreshControl = UIRefreshControl()
+        
+        self.refreshControl.tintColor = UIColor.black
+        self.refreshControl.addTarget(self,
+                                      action: #selector(ProductListViewController.pullToRefreshHandler),
+                                      for: .valueChanged)
+        
+        self.commentListView.addSubview(self.refreshControl)
+        
         self.loadData()
+        
         // Do any additional setup after loading the view.
         
     }
@@ -57,13 +70,7 @@ class CommentListViewController: UIViewController {
 
 extension CommentListViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return UITableViewAutomaticDimension
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,6 +80,7 @@ extension CommentListViewController: UITableViewDataSource, UITableViewDelegate 
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentListViewCell", for: indexPath)
         if let cell = cell as? CommentListViewCell {
+        
             let data = commentList[indexPath.row]
             cell.loadCell(data: data)
             
