@@ -68,6 +68,12 @@ class CommentService: ProtocolCommentService{
                 if let total_like = p["total_like"] as? String {
                     comment.total_like = total_like
                 }
+                if let user_name = p["user_name"] as? String {
+                    comment.user_name = user_name
+                }
+                if let user_avatar = p["user_avatar"] as? String {
+                    comment.user_avatar = user_avatar
+                }
                 
                 commentStore.append(comment)
             }

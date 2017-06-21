@@ -28,7 +28,8 @@ class CommentListViewCell: UITableViewCell {
     }
     
     func loadCell( data: Comments){
-        
+        commentTitle.text = data.name
+        commentText.text = data.comment
         
     }
 
