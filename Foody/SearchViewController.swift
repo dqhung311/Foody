@@ -38,7 +38,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         callprovince()
         callcategory()
         callproduct("")
-        reloadtableview()
     }
 
     func reloadtableview(){
@@ -50,6 +49,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     func callproduct(_ callquery: String){
         productService.fetchAllProduct(query: callquery){ [weak self] (productList, error) in
             self?.productList = productList
+            self?.reloadtableview()
         }
     }
     
@@ -131,18 +131,21 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(searchType == "category"){
-            searchType = "name"
-            callproduct("cat=\(categoryList[indexPath.row].name)&name=\(searchTextField.text!)")
+            callproduct("catID=\(categoryList[indexPath.row].id)&name=\(searchTextField.text!)")
+            DispatchQueue.main.async {
+                self.searchType = "name"
+            }
         }
         if(searchType == "province"){
-            searchType = "name"
-            callproduct("province=\(provinceList[indexPath.row].name)&name=\(searchTextField.text!)")
+            callproduct("provinceID=\(provinceList[indexPath.row].id)&name=\(searchTextField.text!)")
+            DispatchQueue.main.async {
+                self.searchType = "name"
+            }
         }
         if(searchType == "name"){
             searchType = "name"
             DispatchQueue.main.async {
                 self.productItemInfo = self.productList[indexPath.row]
-//                self.performSegue(withIdentifier: "ProductDetail", sender: self)
                 let storyboard = UIStoryboard(name: "ProductDetail", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailStoryBoard")
                 if let vc = vc as? ProductDetailController {
