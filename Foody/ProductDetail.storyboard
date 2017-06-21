@@ -13,7 +13,7 @@
         <!--Product Detail Controller-->
         <scene sceneID="6V5-t2-rjJ">
             <objects>
-                <viewController storyboardIdentifier="ProductDetailStoryBoard" id="a1S-ct-U3y" customClass="ProductDetailController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetail" id="a1S-ct-U3y" customClass="ProductDetailController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CcR-p1-c58"/>
                         <viewControllerLayoutGuide type="bottom" id="1tq-eU-azp"/>
@@ -543,7 +543,7 @@
         <!--Add Comment View Controller-->
         <scene sceneID="zpb-Nf-zRd">
             <objects>
-                <viewController id="EL9-7n-1q5" customClass="AddCommentViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCommentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EL9-7n-1q5" customClass="AddCommentViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Y7-kf-KBG"/>
                         <viewControllerLayoutGuide type="bottom" id="vtn-gI-Sfg"/>

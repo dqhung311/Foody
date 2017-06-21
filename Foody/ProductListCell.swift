@@ -18,6 +18,7 @@ class ProductListCell: UITableViewCell {
     @IBOutlet weak var labelTotalImage: UILabel!
     @IBOutlet weak var viewToolBox: UIView!
     @IBOutlet weak var viewTopTitle: UIView!
+    @IBOutlet weak var btnViewComment: UIButton!
     
     @IBOutlet weak var viewCommentList: UIView!
     @IBOutlet weak var viewCommentList2: UIView!
@@ -53,6 +54,12 @@ class ProductListCell: UITableViewCell {
         labelTotalComment.text = String(data.total_comment)
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
+        if(data.total_comment>0){
+            btnViewComment.setTitle("Xem \(data.total_comment) bình luận >", for: .normal)
+            btnViewComment.isHidden = false
+        }else{
+            btnViewComment.isHidden = true
+        }
         picturePreview.loadImage(urlString: data.urlphoto)
         if(data.total_comment == 1){
             createViewCommentUIView(dataComment: data.comment_list as [AnyObject] , avatar: [avatarImage], label: [commentText] )
@@ -71,17 +78,18 @@ class ProductListCell: UITableViewCell {
         if(dataComment.count >= 1){
         for i in 0..<dataComment.count {
             if(i < 3){
-            avatar[i].loadImage(urlString: "https://media.foody.vn/usr/g8/74666/avt/c100x100/chau2201-avatar-461-636283346783431576.jpg")
-            
+                let arResult = dataComment[i].components(separatedBy: "@#!|")
+                avatar[i].loadImage(urlString: arResult[1])
                 avatar[i].layer.cornerRadius = avatar[i].frame.width/2.0
                 avatar[i].clipsToBounds = true
     
             
             label[i].font = UIFont(name: commentText.font.fontName, size: 12)
-            let comment = "Dao Quang Hung: \(dataComment[i])"  as NSString
+            
+            let comment = arResult[0]+": \(arResult[2])"  as NSString
             let attributedString = NSMutableAttributedString(string: comment as String, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 12)])
             let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 12)]
-            attributedString.addAttributes(boldFontAttribute, range: comment.range(of: "Dao Quang Hung:"))
+            attributedString.addAttributes(boldFontAttribute, range: comment.range(of: arResult[0]+":"))
             label[i].attributedText = attributedString
             label[i].numberOfLines = 2
             }

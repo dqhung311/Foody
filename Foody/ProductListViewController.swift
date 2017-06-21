@@ -252,9 +252,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.picturePreview.addGestureRecognizer(tap2)
                 
                 let tap3 = UITapGestureRecognizer(target: self, action: #selector(ProductListViewController.onTabToViewComment))
-                cell.viewCommentList.tag = indexPath.row
-                cell.viewCommentList.isUserInteractionEnabled = true
-                cell.viewCommentList.addGestureRecognizer(tap3)
+                cell.btnViewComment.tag = indexPath.row
+                cell.btnViewComment.isUserInteractionEnabled = true
+                cell.btnViewComment.addGestureRecognizer(tap3)
                 
                 
                 cell.loadCell(data: dataProduct)
