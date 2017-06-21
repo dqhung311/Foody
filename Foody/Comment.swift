@@ -22,6 +22,8 @@ class Comments{
     var product_category_name: String
     var product_price: String
     var total_like: String
+    var user_name: String
+    var user_avatar: String
     
     init() {
         self.id = ""
@@ -37,6 +39,8 @@ class Comments{
         self.product_price = ""
         self.total_like = ""
         self.user_id = ""
+        self.user_name = ""
+        self.user_avatar = ""
     }
     
 }

@@ -11,15 +11,38 @@ import UIKit
 class CommentListViewController: UIViewController {
     
     var productItem  = ProductItem()
+    var refreshControl: UIRefreshControl!
+    let commentService = CommentService()
+    var commentList = [Comments]()
+    
     @IBOutlet weak var labelProductName: UILabel!
     @IBOutlet weak var labelProductAddress: UILabel!
+    @IBOutlet weak var commentListView: UITableView!
     
+    @objc func pullToRefreshHandler() {
+        // refresh table view data here
+        self.loadData()
+        self.refreshControl.endRefreshing()
+    }
+    func loadData(){
+        commentService.fetchAll("productID=\(productItem.id)"){ [weak self] (commentList, error) in
+            self?.commentList = commentList
+            DispatchQueue.main.async {
+                self?.commentListView.reloadData()
+            }
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         labelProductName.text = productItem.name
         labelProductAddress.text = productItem.address
+        self.loadData()
         // Do any additional setup after loading the view.
+        
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -36,7 +59,7 @@ extension CommentListViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 44
+        return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,11 +67,16 @@ extension CommentListViewController: UITableViewDataSource, UITableViewDelegate 
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return commentList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentListViewCell", for: indexPath)
+        if let cell = cell as? CommentListViewCell {
+            let data = commentList[indexPath.row]
+            cell.loadCell(data: data)
+            
+        }
         return cell
     }
 }
