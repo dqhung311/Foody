@@ -75,7 +75,6 @@ class ProductService:ProtocolProductService{
         if(query != ""){
             urlJsonRes = urlJson + query
         }
-      
         guard let url = URL(string: urlJsonRes) else {
             let error = NSError(domain: "ProductService", code: 404, userInfo: [NSLocalizedDescriptionKey: "URL is invalid!"])
             completion([], error)
