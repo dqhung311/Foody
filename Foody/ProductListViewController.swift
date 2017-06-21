@@ -32,11 +32,22 @@ class ProductListViewController: UIViewController{
     let tabProduct = Config().getTabProduct()
     let tabCategory = Config().getTabCategory()
     let tabProvince = Config().getTabProvince()
-    
+    var refreshControl: UIRefreshControl!
     var productItemInfo = ProductItem()
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+    }
+
+    @objc func pullToRefreshHandler() {
+        // refresh table view data here
+        self.loadData()
+        self.refreshControl.endRefreshing()
+    }
+    
+    
+    func loadData(){
         productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
@@ -59,15 +70,20 @@ class ProductListViewController: UIViewController{
         }
     }
     
-    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.setUIView()
-        self.productListView.reloadData()
-        //self.productListView.reloadData()
-    
+        
+        self.refreshControl = UIRefreshControl()
+        
+        self.refreshControl.tintColor = UIColor.black
+        self.refreshControl.addTarget(self,
+                                      action: #selector(ProductListViewController.pullToRefreshHandler),
+                                      for: .valueChanged)
+        
+        self.productListView.addSubview(self.refreshControl)
+        self.loadData()
     }
     
     func setUIView(){
@@ -93,6 +109,8 @@ class ProductListViewController: UIViewController{
         
      
     }
+    
+    
     
     @IBAction func disMist(_ sender: UIButton){
         self.performSegue(withIdentifier: "Home", sender: sender)
@@ -131,18 +149,32 @@ class ProductListViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func onTabToViewDetail(tapGesture:UITapGestureRecognizer){
+        
+        self.productItemInfo = productList[(tapGesture.view?.tag)!]
+        self.performSegue(withIdentifier: "ProductDetail", sender: self)
+        
+    }
 }
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height: CGFloat = 44
+        var heightComment: CGFloat = 0
         if(viewCurrent == tabProduct || viewCurrent == ""){
-             height = (self.view.frame.size.height * 0.5)
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
             if let cell = cell as? ProductListCell {
-                //height = 200 + cell.picturePreview.frame.height
+               
+               let dataProduct = productList[indexPath.row]
+                if(dataProduct.total_comment <= 3){
+                    heightComment = (35 * CGFloat(dataProduct.total_comment))
+                }else{
+                    heightComment =  105
+                }
+                height = (cell.picturePreview.frame.height  + cell.viewToolBox.frame.height + cell.viewTopTitle.frame.height + heightComment) + 10 //Contranit
             }
+            
         }
       return height
     }
@@ -150,9 +182,6 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let str = "&"
-        //if query.range(of:"?") != nil{
-        //    str = ""
-        //}
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
             self.viewCurrent = tabProduct
@@ -176,10 +205,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             }
             btnProvince.setTitle(provinceList[indexPath.row].name, for: .normal)
         }else{
-            productItemInfo = productList[indexPath.row]
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "ProductDetail", sender: self)
-            }
+        
         }
     }
     
@@ -195,6 +221,8 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
     
+    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(viewCurrent == tabCategory){
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryListCell")
@@ -213,27 +241,26 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             }
             return cell!
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell", for: indexPath)
+            let dataProduct = productList[indexPath.row]
             
             if let cell = cell as? ProductListCell {
-                let dataProduct = productList[indexPath.row]
+                let tap = UITapGestureRecognizer(target: self, action: #selector(ProductListViewController.onTabToViewDetail))
                 
+                cell.viewTopTitle.tag = indexPath.row
+                cell.viewTopTitle.isUserInteractionEnabled = true
+                cell.viewTopTitle.addGestureRecognizer(tap)
                 
-                //cell.viewCommentList.frame.size.height = 200
-                //cell.contentView.addSubview(cell.viewCommentList)
+                let tap2 = UITapGestureRecognizer(target: self, action: #selector(ProductListViewController.onTabToViewDetail))
+                cell.picturePreview.tag = indexPath.row
+                cell.picturePreview.isUserInteractionEnabled = true
+                cell.picturePreview.addGestureRecognizer(tap2)
+                
                 cell.loadCell(data: dataProduct)
-                /*let y_position = Int(cell.picturePreview.frame.size.height) + 70
-                for i in 0..<4 {
-                    let label = UILabel(frame: CGRect(x: 0, y: Int(i * y_position), width: 100, height: 20))
-                    label.text = "dqhung"
-                    label.font = UIFont(name: label.font.fontName, size: 12)
-                    label.sizeToFit()
-                    label.numberOfLines = 1
-                    cell.contentView.addSubview(label)
-                }*/
+                
                 
             }
-            return cell!
+            return cell
         }
         
     }

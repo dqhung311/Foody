@@ -144,6 +144,10 @@ class ProductService:ProtocolProductService{
                             if let userid = p["userid"] as? String {
                                 item.userid = userid
                             }
+                            if let comment_list = p["comment_list"] as? [String] {
+                                item.comment_list = comment_list
+                            }
+                            
                             productItems.append(item)
                             
                         }
