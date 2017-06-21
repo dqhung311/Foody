@@ -36,8 +36,7 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
         TopAccountManager.contentMode = UIViewContentMode.scaleAspectFit
         
         NameLabel.text = self.getLoginName()
-        self.fetchCommentByEmail(getLoginEmail())
-        self.reloadtableview()
+        self.fetchCommentUser("userID=" + self.getId())
 
     }
     
@@ -47,7 +46,7 @@ class CommentViewController: UIViewController,UITableViewDelegate,UITableViewDat
         }
     }
 
-    func fetchCommentByEmail(_ email: String){
+    func fetchCommentUser(_ email: String){
         commentService.fetchAll(email){ [weak self] (commentList, error) in
             self?.commentList = commentList
             DispatchQueue.main.async {

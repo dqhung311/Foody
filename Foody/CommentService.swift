@@ -18,7 +18,7 @@ protocol ProtocolCommentService {
 }
 class CommentService: ProtocolCommentService{
     
-    let strUrl = "http://anphatkhanh.vn/foody/comment/?email="
+    let strUrl = "http://anphatkhanh.vn/foody/comment/?"
     let strUrlEdit = "http://anphatkhanh.vn/foody/comment/edit.php"
     
     private let session : URLSession!
