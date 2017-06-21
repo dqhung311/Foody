@@ -89,16 +89,12 @@ class ProductListViewController: UIViewController{
     func setUIView(){
         btnLabel.layer.cornerRadius = 5
         btnLabel.layer.masksToBounds = true
-        
-//        let myViews = boundButtonMenu.subviews.filter{$0 is UIView}
         let myViews = boundButtonMenu.subviews
         for view in myViews {
           view.backgroundColor = UIColor.clear
         }
-        
         if(viewCurrent == tabProduct || viewCurrent==""){
             btnLatest.superview?.backgroundColor = UIColor.white
-           
         }
         if(viewCurrent == tabCategory){
             btnCategory.superview?.backgroundColor = UIColor.white
@@ -106,14 +102,9 @@ class ProductListViewController: UIViewController{
         if(viewCurrent == tabProvince){
             btnProvince.superview?.backgroundColor = UIColor.white
         }
-        
-     
     }
-    
-    
-    
     @IBAction func disMist(_ sender: UIButton){
-        self.performSegue(withIdentifier: "Home", sender: sender)
+        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func tabToAddProduct(_ sender: UIButton){
         if checkLogin() {
@@ -125,7 +116,10 @@ class ProductListViewController: UIViewController{
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let svc = segue.destination as? ProductDetailController {
-        svc.productItem = self.productItemInfo
+            svc.productItem = self.productItemInfo
+        }
+        if let svc = segue.destination as? CommentListViewController {
+            svc.productItem = self.productItemInfo
         }
     }
     
@@ -155,6 +149,13 @@ class ProductListViewController: UIViewController{
         self.performSegue(withIdentifier: "ProductDetail", sender: self)
         
     }
+    func onTabToViewComment(tapGesture:UITapGestureRecognizer){
+        
+        self.productItemInfo = productList[(tapGesture.view?.tag)!]
+        self.performSegue(withIdentifier: "ShowCommentList", sender: self)
+        
+    }
+    
 }
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -208,9 +209,6 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         
         }
     }
-    
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(viewCurrent == tabCategory){
             return categoryList.count
@@ -220,9 +218,6 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             return productList.count
         }
     }
-    
-    
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(viewCurrent == tabCategory){
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryListCell")
@@ -255,6 +250,12 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
                 cell.picturePreview.tag = indexPath.row
                 cell.picturePreview.isUserInteractionEnabled = true
                 cell.picturePreview.addGestureRecognizer(tap2)
+                
+                let tap3 = UITapGestureRecognizer(target: self, action: #selector(ProductListViewController.onTabToViewComment))
+                cell.viewCommentList.tag = indexPath.row
+                cell.viewCommentList.isUserInteractionEnabled = true
+                cell.viewCommentList.addGestureRecognizer(tap3)
+                
                 
                 cell.loadCell(data: dataProduct)
                 
