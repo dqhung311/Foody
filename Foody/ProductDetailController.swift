@@ -117,7 +117,7 @@ class ProductDetailController: UIViewController{
         labelAddress.text = productItem.address + " " + productItem.province_name
         labelCategory.text = productItem.category_name
         
-        //detailProductView.estimatedRowHeight = 90
+        detailProductView.estimatedRowHeight = 90
         detailProductView.rowHeight = UITableViewAutomaticDimension
 
         
@@ -161,34 +161,42 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
-    
-    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 30))
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+       
         
-            headerView.backgroundColor = UIColor.red
+        header.textLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        header.textLabel?.frame = header.frame
         
-        return headerView
-    }*/
+    }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section==0){
-            return "Hình ảnh thực tế"
+            return "::: Hình ảnh thực tế"
         }
         if(section==1){
-            return "Bình luận"
+            return "::: Bình luận"
         }
         if(section==2){
-            return "Các sản phẩm cùng danh mục"
+            return "::: Các sản phẩm cùng danh mục"
         }
         return ""
     }
-    
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath.section==0){
+        return 90
+        }
+        if(indexPath.section==2){
+            return 90*4
+        }
+        return UITableViewAutomaticDimension
+    }
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        
         return 90
         
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section==0){
@@ -202,7 +210,7 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
             return commentList.count
         }
         if(section==2){
-            return 3
+            return 1
         }
         return 1
     }

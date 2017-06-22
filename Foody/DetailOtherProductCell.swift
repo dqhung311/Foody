@@ -27,10 +27,12 @@ class DetailOtherProductCell: UITableViewCell {
 }
 extension DetailOtherProductCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    
+    
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
