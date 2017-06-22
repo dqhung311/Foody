@@ -9,6 +9,7 @@
 import UIKit
 import AFNetworking
 
+
 class ProductListViewController: UIViewController{
     @IBOutlet weak var btnLabel: UIButton!
     @IBOutlet weak var btnLatest: UIButton!
@@ -35,6 +36,8 @@ class ProductListViewController: UIViewController{
     var refreshControl: UIRefreshControl!
     var productItemInfo = ProductItem()
  
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -157,6 +160,7 @@ class ProductListViewController: UIViewController{
     }
     
 }
+
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate {
     

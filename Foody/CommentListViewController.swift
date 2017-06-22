@@ -66,7 +66,12 @@ class CommentListViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func gotoAddComment(_ sender: UIButton){
-        self.performSegue(withIdentifier: "AddComment", sender: sender)
+        if checkLogin() {
+            self.performSegue(withIdentifier: "AddComment", sender: sender)
+        }else{
+            self.goToStory("Second","LoginStoryBoard")
+            
+        }
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let svc = segue.destination as? AddCommentViewController {
