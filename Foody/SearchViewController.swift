@@ -147,7 +147,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             DispatchQueue.main.async {
                 self.productItemInfo = self.productList[indexPath.row]
                 let storyboard = UIStoryboard(name: "ProductDetail", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetailStoryBoard")
+                let vc = storyboard.instantiateViewController(withIdentifier: "ProductDetail")
                 if let vc = vc as? ProductDetailController {
                     vc.productItem = self.productItemInfo
                     self.present(vc, animated: true, completion: nil)

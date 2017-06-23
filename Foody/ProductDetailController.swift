@@ -34,8 +34,9 @@ class ProductDetailController: UIViewController{
     let collectionService = CollectionService()
     var collectionOfUser = [CollectionItem]()
     var isHaveCollection: Bool = false
-    
+    var productSelected = ProductItem()
     var productCategoryItem  = [ProductItem]()
+    var productProvinceItem  = [ProductItem]()
     var refreshControl: UIRefreshControl!
     let commentService = CommentService()
     var commentList = [Comments]()
@@ -103,8 +104,8 @@ class ProductDetailController: UIViewController{
         }
         
         if let svc = segue.destination as? ProductDetailController {
-            let path = detailProductView.indexPathForSelectedRow!
-            svc.productItem = productCategoryItem[path.row]
+            
+            svc.productItem = productSelected
         }
     }
     @objc func pullToRefreshHandler() {
@@ -147,9 +148,16 @@ class ProductDetailController: UIViewController{
         detailProductView.estimatedRowHeight = 90
         detailProductView.rowHeight = UITableViewAutomaticDimension
         
-        let query = "catID=\(productItem.category_id)"
+        let query = "catID=\(productItem.category_id)&exclude_id=\(productItem.id)"
         productService.fetchAllProduct(query: query){ [weak self] (productCategoryItem, error) in
             self?.productCategoryItem = productCategoryItem
+            DispatchQueue.main.async {
+                self?.detailProductView.reloadData()
+            }
+        }
+        let query2 = "provinceID=\(productItem.province_id)&exclude_id=\(productItem.id)"
+        productService.fetchAllProduct(query: query2){ [weak self] (productProvinceItem, error) in
+            self?.productProvinceItem = productProvinceItem
             DispatchQueue.main.async {
                 self?.detailProductView.reloadData()
             }
@@ -193,7 +201,7 @@ class ProductDetailController: UIViewController{
 extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         guard let header = view as? UITableViewHeaderFooterView else { return }
@@ -217,9 +225,12 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if(indexPath.section==2){
-            
-            
+        if(indexPath.section==2 || indexPath.section==3){
+            if(indexPath.section==2){
+                productSelected = self.productCategoryItem[indexPath.row]
+            }else{
+                productSelected = self.productProvinceItem[indexPath.row]
+            }
             self.performSegue(withIdentifier: "ProductDetail", sender: self)
         }
     }
@@ -232,7 +243,10 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
             return "::: Bình luận (\(commentList.count))"
         }
         if(section==2){
-            return "::: Các sản phẩm cùng danh mục"
+            return "::: Cùng danh mục \(productItem.category_name)"
+        }
+        if(section==3){
+            return "::: Cùng tỉnh thành \(productItem.province_name)"
         }
         return ""
     }
@@ -240,7 +254,7 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
         if(indexPath.section==0){
             return 90
         }
-        if(indexPath.section==2){
+        if(indexPath.section==2 || indexPath.section==3){
             return 75
         }
         return UITableViewAutomaticDimension
@@ -259,12 +273,24 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
             }else{
                 return commentList.count
             }
-            
         }
         if(section==2){
-            return productCategoryItem.count
+            if(productCategoryItem.count > 3){
+                return 3
+            }else{
+                return productCategoryItem.count
+            }
+            
         }
-        return 1
+        if(section==3){
+            if(productProvinceItem.count > 3){
+                return 3
+            }else{
+                return productProvinceItem.count
+            }
+            
+        }
+        return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -285,10 +311,15 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell!
         }else{
+            var data: AnyObject
+            if(indexPath.section == 2){
+                 data = productCategoryItem[indexPath.row]
+            }else{
+                 data = productProvinceItem[indexPath.row]
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherProductCell")
             
             if let cell = cell as? ProductListMangerCell {
-                let data = productCategoryItem[indexPath.row]
                 cell.loadCell(data: data)
             }
             return cell!
