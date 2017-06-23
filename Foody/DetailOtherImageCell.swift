@@ -10,7 +10,7 @@ import UIKit
 
 class DetailOtherImageCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionView2: UICollectionView!
+    
     
     var productItem  = ProductItem()
     

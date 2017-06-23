@@ -36,7 +36,7 @@ class ProductDetailController: UIViewController{
     var isHaveCollection: Bool = false
     
     var productCategoryItem  = [ProductItem]()
-    
+    var refreshControl: UIRefreshControl!
     let commentService = CommentService()
     var commentList = [Comments]()
     
@@ -50,6 +50,7 @@ class ProductDetailController: UIViewController{
             
         }
     }
+   
     @IBAction func tabToAddCollection(_ sender: UIButton){
         if checkLogin() {
             if(self.isHaveCollection){
@@ -75,6 +76,9 @@ class ProductDetailController: UIViewController{
                         let defaultAction = UIAlertAction(title: "Đóng", style: .default, handler: { action in
                             if(success){
                                 self.isHaveCollection = true
+                                let totalLike = self.productItem.total_like + 1
+                                self.productItem.total_like = totalLike
+                                self.labelTotalCollection.text = String(totalLike)
                             }
                         })
                         alertController.addAction(defaultAction)
@@ -94,22 +98,45 @@ class ProductDetailController: UIViewController{
         if let svc = segue.destination as? AddCommentViewController {
             svc.productItem = self.productItem
         }
+        if let svc = segue.destination as? CommentListViewController {
+            svc.productItem = self.productItem
+        }
+        
+        if let svc = segue.destination as? ProductDetailController {
+            let path = detailProductView.indexPathForSelectedRow!
+            svc.productItem = productCategoryItem[path.row]
+        }
+    }
+    @objc func pullToRefreshHandler() {
+        // refresh table view data here
+        self.loadData()
+        self.refreshControl.endRefreshing()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         labelScore.layer.cornerRadius = labelScore.frame.width/2.0
         labelScore.clipsToBounds = true
+        loadData()
+        self.refreshControl = UIRefreshControl()
         
+        self.refreshControl.tintColor = UIColor.black
+        self.refreshControl.addTarget(self,
+                                      action: #selector(ProductDetailController.pullToRefreshHandler),
+                                      for: .valueChanged)
         
+        self.detailProductView.addSubview(self.refreshControl)
+        //self.detailProductView.reloadData()
+    }
+    
+    func loadData(){
         labelProductName.text = productItem.name
         labelProductNameDetail.text = productItem.name
         pictureImage.loadImage(urlString: productItem.urlphoto)
         
-        labelTotalComment.text = String(productItem.total_comment)
+        
         labelTotalPicture.text = String(productItem.otherimage.count)
         labelTotalCollection.text = String(productItem.total_like)
         labelScore.text = productItem.score
@@ -119,11 +146,18 @@ class ProductDetailController: UIViewController{
         
         detailProductView.estimatedRowHeight = 90
         detailProductView.rowHeight = UITableViewAutomaticDimension
-
         
+        let query = "catID=\(productItem.category_id)"
+        productService.fetchAllProduct(query: query){ [weak self] (productCategoryItem, error) in
+            self?.productCategoryItem = productCategoryItem
+            DispatchQueue.main.async {
+                self?.detailProductView.reloadData()
+            }
+        }
         commentService.fetchAll("productID=\(productItem.id)"){ [weak self] (commentList, error) in
             self?.commentList = commentList
             DispatchQueue.main.async {
+                self?.labelTotalComment.text = String(commentList.count)
                 self?.detailProductView.reloadData()
             }
         }
@@ -139,11 +173,9 @@ class ProductDetailController: UIViewController{
                 }
             }
         }
-        
-        
-        
-        
+
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -152,8 +184,10 @@ class ProductDetailController: UIViewController{
     @IBAction func disMist(_ sender: UIButton){
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
+    func onTabToViewComment(tapGesture:UITapGestureRecognizer){
+        self.performSegue(withIdentifier: "ShowCommentList", sender: self)
+        
+    }
     
 }
 extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
@@ -170,12 +204,32 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let v = UITableViewHeaderFooterView()
+        if(section==1){
+            let tap = UITapGestureRecognizer(target: self, action: #selector(ProductDetailController.onTabToViewComment))
+            v.isUserInteractionEnabled = true
+            v.addGestureRecognizer(tap)
+        }
+        
+        return v
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.section==2){
+            
+            
+            self.performSegue(withIdentifier: "ProductDetail", sender: self)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section==0){
             return "::: Hình ảnh thực tế"
         }
         if(section==1){
-            return "::: Bình luận"
+            return "::: Bình luận (\(commentList.count))"
         }
         if(section==2){
             return "::: Các sản phẩm cùng danh mục"
@@ -184,59 +238,60 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if(indexPath.section==0){
-        return 90
+            return 90
         }
         if(indexPath.section==2){
-            return 90*4
+            return 75
         }
         return UITableViewAutomaticDimension
     }
-    /*
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-       
-        return 90
-        
-    }*/
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(section==0){
             if(productItem.otherimage.count > 0){
-            return 1
+                return 1
             }else{
                 return 0
             }
         }
         if(section==1){
-            return commentList.count
+            if(commentList.count > 2){
+                return 2
+            }else{
+                return commentList.count
+            }
+            
         }
         if(section==2){
-            return 1
+            return productCategoryItem.count
         }
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if (indexPath.section == 0){
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherImageCell",
-                                                     for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherImageCell")
             
             if let cell = cell as? DetailOtherImageCell {
                 cell.productItem = self.productItem
             }
-            return cell
+            return cell!
         }else if(indexPath.section == 1){
            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentListViewCell",
-                                                     for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommentListViewCell")
+            
             if let cell = cell as? CommentListViewCell {
                 let data = commentList[indexPath.row]
                 cell.loadCell(data: data)
             }
-            return cell
+            return cell!
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherProductCell",
-                                                     for: indexPath)
-            return cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherProductCell")
+            
+            if let cell = cell as? ProductListMangerCell {
+                let data = productCategoryItem[indexPath.row]
+                cell.loadCell(data: data)
+            }
+            return cell!
 
         }
         

@@ -166,6 +166,7 @@ extension CollectionManagerViewController: UITableViewDataSource, UITableViewDel
             productItemInfo.otherimage = productList[indexPath.row].otherimage
             productItemInfo.price =  productList[indexPath.row].price
             productItemInfo.category_id = productList[indexPath.row].category_id
+            productItemInfo.id = productList[indexPath.row].id
 
         }else{
             
@@ -180,6 +181,7 @@ extension CollectionManagerViewController: UITableViewDataSource, UITableViewDel
             productItemInfo.otherimage = collectionList[indexPath.row].product_otherimage
             productItemInfo.price =  collectionList[indexPath.row].product_price
             productItemInfo.category_id = collectionList[indexPath.row].product_category_id
+            productItemInfo.id = collectionList[indexPath.row].product_id
         }
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "ProductDetailStoryBoard", sender: self)

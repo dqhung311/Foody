@@ -717,7 +717,7 @@
         <!--Comment List View Controller-->
         <scene sceneID="hRK-45-BcK">
             <objects>
-                <viewController id="50y-HE-YFE" customClass="CommentListViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewCommentList" id="50y-HE-YFE" customClass="CommentListViewController" customModule="Foody" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5zM-bN-KEN"/>
                         <viewControllerLayoutGuide type="bottom" id="WQg-Hu-hnp"/>

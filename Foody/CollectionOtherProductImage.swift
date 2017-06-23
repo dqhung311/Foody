@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionOtherProductImage: UICollectionViewCell {
     
-    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var imageProduct: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,8 +21,7 @@ class CollectionOtherProductImage: UICollectionViewCell {
         //update(with: nil)
     }
     
-    func loadCell(){
-        
-        label.text = "aaa"
+    func loadCell(data: String){
+        imageProduct.loadImage(urlString: data)
     }
 }

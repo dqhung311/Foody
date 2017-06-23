@@ -112,6 +112,7 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         productItemInfo.total_comment = data.total_comment
         productItemInfo.otherimage = data.product_otherimage
         productItemInfo.price =  data.product_price
+        productItemInfo.id = data.product_id
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "ProductDetail", sender: self)
