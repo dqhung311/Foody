@@ -146,6 +146,9 @@ class ProductService:ProtocolProductService{
                             if let comment_list = p["comment_list"] as? [String] {
                                 item.comment_list = comment_list
                             }
+                            if let urlvideo = p["urlvideo"] as? String {
+                                item.urlvideo = urlvideo
+                            }
                             
                             productItems.append(item)
                             

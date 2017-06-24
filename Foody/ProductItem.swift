@@ -25,6 +25,7 @@ class ProductItem{
     var total_like: Int = 0
     var total_comment: Int = 0
     var userid: String = ""
+    var urlvideo: String = ""
     
     
     init(){
@@ -33,7 +34,8 @@ class ProductItem{
     init(id: String, name: String, code: String, urlphoto: String,address: String, score: String, price: String, province_id: String, category_id: String, province_name: String, category_name: String, otherimage: [String],
          comment_list: [String],
          total_like: Int, total_comment: Int,
-         userid: String
+         userid: String,
+         urlvideo: String
          ) {
         self.code = code
         self.id = id
@@ -51,6 +53,7 @@ class ProductItem{
         self.total_comment = total_comment
         self.userid = userid
         self.comment_list = comment_list
+        self.urlvideo = urlvideo
     }
   
     

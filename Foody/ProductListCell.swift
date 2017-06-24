@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ProductListCell: UITableViewCell {
     
@@ -30,8 +31,8 @@ class ProductListCell: UITableViewCell {
     @IBOutlet weak var commentText2: UILabel!
     @IBOutlet weak var avatarImage3: UIImageView!
     @IBOutlet weak var commentText3: UILabel!
-    
-
+    @IBOutlet weak var viewVideo: UIView!
+    var player = AVPlayer()
    
     var productItem: ProductItem!
     var dataComment = [String]()
@@ -60,6 +61,24 @@ class ProductListCell: UITableViewCell {
         }else{
             btnViewComment.isHidden = true
         }
+        /*
+        if(data.urlvideo != ""){
+            viewVideo.isHidden = false
+            picturePreview.isHidden = true
+            let videoURL = NSURL(string: data.urlvideo)
+            player = AVPlayer(url: videoURL! as URL)
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 220)
+            viewVideo.layer.addSublayer(playerLayer)
+            player.play()
+            
+            
+            
+        }else{
+            viewVideo.isHidden = true
+            picturePreview.isHidden = false
+            
+        }*/
         picturePreview.loadImage(urlString: data.urlphoto)
         if(data.total_comment == 1){
             createViewCommentUIView(dataComment: data.comment_list as [AnyObject] , avatar: [avatarImage], label: [commentText] )

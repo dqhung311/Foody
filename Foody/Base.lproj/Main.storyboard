@@ -406,20 +406,28 @@
                                                         <constraint firstItem="nzV-gg-eRA" firstAttribute="top" secondItem="tor-hu-Tpg" secondAttribute="top" id="hOW-Br-uyE"/>
                                                     </constraints>
                                                 </view>
+                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dO-yd-55V">
+                                                    <rect key="frame" x="0.0" y="37" width="375" height="225"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="pgX-cc-tbo" secondAttribute="trailing" id="0DF-h5-SU5"/>
+                                                <constraint firstItem="8dO-yd-55V" firstAttribute="top" secondItem="tOc-Kj-a9y" secondAttribute="bottom" id="4Uh-GT-cwE"/>
                                                 <constraint firstAttribute="trailing" secondItem="tor-hu-Tpg" secondAttribute="trailing" id="4aN-cD-AsR"/>
                                                 <constraint firstItem="bUk-2F-eT5" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="8U0-34-nJz"/>
                                                 <constraint firstItem="tor-hu-Tpg" firstAttribute="top" secondItem="pgX-cc-tbo" secondAttribute="bottom" constant="5" id="9hT-FZ-swO"/>
                                                 <constraint firstAttribute="trailing" secondItem="tOc-Kj-a9y" secondAttribute="trailing" id="F9m-DA-lod"/>
+                                                <constraint firstAttribute="trailing" secondItem="8dO-yd-55V" secondAttribute="trailing" id="GXf-BG-gZN"/>
                                                 <constraint firstAttribute="trailing" secondItem="bUk-2F-eT5" secondAttribute="trailing" id="Jtm-5g-hTd"/>
                                                 <constraint firstItem="bUk-2F-eT5" firstAttribute="top" secondItem="tOc-Kj-a9y" secondAttribute="bottom" constant="5" id="KVh-oc-mBt"/>
                                                 <constraint firstItem="SWX-mB-5yJ" firstAttribute="top" secondItem="bUk-2F-eT5" secondAttribute="bottom" id="Kcc-4K-S1z"/>
+                                                <constraint firstItem="SWX-mB-5yJ" firstAttribute="top" secondItem="8dO-yd-55V" secondAttribute="bottom" id="N6x-6b-Gbp"/>
                                                 <constraint firstItem="tOc-Kj-a9y" firstAttribute="top" secondItem="w4U-Ui-gVS" secondAttribute="top" constant="5" id="RN6-Wt-VRM"/>
                                                 <constraint firstAttribute="trailing" secondItem="SWX-mB-5yJ" secondAttribute="trailing" id="hrz-7e-ZTb"/>
                                                 <constraint firstItem="E6a-G6-3fw" firstAttribute="top" secondItem="SWX-mB-5yJ" secondAttribute="bottom" constant="2" id="kZ6-69-jQl"/>
                                                 <constraint firstItem="tOc-Kj-a9y" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="nJr-2c-AVv"/>
+                                                <constraint firstItem="8dO-yd-55V" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="oAn-zz-6Vr"/>
                                                 <constraint firstItem="pgX-cc-tbo" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="pjw-2a-z12"/>
                                                 <constraint firstItem="E6a-G6-3fw" firstAttribute="leading" secondItem="w4U-Ui-gVS" secondAttribute="leading" id="qwY-n2-qDg"/>
                                                 <constraint firstItem="pgX-cc-tbo" firstAttribute="top" secondItem="E6a-G6-3fw" secondAttribute="bottom" constant="5" id="rHO-Ih-qgU"/>
@@ -448,6 +456,7 @@
                                             <outlet property="viewCommentList3" destination="tor-hu-Tpg" id="Mve-bq-Mm8"/>
                                             <outlet property="viewToolBox" destination="SWX-mB-5yJ" id="E5p-Pu-eMQ"/>
                                             <outlet property="viewTopTitle" destination="tOc-Kj-a9y" id="Saf-qu-xQ7"/>
+                                            <outlet property="viewVideo" destination="8dO-yd-55V" id="WQb-Kc-7bv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

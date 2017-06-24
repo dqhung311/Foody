@@ -8,7 +8,7 @@
 
 import UIKit
 import AFNetworking
-
+import AVFoundation
 
 class ProductListViewController: UIViewController{
     @IBOutlet weak var btnLabel: UIButton!
@@ -222,6 +222,21 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             return productList.count
         }
     }
+    /*
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell", for: indexPath)
+        if let cell = cell as? ProductListCell {
+            cell.player.pause()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListCell", for: indexPath)
+        if let cell = cell as? ProductListCell {
+            cell.player.play()
+        
+        }
+    }*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(viewCurrent == tabCategory){
             let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryListCell")
@@ -244,6 +259,8 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             let dataProduct = productList[indexPath.row]
             
             if let cell = cell as? ProductListCell {
+                
+                
                 let tap = UITapGestureRecognizer(target: self, action: #selector(ProductListViewController.onTabToViewDetail))
                 
                 cell.viewTopTitle.tag = indexPath.row
@@ -267,6 +284,8 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
             }
             return cell
         }
+        
+        
         
     }
 }

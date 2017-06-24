@@ -311,18 +311,24 @@ extension ProductDetailController: UITableViewDataSource, UITableViewDelegate {
             }
             return cell!
         }else{
-            var data: AnyObject
-            if(indexPath.section == 2){
-                 data = productCategoryItem[indexPath.row]
-            }else{
-                 data = productProvinceItem[indexPath.row]
-            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "DetailOtherProductCell")
-            
-            if let cell = cell as? ProductListMangerCell {
-                cell.loadCell(data: data)
+            if(indexPath.section == 3){
+                 let dataProduct = productProvinceItem[indexPath.row]
+                 if let cell = cell as? ProductListMangerCell {
+                    cell.loadCell(data: dataProduct)
+                 }
+                return cell!
+            }else{
+                let dataProduct = productCategoryItem[indexPath.row]
+                if let cell = cell as? ProductListMangerCell {
+                    cell.loadCell(data: dataProduct)
+                }
+                return cell!
             }
-            return cell!
+            
+            
+            
+            
 
         }
         
