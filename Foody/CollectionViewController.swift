@@ -102,6 +102,8 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let data = collectionList[indexPath.row]
+    
+        
         productItemInfo.address = data.product_address
         productItemInfo.name = data.product_name
         productItemInfo.urlphoto = data.product_image
@@ -112,7 +114,9 @@ class CollectionViewController: UIViewController, UICollectionViewDataSource, UI
         productItemInfo.total_comment = data.total_comment
         productItemInfo.otherimage = data.product_otherimage
         productItemInfo.price =  data.product_price
+        productItemInfo.category_id = data.product_category_id
         productItemInfo.id = data.product_id
+        productItemInfo.province_id = data.product_province_id
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "ProductDetail", sender: self)
