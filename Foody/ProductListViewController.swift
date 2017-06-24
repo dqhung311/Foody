@@ -35,8 +35,6 @@ class ProductListViewController: UIViewController{
     let tabProvince = Config().getTabProvince()
     var refreshControl: UIRefreshControl!
     var productItemInfo = ProductItem()
- 
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -51,7 +49,8 @@ class ProductListViewController: UIViewController{
     
     
     func loadData(){
-        productService.fetchAllProduct(query: ""){ [weak self] (productList, error) in
+        
+        productService.fetchAllProduct(query: query){ [weak self] (productList, error) in
             self?.productList = productList
             DispatchQueue.main.async {
                 self?.productListView.reloadData()
@@ -189,6 +188,7 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate 
         let str = "&"
         if(viewCurrent == tabCategory){
             query += "\(str)catID=\(categoryList[indexPath.row].id)"
+            
             self.viewCurrent = tabProduct
             productService.fetchAllProduct(query: query){ [weak self] (productList, error) in
                 self?.productList = productList
