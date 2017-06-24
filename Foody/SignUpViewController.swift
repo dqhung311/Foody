@@ -49,6 +49,7 @@ class SignUpViewController: UIViewController {
         newuser.name = displayNameField!.text!
         newuser.password = passwordField!.text!
         newuser.email = self.emailField.text!
+        newuser.password_confirm = confirmPasswordField!.text!
         userService.registerUser(sender: newuser)
     }
     

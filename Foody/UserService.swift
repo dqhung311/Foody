@@ -119,7 +119,7 @@ class UserService:ProtocolUser {
         if let user = sender as? Users{
             var request = URLRequest(url: URL(string: newUserUrl)!)
             request.httpMethod = "POST"
-            let postString = "email=\(user.email)&password=\(user.password)&name=\(user.name)"
+            let postString = "email=\(user.email)&password=\(user.password)&passwordconfirm=\(user.password_confirm)&name=\(user.name)"
             request.httpBody = postString.data(using: .utf8)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 guard let data = data, error == nil else {
